@@ -190,7 +190,7 @@ h1{
   justify-content:center;
   gap:12px;
   padding:15px 14px;
-  margin-bottom:18px;
+  margin-bottom:10px;
   border-radius:18px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.15)),
@@ -285,6 +285,74 @@ button:focus-visible{
 button .ico{ font-size:1.15em; line-height:1; }
 
 /* ============================================================
+   شريط السنة الحالية
+   ============================================================ */
+.current-year-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 16px;
+  font-size:clamp(12px, 2.7vw, 15px);
+  color:#5a4029;
+  font-weight:700;
+}
+.current-year-bar .hint{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25));
+  border:1px dashed rgba(122,92,31,.5);
+  color:#4d2e1a;
+}
+.current-year-bar .hint .dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:#3a7a4a;
+  box-shadow:0 0 0 3px rgba(58,122,74,.2);
+  animation:pulseDot 2.4s ease-in-out infinite;
+}
+@keyframes pulseDot{
+  0%,100%{ box-shadow:0 0 0 3px rgba(58,122,74,.2); }
+  50%    { box-shadow:0 0 0 6px rgba(58,122,74,.05); }
+}
+
+#goCurrentBtn{
+  font-size:clamp(11px, 2.5vw, 14px);
+  padding:6px 14px;
+  border-radius:999px;
+  background:linear-gradient(180deg, #fff5d8, #ecd09a);
+  color:#5a3a14;
+  border:1px solid rgba(122,92,31,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 2px 0 #7a5c1f,
+    0 6px 12px -6px rgba(0,0,0,.6);
+  text-shadow:none;
+  gap:6px;
+  transition:transform .14s, box-shadow .14s, filter .2s;
+}
+#goCurrentBtn:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 3px 0 #7a5c1f,
+    0 8px 14px -6px rgba(0,0,0,.65);
+}
+#goCurrentBtn:active{
+  transform:translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    0 0 0 #7a5c1f,
+    0 3px 8px -5px rgba(0,0,0,.6);
+}
+#goCurrentBtn[hidden]{ display:none; }
+
+/* ============================================================
    لوحة السنة الهجرية
    ============================================================ */
 .hijri-sign{
@@ -329,7 +397,7 @@ button .ico{ font-size:1.15em; line-height:1; }
 }
 
 /* ============================================================
-   الجدول — التصميم الأساسي (سطح المكتب والتابلت الكبير)
+   الجدول
    ============================================================ */
 .table-wrap{
   width:100%;
@@ -475,7 +543,6 @@ tbody tr.ramadan:hover td{
   justify-content:center;
 }
 
-/* صف الرسائل (خطأ / تحميل) */
 .msg-row td{
   padding:30px 12px !important;
   font-size:clamp(15px, 2.4vw, 21px) !important;
@@ -514,7 +581,7 @@ tbody tr.ramadan:hover td{
 .footer-note .dev{ display:inline-block; color:#7a4a1c; font-weight:700; }
 
 /* ============================================================
-   تابلت (641px – 900px): ضغط بسيط ليتّسع الجدول
+   تابلت
    ============================================================ */
 @media (max-width:900px){
   .book-container{ padding:24px 16px 18px; }
@@ -526,7 +593,7 @@ tbody tr.ramadan:hover td{
 }
 
 /* ============================================================
-   جوال (حتى 640px): تحويل الجدول إلى بطاقات عمودية
+   جوال
    ============================================================ */
 @media (max-width:640px){
 
@@ -541,7 +608,6 @@ tbody tr.ramadan:hover td{
   button{ padding:10px 18px; }
   .hijri-sign{ letter-spacing:2px; padding:10px 8px; }
 
-  /* --- تحويل الجدول إلى بطاقات --- */
   table{
     min-width:0 !important;
     border-spacing:0;
@@ -571,10 +637,7 @@ tbody tr.ramadan:hover td{
     100%{ opacity:1; transform:translateY(0) rotateX(0); }
   }
 
-  tbody tr:hover{
-    transform:none;
-    filter:none;
-  }
+  tbody tr:hover{ transform:none; filter:none; }
 
   tbody td{
     display:flex;
@@ -602,7 +665,6 @@ tbody tr.ramadan:hover td{
     line-height:1.4;
   }
 
-  /* الشهر: شريط علوي كامل العرض */
   tbody td.month-name{
     grid-column:1 / -1;
     flex-direction:row;
@@ -617,7 +679,6 @@ tbody tr.ramadan:hover td{
   }
   tbody td.month-name::before{ display:none; }
 
-  /* بداية / نهاية: عمودان متجاوران مع فاصل */
   tbody td[data-label="البداية"]{
     border-left:1px dashed rgba(168,132,47,.4) !important;
     border-bottom:1px dashed rgba(168,132,47,.35) !important;
@@ -626,7 +687,6 @@ tbody tr.ramadan:hover td{
     border-bottom:1px dashed rgba(168,132,47,.35) !important;
   }
 
-  /* الميلادي: عرض كامل أسفل البطاقة */
   tbody td[data-label="الميلادي"]{
     grid-column:1 / -1;
     padding:12px 10px !important;
@@ -635,11 +695,7 @@ tbody tr.ramadan:hover td{
     border-radius:0 0 14px 14px !important;
   }
 
-  .greg-list{
-    flex-direction:column;
-    gap:6px;
-    width:100%;
-  }
+  .greg-list{ flex-direction:column; gap:6px; width:100%; }
   .gregorian-badge{
     display:block;
     width:100%;
@@ -654,7 +710,6 @@ tbody tr.ramadan:hover td{
     padding:5px 12px;
   }
 
-  /* رمضان: تمييز البطاقة */
   tbody tr.ramadan{
     border-color:var(--gold-2);
     box-shadow:
@@ -668,10 +723,7 @@ tbody tr.ramadan:hover td{
     background:linear-gradient(180deg, rgba(249,237,205,.6), rgba(247,233,194,.9)) !important;
   }
 
-  /* صف الرسائل */
-  tbody tr.msg-row{
-    display:block;
-  }
+  tbody tr.msg-row{ display:block; }
   tbody tr.msg-row td{
     display:block;
     padding:24px 14px !important;
@@ -684,9 +736,6 @@ tbody tr.ramadan:hover td{
   .footer-note{ margin-top:20px; padding-top:14px; }
 }
 
-/* ============================================================
-   شاشات صغيرة جدًا
-   ============================================================ */
 @media (max-width:380px){
   .book-container{ padding:18px 8px 14px; }
   h1{ font-size:24px; }
@@ -698,9 +747,6 @@ tbody tr.ramadan:hover td{
   .gregorian-badge{ font-size:11px; padding:5px 8px; }
 }
 
-/* ============================================================
-   تقليل الحركة
-   ============================================================ */
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     animation-duration:.001ms !important;
@@ -727,13 +773,21 @@ tbody tr.ramadan:hover td{
 
     <div class="input-section">
       <span class="input-label">عام هجري:</span>
-      <input type="number" id="yearInput" placeholder="١٤٤٧" value="1447" min="1356" max="1500" inputmode="numeric">
+      <input type="number" id="yearInput" placeholder="١٤٤٨" value="1448" min="1356" max="1500" inputmode="numeric">
       <button id="convertBtn">
         <span class="ico">🔍</span> استخراج
       </button>
     </div>
 
-    <div class="hijri-sign" id="hijriYearDisplay">🌙 ١٤٤٧ هـ 🌙</div>
+    <div class="current-year-bar">
+      <span class="hint" id="currentYearHint">
+        <span class="dot"></span>
+        السنة الهجرية الحالية: <strong id="currentYearValue">—</strong>
+      </span>
+      <button id="goCurrentBtn" type="button" hidden>↺ العودة للسنة الحالية</button>
+    </div>
+
+    <div class="hijri-sign" id="hijriYearDisplay">🌙 ١٤٤٨ هـ 🌙</div>
 
     <div class="table-wrap" id="tableWrap">
       <table id="hijriTable">
@@ -826,6 +880,9 @@ const monthLengthsDatabase = {
   1460: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
 };
 
+const MIN_YEAR = 1356;
+const MAX_YEAR = 1500;
+
 /* ================================================================
    دوال مساعدة
    ================================================================ */
@@ -879,12 +936,51 @@ function getHijriNewYearDate(hijriYear){
 }
 
 /* ================================================================
+   الحصول على السنة الهجرية الحالية تلقائيًا
+   يعتمد أولًا على واجهة Intl (تقويم أم القرى) في المتصفح
+   ويرجع إلى حساب تقريبي في حال عدم التوفر
+   ================================================================ */
+function getCurrentHijriYear(){
+  // المحاولة 1: استخدام Intl مع تقويم أم القرى (دقيق جدًا)
+  try {
+    const fmt = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    });
+    const parts = fmt.formatToParts(new Date());
+    const yearPart = parts.find(p => p.type === 'year');
+    if (yearPart) {
+      const y = parseInt(yearPart.value, 10);
+      if (!isNaN(y)) return y;
+    }
+  } catch (e) { /* تجاهل */ }
+
+  // المحاولة 2: استخدام تقويم إسلامي عام
+  try {
+    const fmt2 = new Intl.DateTimeFormat('en-US-u-ca-islamic', { year: 'numeric' });
+    const y2 = parseInt(fmt2.format(new Date()), 10);
+    if (!isNaN(y2)) return y2;
+  } catch (e) { /* تجاهل */ }
+
+  // المحاولة 3: حساب تقريبي (بديل أخير)
+  const now = new Date();
+  const gregYear = now.getFullYear();
+  const gregMonth = now.getMonth(); // 0-11
+  // نقطة مرجعية: 1 محرم 1447 ≈ 27 يونيو 2025
+  const refGreg = new Date(2025, 5, 27);
+  const refHijri = 1447;
+  const daysDiff = Math.floor((now - refGreg) / 86400000);
+  const approx = refHijri + Math.floor(daysDiff / 354.367);
+  // تصحيح إذا كنا في بداية السنة الميلادية قبل محرم
+  return approx;
+}
+
+/* ================================================================
    توليد الجدول
    ================================================================ */
 function generateHijriCalendar(hijriYear){
-  if (hijriYear < 1356 || hijriYear > 1500) {
+  if (hijriYear < MIN_YEAR || hijriYear > MAX_YEAR) {
     return `<tr class="msg-row"><td colspan="4">
-              ❌ السنة خارج النطاق المدعوم (١٣٥٦ - ١٥٠٠ هـ)
+              ❌ السنة خارج النطاق المدعوم (${toArabicNumerals(MIN_YEAR)} - ${toArabicNumerals(MAX_YEAR)} هـ)
             </td></tr>`;
   }
 
@@ -975,52 +1071,126 @@ function loadCalendarForYear(year, animate = true){
    ================================================================ */
 document.addEventListener('DOMContentLoaded', function () {
 
-  const yearInput  = document.getElementById('yearInput');
-  const convertBtn = document.getElementById('convertBtn');
+  const yearInput    = document.getElementById('yearInput');
+  const convertBtn   = document.getElementById('convertBtn');
+  const currentValEl = document.getElementById('currentYearValue');
+  const goCurrentBtn = document.getElementById('goCurrentBtn');
+  const currentHint  = document.getElementById('currentYearHint');
 
-  /* التحميل الأول */
-  renderTable(1447);
+  /* --- تحديد السنة الهجرية الحالية تلقائيًا --- */
+  let currentHijriYear = getCurrentHijriYear();
 
-  /* اختبار داخلي */
-  let testDate = getHijriNewYearDate(1447);
-  for (let i = 1; i < 9; i++) {
-    testDate.setDate(testDate.getDate() + getMonthLength(1447, i));
-  }
-  console.log('✅ 1 رمضان 1447 =', formatGregorian(testDate), getDayName(testDate));
+  // التأكد من بقاء السنة ضمن النطاق المدعوم
+  if (isNaN(currentHijriYear)) currentHijriYear = 1448;
+  if (currentHijriYear < MIN_YEAR) currentHijriYear = MIN_YEAR;
+  if (currentHijriYear > MAX_YEAR) currentHijriYear = MAX_YEAR;
 
-  /* زر الاستخراج */
-  function run(){
+  // عرض السنة الحالية في الشريط
+  currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
+
+  // تعيين قيمة الإدخال إلى السنة الحالية تلقائيًا
+  yearInput.value = currentHijriYear;
+
+  // عرض الجدول للسنة الحالية مباشرة
+  renderTable(currentHijriYear);
+
+  /* --- زر الاستخراج (إدخال يدوي) --- */
+  function run(animate = true){
     const year = parseInt(yearInput.value, 10);
     if (isNaN(year)) {
       alert('الرجاء إدخال سنة هجرية صحيحة');
       return;
     }
-    if (year < 1356 || year > 1500) {
-      alert('الرجاء إدخال سنة هجرية بين 1356 و 1500');
+    if (year < MIN_YEAR || year > MAX_YEAR) {
+      alert('الرجاء إدخال سنة هجرية بين ' + MIN_YEAR + ' و ' + MAX_YEAR);
       return;
     }
-    loadCalendarForYear(year, true);
+    loadCalendarForYear(year, animate);
+    updateGoCurrentButton(year);
   }
 
-  convertBtn.addEventListener('click', run);
+  convertBtn.addEventListener('click', () => run(true));
 
   yearInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      run();
+      run(true);
     }
   });
 
-  /* إعادة حساب التأخيرات عند تغيير حجم الشاشة */
+  /* --- زر العودة للسنة الحالية --- */
+  function updateGoCurrentButton(displayedYear){
+    if (displayedYear !== currentHijriYear) {
+      goCurrentBtn.hidden = false;
+    } else {
+      goCurrentBtn.hidden = true;
+    }
+  }
+
+  goCurrentBtn.addEventListener('click', function(){
+    yearInput.value = currentHijriYear;
+    loadCalendarForYear(currentHijriYear, true);
+    updateGoCurrentButton(currentHijriYear);
+  });
+
+  // تحديث حالة زر "السنة الحالية" عند أي تغيير في الحقل
+  yearInput.addEventListener('input', function(){
+    const y = parseInt(yearInput.value, 10);
+    updateGoCurrentButton(isNaN(y) ? null : y);
+  });
+
+  /* --- التحقق التلقائي عند تغيّر اليوم (منتصف الليل) ---
+         بحيث تتحدث السنة الهجرية الحالية تلقائيًا عند بداية سنة جديدة */
+  let lastKnownYear = currentHijriYear;
+
+  function checkYearRollover(){
+    const nowYear = getCurrentHijriYear();
+    if (!isNaN(nowYear) && nowYear !== lastKnownYear) {
+      lastKnownYear = nowYear;
+      // تحديث النطاق إن لزم
+      if (nowYear >= MIN_YEAR && nowYear <= MAX_YEAR) {
+        currentHijriYear = nowYear;
+        currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
+
+        // إذا كان المستخدم يشاهد السنة الحالية السابقة، نحدّثها تلقائيًا
+        const displayed = parseInt(yearInput.value, 10);
+        if (displayed === lastKnownYear - (nowYear - lastKnownYear) || displayed === nowYear - 1) {
+          yearInput.value = nowYear;
+          loadCalendarForYear(nowYear, true);
+          updateGoCurrentButton(nowYear);
+        } else {
+          updateGoCurrentButton(displayed);
+        }
+        console.log('🎉 تم تحديث السنة الهجرية الحالية إلى:', nowYear);
+      }
+    }
+  }
+
+  // فحص كل ساعة (يغطي تغيّر منتصف الليل)
+  setInterval(checkYearRollover, 60 * 60 * 1000);
+  // فحص أولي بعد التحميل بقليل
+  setTimeout(checkYearRollover, 3000);
+
+  /* --- إعادة حساب تأخيرات الصفوف عند تغيير حجم الشاشة --- */
   let resizeTimer = null;
   window.addEventListener('resize', function(){
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(applyRowDelays, 180);
   });
 
-  /* ============================================================
-     ميلان ثلاثي الأبعاد (سطح المكتب فقط)
-     ============================================================ */
+  /* --- اختبار داخلي --- */
+  (function selfTest(){
+    try {
+      let testDate = getHijriNewYearDate(1447);
+      for (let i = 1; i < 9; i++) {
+        testDate.setDate(testDate.getDate() + getMonthLength(1447, i));
+      }
+      console.log('✅ 1 رمضان 1447 =', formatGregorian(testDate), getDayName(testDate));
+      console.log('📅 السنة الهجرية الحالية المكتشفة =', currentHijriYear);
+    } catch(e){ console.warn('اختبار داخلي:', e); }
+  })();
+
+  /* --- الميلان ثلاثي الأبعاد (سطح المكتب فقط) --- */
   const scene = document.getElementById('scene');
   const book  = document.getElementById('book');
   const canTilt = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;

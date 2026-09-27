@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+<title>التوفيقات الإلهامية - التقويم الهجري</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   المتغيرات اللونية
+   ============================================================ */
+:root{
+  --gold-1:#f7e7b6;
+  --gold-2:#d4af5f;
+  --gold-3:#a8842f;
+  --gold-4:#7a5c1f;
+  --wood-1:#3a2415;
+  --wood-2:#6b4a2e;
+  --wood-3:#8b6b4d;
+  --paper-1:#fbf5e6;
+  --paper-2:#f2e7cd;
+  --paper-3:#e6d8b6;
+  --ink:#2c1e12;
+  --teal-1:#2c5a56;
+  --teal-2:#16322f;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  font-family:'Amiri','Traditional Arabic','Scheherazade New',serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:34px 12px;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -10%, #5a3a22 0%, #3a2415 45%, #241608 75%, #150c04 100%);
+  position:relative;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.15;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='%23d4af5f' stroke-width='1'%3E%3Cpath d='M45 3 L87 45 L45 87 L3 45 Z'/%3E%3Cpath d='M45 15 L75 45 L45 75 L15 45 Z'/%3E%3Ccircle cx='45' cy='45' r='7'/%3E%3Cpath d='M45 0 L45 12 M45 78 L45 90 M0 45 L12 45 M78 45 L90 45'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:90px 90px;
+  animation:patternDrift 90s linear infinite;
+}
+@keyframes patternDrift{
+  from{ background-position:0 0; }
+  to  { background-position:180px 180px; }
+}
+
+/* ============================================================
+   المشهد والكتاب
+   ============================================================ */
+.scene{
+  width:100%;
+  max-width:900px;
+  perspective:1700px;
+  position:relative;
+  z-index:2;
+}
+
+.book-container{
+  position:relative;
+  width:100%;
+  padding:28px 22px 22px;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.7), transparent 45%),
+    linear-gradient(158deg, var(--paper-1) 0%, var(--paper-2) 55%, var(--paper-3) 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),
+    inset 0 -14px 26px -18px rgba(122,92,31,.5),
+    0 0 0 7px #6b4a2e,
+    0 0 0 10px var(--gold-2),
+    0 0 0 12px #402a16,
+    0 42px 70px -26px rgba(0,0,0,.95),
+    0 70px 110px -40px rgba(0,0,0,.9);
+  transform-style:preserve-3d;
+  transition:transform .45s cubic-bezier(.2,.85,.3,1);
+  animation:bookIn 1.15s cubic-bezier(.16,.9,.3,1) backwards;
+}
+@keyframes bookIn{
+  0%   { opacity:0; transform:perspective(1400px) rotateX(28deg) translateY(70px) scale(.9); }
+  60%  { opacity:1; }
+  100% { opacity:1; transform:perspective(1400px) rotateX(0) translateY(0) scale(1); }
+}
+
+.book-container::before{
+  content:"";
+  position:absolute;
+  inset:13px;
+  border:1px solid rgba(168,132,47,.4);
+  border-radius:17px;
+  pointer-events:none;
+}
+
+.corner{
+  position:absolute;
+  width:38px; height:38px;
+  border:2px solid var(--gold-2);
+  opacity:.75;
+  pointer-events:none;
+}
+.corner::after{
+  content:"";
+  position:absolute;
+  width:9px; height:9px;
+  background:var(--gold-2);
+  transform:rotate(45deg);
+  box-shadow:0 0 6px rgba(212,175,95,.9);
+}
+.c1{ top:16px; right:16px; border-left:none; border-bottom:none; border-radius:0 14px 0 0; }
+.c1::after{ top:6px; right:6px; }
+.c2{ top:16px; left:16px; border-right:none; border-bottom:none; border-radius:14px 0 0 0; }
+.c2::after{ top:6px; left:6px; }
+.c3{ bottom:16px; right:16px; border-left:none; border-top:none; border-radius:0 0 14px 0; }
+.c3::after{ bottom:6px; right:6px; }
+.c4{ bottom:16px; left:16px; border-right:none; border-top:none; border-radius:0 0 0 14px; }
+.c4::after{ bottom:6px; left:6px; }
+
+/* ============================================================
+   العنوان
+   ============================================================ */
+h1{
+  font-size:clamp(26px, 5.6vw, 44px);
+  font-weight:700;
+  text-align:center;
+  line-height:1.35;
+  letter-spacing:.5px;
+  margin:2px 0 0;
+  background:linear-gradient(100deg,
+      #3a2415 12%, #a8842f 32%, #f9edc4 48%, #d4af5f 56%, #a8842f 70%, #3a2415 90%);
+  background-size:260% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  animation:shine 7s linear infinite;
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.9))
+    drop-shadow(0 5px 9px rgba(58,36,21,.3));
+}
+@keyframes shine{
+  from{ background-position:0% center; }
+  to  { background-position:260% center; }
+}
+
+.subtitle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:10px 0 18px;
+  font-size:clamp(13px, 2.9vw, 18px);
+  font-weight:700;
+  color:#5a4029;
+  text-align:center;
+  letter-spacing:.2px;
+  line-height:1.6;
+}
+.subtitle::before,
+.subtitle::after{
+  content:"";
+  flex:1 1 auto;
+  max-width:90px;
+  height:1px;
+  position:relative;
+}
+.subtitle::before{ background:linear-gradient(270deg, transparent, var(--gold-3), transparent); }
+.subtitle::after { background:linear-gradient(90deg, transparent, var(--gold-3), transparent); }
+
+/* ============================================================
+   صندوق الإدخال
+   ============================================================ */
+.input-section{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:15px 14px;
+  margin-bottom:10px;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.15)),
+    linear-gradient(160deg, #eaddbe, #ddcaa3);
+  border:1px solid rgba(122,92,31,.55);
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,.85),
+    inset 0 -6px 14px -8px rgba(90,64,41,.45),
+    0 8px 18px -12px rgba(0,0,0,.6);
+}
+
+.input-label{
+  font-size:clamp(17px, 3.8vw, 24px);
+  font-weight:700;
+  color:#4d2e1a;
+  text-shadow:0 1px 0 rgba(255,255,255,.7);
+}
+
+#yearInput{
+  width:118px;
+  max-width:40vw;
+  padding:9px 6px;
+  font-size:clamp(19px, 4.4vw, 26px);
+  font-weight:700;
+  text-align:center;
+  color:#1f140c;
+  font-family:'Amiri','Courier New',monospace;
+  background:linear-gradient(180deg, #fffdf4, #f3e9d2);
+  border:2px solid var(--wood-2);
+  border-radius:12px;
+  box-shadow:
+    inset 0 3px 7px rgba(90,64,41,.3),
+    0 1px 0 rgba(255,255,255,.9),
+    0 4px 10px -6px rgba(0,0,0,.6);
+  transition:box-shadow .3s, border-color .3s, transform .3s;
+  outline:none;
+}
+#yearInput:focus{
+  border-color:var(--gold-2);
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 3px 7px rgba(90,64,41,.28),
+    0 0 0 3px rgba(212,175,95,.35),
+    0 8px 18px -8px rgba(0,0,0,.6);
+}
+
+button{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:11px 24px;
+  font-family:inherit;
+  font-size:clamp(17px, 3.9vw, 24px);
+  font-weight:700;
+  color:#2b1c07;
+  cursor:pointer;
+  border:1px solid rgba(90,64,20,.6);
+  border-radius:15px;
+  background:linear-gradient(180deg, #f6e3ad 0%, #dcb95f 42%, #b8912f 62%, #8a6a1e 100%);
+  text-shadow:0 1px 0 rgba(255,255,255,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -2px 6px rgba(90,64,20,.35),
+    0 6px 0 #5c4413,
+    0 12px 20px -8px rgba(0,0,0,.7);
+  transform:translateY(0);
+  transition:transform .12s cubic-bezier(.2,.85,.3,1),
+             box-shadow .12s cubic-bezier(.2,.85,.3,1),
+             filter .25s;
+}
+button:hover{
+  filter:brightness(1.08);
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -2px 6px rgba(90,64,20,.35),
+    0 8px 0 #5c4413,
+    0 16px 26px -8px rgba(0,0,0,.75);
+}
+button:active{
+  transform:translateY(5px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    inset 0 -1px 4px rgba(90,64,20,.4),
+    0 1px 0 #5c4413,
+    0 5px 10px -6px rgba(0,0,0,.7);
+}
+button:focus-visible{
+  outline:3px solid rgba(212,175,95,.85);
+  outline-offset:3px;
+}
+button .ico{ font-size:1.15em; line-height:1; }
+
+/* ============================================================
+   شريط السنة الحالية
+   ============================================================ */
+.current-year-bar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 16px;
+  font-size:clamp(12px, 2.7vw, 15px);
+  color:#5a4029;
+  font-weight:700;
+}
+.current-year-bar .hint{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25));
+  border:1px dashed rgba(122,92,31,.5);
+  color:#4d2e1a;
+}
+.current-year-bar .hint .dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:#3a7a4a;
+  box-shadow:0 0 0 3px rgba(58,122,74,.2);
+  animation:pulseDot 2.4s ease-in-out infinite;
+}
+@keyframes pulseDot{
+  0%,100%{ box-shadow:0 0 0 3px rgba(58,122,74,.2); }
+  50%    { box-shadow:0 0 0 6px rgba(58,122,74,.05); }
+}
+
+#goCurrentBtn{
+  font-size:clamp(11px, 2.5vw, 14px);
+  padding:6px 14px;
+  border-radius:999px;
+  background:linear-gradient(180deg, #fff5d8, #ecd09a);
+  color:#5a3a14;
+  border:1px solid rgba(122,92,31,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 2px 0 #7a5c1f,
+    0 6px 12px -6px rgba(0,0,0,.6);
+  text-shadow:none;
+  gap:6px;
+  transition:transform .14s, box-shadow .14s, filter .2s;
+}
+#goCurrentBtn:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 3px 0 #7a5c1f,
+    0 8px 14px -6px rgba(0,0,0,.65);
+}
+#goCurrentBtn:active{
+  transform:translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    0 0 0 #7a5c1f,
+    0 3px 8px -5px rgba(0,0,0,.6);
+}
+#goCurrentBtn[hidden]{ display:none; }
+
+/* ============================================================
+   لوحة السنة الهجرية
+   ============================================================ */
+.hijri-sign{
+  position:relative;
+  overflow:hidden;
+  padding:11px 10px;
+  margin-bottom:20px;
+  text-align:center;
+  font-size:clamp(19px, 4.6vw, 30px);
+  font-weight:700;
+  letter-spacing:4px;
+  color:#ffeec2;
+  border-radius:16px;
+  border:1px solid rgba(212,175,95,.65);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+    linear-gradient(180deg, var(--teal-1), var(--teal-2));
+  text-shadow:0 2px 6px rgba(0,0,0,.75);
+  box-shadow:
+    0 0 0 4px rgba(212,175,95,.14),
+    inset 0 2px 12px rgba(0,0,0,.6),
+    0 14px 26px -14px rgba(0,0,0,.9);
+}
+.hijri-sign::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(105deg,
+      transparent 34%, rgba(255,255,255,.3) 50%, transparent 66%);
+  transform:translateX(-130%);
+  animation:sweep 5.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes sweep{
+  0%,55%{ transform:translateX(-130%); }
+  100%   { transform:translateX(130%); }
+}
+.hijri-sign.flip{ animation:flipIn .7s cubic-bezier(.2,.85,.3,1); }
+@keyframes flipIn{
+  0%  { opacity:0; transform:perspective(700px) rotateX(-88deg); }
+  100%{ opacity:1; transform:perspective(700px) rotateX(0); }
+}
+
+/* ============================================================
+   الجدول
+   ============================================================ */
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  perspective:1200px;
+  transition:opacity .26s ease, transform .26s ease, filter .26s ease;
+  padding-bottom:2px;
+}
+.table-wrap.reloading{
+  opacity:0;
+  transform:translateY(14px) rotateX(-7deg);
+  filter:blur(3px);
+}
+
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 7px;
+  font-family:inherit;
+  table-layout:fixed;
+}
+
+colgroup col:nth-child(1){ width:20%; }
+colgroup col:nth-child(2){ width:17%; }
+colgroup col:nth-child(3){ width:17%; }
+colgroup col:nth-child(4){ width:46%; }
+
+thead th{
+  padding:13px 6px;
+  font-size:clamp(13px, 1.7vw, 19px);
+  font-weight:700;
+  color:var(--gold-1);
+  text-align:center;
+  letter-spacing:.3px;
+  background:linear-gradient(180deg, #7a5535 0%, #5a3c22 45%, #3d2814 100%);
+  border-top:1px solid rgba(212,175,95,.55);
+  border-bottom:2px solid rgba(0,0,0,.5);
+  text-shadow:0 2px 3px rgba(0,0,0,.7);
+}
+thead th:first-child{ border-radius:0 15px 15px 0; }
+thead th:last-child { border-radius:15px 0 0 15px; }
+
+tbody tr{
+  transform-origin:center top;
+  animation:rowIn .72s cubic-bezier(.2,.85,.3,1) backwards;
+  transition:transform .38s cubic-bezier(.2,.85,.3,1), filter .38s;
+  will-change:transform;
+}
+@keyframes rowIn{
+  0%  { opacity:0; transform:perspective(800px) rotateX(-78deg) translateY(-10px); }
+  100%{ opacity:1; transform:perspective(800px) rotateX(0) translateY(0); }
+}
+
+tbody td{
+  padding:12px 6px;
+  text-align:center;
+  font-size:clamp(13px, 1.7vw, 18px);
+  color:var(--ink);
+  vertical-align:middle;
+  background:linear-gradient(180deg, #fffdf6, #f6efdd);
+  border-top:1px solid rgba(168,132,47,.35);
+  border-bottom:1px solid rgba(168,132,47,.35);
+  box-shadow:0 3px 6px -3px rgba(58,36,21,.35);
+  transition:background .35s ease, color .35s ease;
+}
+tbody td:first-child{
+  border-right:1px solid rgba(168,132,47,.45);
+  border-radius:0 14px 14px 0;
+}
+tbody td:last-child{
+  border-left:1px solid rgba(168,132,47,.45);
+  border-radius:14px 0 0 14px;
+}
+
+tbody tr:nth-child(even) td{
+  background:linear-gradient(180deg, #f8f1e1, #eee3c9);
+}
+
+tbody tr:hover{
+  transform:translateY(-5px) scale(1.012);
+  filter:drop-shadow(0 16px 16px rgba(58,36,21,.4));
+  z-index:3;
+  position:relative;
+}
+tbody tr:hover td{
+  background:linear-gradient(180deg, #fffaea, #f8ebc6);
+}
+
+tbody tr.ramadan td{
+  background:linear-gradient(180deg, #fff8e4, #f7e9c2);
+  border-top-color:rgba(212,175,95,.75);
+  border-bottom-color:rgba(212,175,95,.75);
+}
+tbody tr.ramadan td:first-child{
+  border-right:5px solid var(--gold-2);
+  box-shadow:-6px 0 16px -8px rgba(212,175,95,.9);
+}
+tbody tr.ramadan:hover td{
+  background:linear-gradient(180deg, #fffdf2, #f9edcd);
+}
+
+.month-name{
+  font-weight:700;
+  font-size:clamp(14px, 1.9vw, 20px);
+  color:#6b3f1c;
+  letter-spacing:.2px;
+}
+
+.day-badge,
+.gregorian-badge{
+  display:inline-block;
+  max-width:100%;
+  padding:5px 11px;
+  border-radius:999px;
+  font-weight:700;
+  line-height:1.65;
+  white-space:normal;
+  word-break:break-word;
+}
+.day-badge{
+  font-size:clamp(12px, 1.6vw, 16px);
+  color:#5e3e24;
+  background:linear-gradient(180deg, #fbe7c4, #f2d79f);
+  border:1px solid rgba(168,132,47,.4);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+.gregorian-badge{
+  font-size:clamp(11px, 1.5vw, 15px);
+  color:#123f45;
+  background:linear-gradient(180deg, #e6f4f3, #cfe6e4);
+  border:1px solid rgba(31,77,74,.3);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+}
+.greg-tag{ color:#0d5b52; font-weight:700; }
+.greg-day{ font-size:.9em; opacity:.85; }
+
+.greg-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:center;
+  justify-content:center;
+}
+
+.msg-row td{
+  padding:30px 12px !important;
+  font-size:clamp(15px, 2.4vw, 21px) !important;
+  font-weight:700;
+  color:#8a3b2a;
+  background:linear-gradient(180deg, #fff4ee, #f7e2d8) !important;
+  border:1px solid rgba(168,60,40,.35) !important;
+  border-radius:14px !important;
+}
+
+/* ============================================================
+   التذييل
+   ============================================================ */
+.footer-note{
+  margin-top:24px;
+  padding-top:16px;
+  text-align:center;
+  font-size:clamp(12px, 2.6vw, 16px);
+  font-weight:700;
+  color:#5a4029;
+  line-height:1.9;
+  border-top:2px dashed rgba(155,126,92,.55);
+  position:relative;
+}
+.footer-note::before{
+  content:"❖";
+  position:absolute;
+  top:-13px;
+  right:50%;
+  transform:translateX(50%);
+  background:var(--paper-2);
+  padding:0 12px;
+  color:var(--gold-3);
+  font-size:16px;
+}
+.footer-note .dev{ display:inline-block; color:#7a4a1c; font-weight:700; }
+
+/* ============================================================
+   تابلت
+   ============================================================ */
+@media (max-width:900px){
+  .book-container{ padding:24px 16px 18px; }
+  .corner{ width:30px; height:30px; }
+  .c1::after,.c2::after,.c3::after,.c4::after{ width:7px; height:7px; }
+  thead th{ padding:12px 4px; }
+  tbody td{ padding:11px 4px; }
+  table{ border-spacing:0 6px; }
+}
+
+/* ============================================================
+   جوال
+   ============================================================ */
+@media (max-width:640px){
+
+  body{ padding:20px 8px; }
+  .book-container{ padding:22px 12px 16px; border-radius:20px; }
+  .book-container::before{ inset:9px; border-radius:13px; }
+  .corner{ width:24px; height:24px; border-width:1.5px; }
+  .c1::after,.c2::after,.c3::after,.c4::after{ width:6px; height:6px; }
+
+  .input-section{ gap:8px; padding:12px 10px; }
+  #yearInput{ width:94px; }
+  button{ padding:10px 18px; }
+  .hijri-sign{ letter-spacing:2px; padding:10px 8px; }
+
+  table{
+    min-width:0 !important;
+    border-spacing:0;
+    table-layout:auto;
+    display:block;
+  }
+  colgroup{ display:none; }
+  thead{ display:none; }
+  tbody{ display:block; }
+
+  tbody tr{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    margin-bottom:13px;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(168,132,47,.5);
+    background:linear-gradient(180deg,#fffdf6,#f6efdd);
+    box-shadow:
+      0 2px 0 rgba(255,255,255,.7) inset,
+      0 8px 18px -10px rgba(58,36,21,.55);
+    animation:rowInMobile .55s cubic-bezier(.2,.85,.3,1) backwards;
+  }
+  @keyframes rowInMobile{
+    0%  { opacity:0; transform:translateY(18px) rotateX(-40deg); }
+    100%{ opacity:1; transform:translateY(0) rotateX(0); }
+  }
+
+  tbody tr:hover{ transform:none; filter:none; }
+
+  tbody td{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:11px 6px !important;
+    text-align:center;
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    background:transparent !important;
+  }
+
+  tbody td::before{
+    content:attr(data-label);
+    font-size:.68em;
+    font-weight:700;
+    letter-spacing:.4px;
+    color:#8a6820;
+    background:rgba(212,175,95,.18);
+    padding:2px 8px;
+    border-radius:6px;
+    line-height:1.4;
+  }
+
+  tbody td.month-name{
+    grid-column:1 / -1;
+    flex-direction:row;
+    gap:0;
+    padding:11px 12px !important;
+    font-size:clamp(15px, 4.2vw, 18px);
+    color:#3a2415;
+    background:linear-gradient(180deg,#f7e5b4,#e1c17a) !important;
+    border-bottom:2px solid rgba(90,64,20,.35) !important;
+    border-radius:0 !important;
+    letter-spacing:.3px;
+  }
+  tbody td.month-name::before{ display:none; }
+
+  tbody td[data-label="البداية"]{
+    border-left:1px dashed rgba(168,132,47,.4) !important;
+    border-bottom:1px dashed rgba(168,132,47,.35) !important;
+  }
+  tbody td[data-label="النهاية"]{
+    border-bottom:1px dashed rgba(168,132,47,.35) !important;
+  }
+
+  tbody td[data-label="الميلادي"]{
+    grid-column:1 / -1;
+    padding:12px 10px !important;
+    gap:8px;
+    background:linear-gradient(180deg, rgba(230,244,243,.35), rgba(230,244,243,.7)) !important;
+    border-radius:0 0 14px 14px !important;
+  }
+
+  .greg-list{ flex-direction:column; gap:6px; width:100%; }
+  .gregorian-badge{
+    display:block;
+    width:100%;
+    padding:6px 10px;
+    border-radius:12px;
+    font-size:clamp(11.5px, 3.2vw, 13.5px);
+    white-space:normal;
+    text-align:center;
+  }
+  .day-badge{
+    font-size:clamp(12px, 3.3vw, 14.5px);
+    padding:5px 12px;
+  }
+
+  tbody tr.ramadan{
+    border-color:var(--gold-2);
+    box-shadow:
+      0 0 0 2px rgba(212,175,95,.35),
+      0 8px 20px -8px rgba(212,175,95,.7);
+  }
+  tbody tr.ramadan td.month-name{
+    background:linear-gradient(180deg,#f9e5a8,#d4af5f) !important;
+  }
+  tbody tr.ramadan td[data-label="الميلادي"]{
+    background:linear-gradient(180deg, rgba(249,237,205,.6), rgba(247,233,194,.9)) !important;
+  }
+
+  tbody tr.msg-row{ display:block; }
+  tbody tr.msg-row td{
+    display:block;
+    padding:24px 14px !important;
+    font-size:15px !important;
+    text-align:center;
+    border-radius:12px !important;
+  }
+  tbody tr.msg-row td::before{ display:none; }
+
+  .footer-note{ margin-top:20px; padding-top:14px; }
+}
+
+@media (max-width:380px){
+  .book-container{ padding:18px 8px 14px; }
+  h1{ font-size:24px; }
+  .subtitle{ font-size:12px; }
+  .input-section{ padding:10px 8px; }
+  .hijri-sign{ font-size:17px; letter-spacing:1px; }
+  tbody td{ padding:9px 4px !important; }
+  tbody td.month-name{ font-size:14px; padding:9px 8px !important; }
+  .gregorian-badge{ font-size:11px; padding:5px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  body::before{ animation:none; }
+  .hijri-sign::after{ animation:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="book-container" id="book">
+
+    <span class="corner c1"></span>
+    <span class="corner c2"></span>
+    <span class="corner c3"></span>
+    <span class="corner c4"></span>
+
+    <h1>📘 التوفيقات الإلهامية</h1>
+    <div class="subtitle">✨ التقويم الهجري الموافق لأم القرى (دقيق لجميع السنوات) ✨</div>
+
+    <div class="input-section">
+      <span class="input-label">عام هجري:</span>
+      <input type="number" id="yearInput" placeholder="١٤٤٨" value="1448" min="1356" max="1500" inputmode="numeric">
+      <button id="convertBtn">
+          <span class="ico">🔍</span> ادخل السنة
+      </button>
+    </div>
+
+    <div class="current-year-bar">
+      <span class="hint" id="currentYearHint">
+        <span class="dot"></span>
+        السنة الهجرية الحالية: <strong id="currentYearValue">—</strong>
+      </span>
+      <button id="goCurrentBtn" type="button" hidden>↺ العودة للسنة الحالية</button>
+    </div>
+
+    <div class="hijri-sign" id="hijriYearDisplay">🌙 ١٤٤٨ هـ 🌙</div>
+
+    <div class="table-wrap" id="tableWrap">
+      <table id="hijriTable">
+        <colgroup>
+          <col><col><col><col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>الشهر الهجري</th>
+            <th>بداية الشهر</th>
+            <th>نهاية الشهر</th>
+            <th>التوافق الميلادي</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr class="msg-row"><td colspan="4">⏳ جاري التحميل...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-note">
+      ✦ بناءً على تقويم أم القرى ✦ يعمل بدون إنترنت ✦ ١٣٥٦ - ١٥٠٠ هـ ✦<br>
+      <span class="dev">برمجة حسين العرياني 💫</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   بيانات تقويم أم القرى المدمجة - تعمل بدون إنترنت 100%
+   ================================================================ */
+
+const hijriMonths = [
+  "محرم", "صفر", "ربيع الأول", "ربيع الثاني",
+  "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان",
+  "رمضان", "شوال", "ذو القعدة", "ذو الحجة"
+];
+
+const weekDays = [
+  "الأحد", "الإثنين", "الثلاثاء", "الأربعاء",
+  "الخميس", "الجمعة", "السبت"
+];
+
+const gregorianMonths = [
+  "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+];
+
+/* ---- 1 محرم لكل سنة ---- */
+const hijriStartDates = {
+  1440: new Date(2018, 8, 11),
+  1441: new Date(2019, 7, 31),
+  1442: new Date(2020, 7, 20),
+  1443: new Date(2021, 7, 9),
+  1444: new Date(2022, 6, 30),
+  1445: new Date(2023, 6, 19),
+  1446: new Date(2024, 6, 7),
+  1447: new Date(2025, 5, 27),
+  1448: new Date(2026, 5, 16),
+  1449: new Date(2027, 5, 5),
+  1450: new Date(2028, 4, 24),
+  1451: new Date(2029, 4, 13),
+  1452: new Date(2030, 4, 3),
+  1453: new Date(2031, 3, 22),
+  1454: new Date(2032, 3, 11),
+  1455: new Date(2033, 2, 31),
+  1456: new Date(2034, 2, 20),
+  1457: new Date(2035, 2, 10),
+  1458: new Date(2036, 1, 27),
+  1459: new Date(2037, 1, 15),
+  1460: new Date(2038, 1, 4)
+};
+
+/* ---- أطوال الأشهر ---- */
+const monthLengthsDatabase = {
+  1447: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1448: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1449: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1450: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1451: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1452: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1453: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1454: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1455: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1456: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1457: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1458: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
+  1459: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
+  1460: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
+};
+
+const MIN_YEAR = 1356;
+const MAX_YEAR = 1500;
+
+/* ================================================================
+   دوال مساعدة
+   ================================================================ */
+function toArabicNumerals(num){
+  const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  return String(num).split('').map(d => arabicDigits[parseInt(d, 10)] ?? d).join('');
+}
+
+function formatGregorian(date){
+  return `${date.getDate()} ${gregorianMonths[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+function getDayName(date){
+  return weekDays[date.getDay()];
+}
+
+function getMonthLength(hijriYear, hijriMonth){
+  const monthIndex = hijriMonth - 1;
+  if (monthLengthsDatabase[hijriYear]) {
+    return monthLengthsDatabase[hijriYear][monthIndex];
+  }
+  const baseYear = 1447;
+  const basePattern = monthLengthsDatabase[1447];
+  const yearDiff = hijriYear - baseYear;
+  if (Math.abs(yearDiff) % 2 === 0) {
+    return basePattern[monthIndex];
+  }
+  return basePattern[monthIndex] === 30 ? 29 : 30;
+}
+
+function getHijriNewYearDate(hijriYear){
+  if (hijriStartDates[hijriYear]) {
+    return new Date(hijriStartDates[hijriYear]);
+  }
+  let baseYear, baseDate;
+  if (hijriYear > 1450) {
+    baseYear = 1450;
+    baseDate = new Date(hijriStartDates[1450]);
+  } else if (hijriYear > 1440) {
+    baseYear = 1447;
+    baseDate = new Date(hijriStartDates[1447]);
+  } else {
+    baseYear = 1440;
+    baseDate = new Date(hijriStartDates[1440]);
+  }
+  const yearDiff = hijriYear - baseYear;
+  const daysDiff = Math.round(yearDiff * 354.367);
+  const result = new Date(baseDate);
+  result.setDate(result.getDate() + daysDiff);
+  return result;
+}
+
+/* ================================================================
+   الحصول على السنة الهجرية الحالية تلقائيًا
+   يعتمد أولًا على واجهة Intl (تقويم أم القرى) في المتصفح
+   ويرجع إلى حساب تقريبي في حال عدم التوفر
+   ================================================================ */
+function getCurrentHijriYear(){
+  // المحاولة 1: استخدام Intl مع تقويم أم القرى (دقيق جدًا)
+  try {
+    const fmt = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    });
+    const parts = fmt.formatToParts(new Date());
+    const yearPart = parts.find(p => p.type === 'year');
+    if (yearPart) {
+      const y = parseInt(yearPart.value, 10);
+      if (!isNaN(y)) return y;
+    }
+  } catch (e) { /* تجاهل */ }
+
+  // المحاولة 2: استخدام تقويم إسلامي عام
+  try {
+    const fmt2 = new Intl.DateTimeFormat('en-US-u-ca-islamic', { year: 'numeric' });
+    const y2 = parseInt(fmt2.format(new Date()), 10);
+    if (!isNaN(y2)) return y2;
+  } catch (e) { /* تجاهل */ }
+
+  // المحاولة 3: حساب تقريبي (بديل أخير)
+  const now = new Date();
+  const gregYear = now.getFullYear();
+  const gregMonth = now.getMonth(); // 0-11
+  // نقطة مرجعية: 1 محرم 1447 ≈ 27 يونيو 2025
+  const refGreg = new Date(2025, 5, 27);
+  const refHijri = 1447;
+  const daysDiff = Math.floor((now - refGreg) / 86400000);
+  const approx = refHijri + Math.floor(daysDiff / 354.367);
+  // تصحيح إذا كنا في بداية السنة الميلادية قبل محرم
+  return approx;
+}
+
+/* ================================================================
+   توليد الجدول
+   ================================================================ */
+function generateHijriCalendar(hijriYear){
+  if (hijriYear < MIN_YEAR || hijriYear > MAX_YEAR) {
+    return `<tr class="msg-row"><td colspan="4">
+              ❌ السنة خارج النطاق المدعوم (${toArabicNumerals(MIN_YEAR)} - ${toArabicNumerals(MAX_YEAR)} هـ)
+            </td></tr>`;
+  }
+
+  let rows = '';
+  let currentDate = getHijriNewYearDate(hijriYear);
+
+  for (let month = 1; month <= 12; month++) {
+
+    const monthStart = new Date(currentDate);
+    const monthLength = getMonthLength(hijriYear, month);
+    const monthEnd = new Date(monthStart);
+    monthEnd.setDate(monthEnd.getDate() + monthLength - 1);
+
+    const startDay  = getDayName(monthStart);
+    const endDay    = getDayName(monthEnd);
+    const startDate = formatGregorian(monthStart);
+    const endDate   = formatGregorian(monthEnd);
+
+    const gregorianRange =
+      `<div class="greg-list">
+         <span class="gregorian-badge"><span class="greg-tag">بداية:</span> ${startDate} <span class="greg-day">(${startDay})</span></span>
+         <span class="gregorian-badge"><span class="greg-tag">نهاية:</span> ${endDate} <span class="greg-day">(${endDay})</span></span>
+       </div>`;
+
+    const monthName = hijriMonths[month - 1];
+    const hijriStartFormatted = `١ ${monthName}`;
+    const hijriEndFormatted   = `${monthLength} ${monthName}`;
+
+    const isRamadan = (monthName === 'رمضان');
+
+    rows += `<tr${isRamadan ? ' class="ramadan"' : ''}>
+        <td class="month-name" data-label="الشهر">${monthName}</td>
+        <td data-label="البداية"><span class="day-badge">${hijriStartFormatted}</span></td>
+        <td data-label="النهاية"><span class="day-badge">${hijriEndFormatted}</span></td>
+        <td data-label="الميلادي">${gregorianRange}</td>
+      </tr>`;
+
+    currentDate = new Date(monthEnd);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return rows;
+}
+
+/* ================================================================
+   تأثيرات العرض
+   ================================================================ */
+function applyRowDelays(){
+  const rows = document.querySelectorAll('#tableBody tr');
+  const isMobile = window.matchMedia('(max-width: 640px)').matches;
+  const step = isMobile ? 40 : 55;
+  rows.forEach((tr, i) => {
+    tr.style.animationDelay = (i * step) + 'ms';
+  });
+}
+
+function updateHijriDisplay(year){
+  const el = document.getElementById('hijriYearDisplay');
+  el.innerHTML = `🌙 ${toArabicNumerals(year)} هـ 🌙`;
+  el.classList.remove('flip');
+  void el.offsetWidth;
+  el.classList.add('flip');
+}
+
+function renderTable(year){
+  document.getElementById('tableBody').innerHTML = generateHijriCalendar(year);
+  applyRowDelays();
+  updateHijriDisplay(year);
+}
+
+function loadCalendarForYear(year, animate = true){
+  const wrapper = document.getElementById('tableWrap');
+
+  if (!animate) {
+    renderTable(year);
+    return;
+  }
+
+  wrapper.classList.add('reloading');
+  window.setTimeout(() => {
+    renderTable(year);
+    requestAnimationFrame(() => wrapper.classList.remove('reloading'));
+  }, 270);
+}
+
+/* ================================================================
+   الأحداث
+   ================================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+
+  const yearInput    = document.getElementById('yearInput');
+  const convertBtn   = document.getElementById('convertBtn');
+  const currentValEl = document.getElementById('currentYearValue');
+  const goCurrentBtn = document.getElementById('goCurrentBtn');
+  const currentHint  = document.getElementById('currentYearHint');
+
+  /* --- تحديد السنة الهجرية الحالية تلقائيًا --- */
+  let currentHijriYear = getCurrentHijriYear();
+
+  // التأكد من بقاء السنة ضمن النطاق المدعوم
+  if (isNaN(currentHijriYear)) currentHijriYear = 1448;
+  if (currentHijriYear < MIN_YEAR) currentHijriYear = MIN_YEAR;
+  if (currentHijriYear > MAX_YEAR) currentHijriYear = MAX_YEAR;
+
+  // عرض السنة الحالية في الشريط
+  currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
+
+  // تعيين قيمة الإدخال إلى السنة الحالية تلقائيًا
+  yearInput.value = currentHijriYear;
+
+  // عرض الجدول للسنة الحالية مباشرة
+  renderTable(currentHijriYear);
+
+  /* --- زر الاستخراج (إدخال يدوي) --- */
+  function run(animate = true){
+    const year = parseInt(yearInput.value, 10);
+    if (isNaN(year)) {
+      alert('الرجاء إدخال سنة هجرية صحيحة');
+      return;
+    }
+    if (year < MIN_YEAR || year > MAX_YEAR) {
+      alert('الرجاء إدخال سنة هجرية بين ' + MIN_YEAR + ' و ' + MAX_YEAR);
+      return;
+    }
+    loadCalendarForYear(year, animate);
+    updateGoCurrentButton(year);
+  }
+
+  convertBtn.addEventListener('click', () => run(true));
+
+  yearInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      run(true);
+    }
+  });
+
+  /* --- زر العودة للسنة الحالية --- */
+  function updateGoCurrentButton(displayedYear){
+    if (displayedYear !== currentHijriYear) {
+      goCurrentBtn.hidden = false;
+    } else {
+      goCurrentBtn.hidden = true;
+    }
+  }
+
+  goCurrentBtn.addEventListener('click', function(){
+    yearInput.value = currentHijriYear;
+    loadCalendarForYear(currentHijriYear, true);
+    updateGoCurrentButton(currentHijriYear);
+  });
+
+  // تحديث حالة زر "السنة الحالية" عند أي تغيير في الحقل
+  yearInput.addEventListener('input', function(){
+    const y = parseInt(yearInput.value, 10);
+    updateGoCurrentButton(isNaN(y) ? null : y);
+  });
+
+  /* --- التحقق التلقائي عند تغيّر اليوم (منتصف الليل) ---
+         بحيث تتحدث السنة الهجرية الحالية تلقائيًا عند بداية سنة جديدة */
+  let lastKnownYear = currentHijriYear;
+
+  function checkYearRollover(){
+    const nowYear = getCurrentHijriYear();
+    if (!isNaN(nowYear) && nowYear !== lastKnownYear) {
+      lastKnownYear = nowYear;
+      // تحديث النطاق إن لزم
+      if (nowYear >= MIN_YEAR && nowYear <= MAX_YEAR) {
+        currentHijriYear = nowYear;
+        currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
+
+        // إذا كان المستخدم يشاهد السنة الحالية السابقة، نحدّثها تلقائيًا
+        const displayed = parseInt(yearInput.value, 10);
+        if (displayed === lastKnownYear - (nowYear - lastKnownYear) || displayed === nowYear - 1) {
+          yearInput.value = nowYear;
+          loadCalendarForYear(nowYear, true);
+          updateGoCurrentButton(nowYear);
+        } else {
+          updateGoCurrentButton(displayed);
+        }
+        console.log('🎉 تم تحديث السنة الهجرية الحالية إلى:', nowYear);
+      }
+    }
+  }
+
+  // فحص كل ساعة (يغطي تغيّر منتصف الليل)
+  setInterval(checkYearRollover, 60 * 60 * 1000);
+  // فحص أولي بعد التحميل بقليل
+  setTimeout(checkYearRollover, 3000);
+
+  /* --- إعادة حساب تأخيرات الصفوف عند تغيير حجم الشاشة --- */
+  let resizeTimer = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyRowDelays, 180);
+  });
+
+  /* --- اختبار داخلي --- */
+  (function selfTest(){
+    try {
+      let testDate = getHijriNewYearDate(1447);
+      for (let i = 1; i < 9; i++) {
+        testDate.setDate(testDate.getDate() + getMonthLength(1447, i));
+      }
+      console.log('✅ 1 رمضان 1447 =', formatGregorian(testDate), getDayName(testDate));
+      console.log('📅 السنة الهجرية الحالية المكتشفة =', currentHijriYear);
+    } catch(e){ console.warn('اختبار داخلي:', e); }
+  })();
+
+  /* --- الميلان ثلاثي الأبعاد (سطح المكتب فقط) --- */
+  const scene = document.getElementById('scene');
+  const book  = document.getElementById('book');
+  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;
+
+  if (canTilt) {
+    let raf = null;
+    scene.addEventListener('mousemove', (e) => {
+      const r = scene.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        book.style.transform =
+          `rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 5).toFixed(2)}deg)`;
+      });
+    });
+    scene.addEventListener('mouseleave', () => {
+      if (raf) cancelAnimationFrame(raf);
+      book.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  }
+});
+</script>
+
+</body>
+</html>

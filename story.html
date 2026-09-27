@@ -2,1218 +2,4829 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-<title>التوفيقات الإلهامية - التقويم الهجري</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+
+<title>دستور بابل المالي | الطرق السبع وقصص الحظ</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-/* ============================================================
-   المتغيرات اللونية
-   ============================================================ */
+
 :root{
-  --gold-1:#f7e7b6;
-  --gold-2:#d4af5f;
-  --gold-3:#a8842f;
-  --gold-4:#7a5c1f;
-  --wood-1:#3a2415;
-  --wood-2:#6b4a2e;
-  --wood-3:#8b6b4d;
-  --paper-1:#fbf5e6;
-  --paper-2:#f2e7cd;
-  --paper-3:#e6d8b6;
-  --ink:#2c1e12;
-  --teal-1:#2c5a56;
-  --teal-2:#16322f;
+
+    --paper:#efe0bf;
+    --paper-light:#f8efd9;
+    --paper-dark:#d9c397;
+
+    --ink:#382b1c;
+    --ink-soft:#65533a;
+
+    --brown:#4a321f;
+    --brown-dark:#2e2015;
+
+    --gold:#b1843e;
+    --gold-light:#d6b56d;
+    --gold-dark:#765321;
+
+    --green:#26382e;
+
+    --border:#b99b69;
+
+    --shadow:rgba(57,38,18,.20);
+
+    --ease:cubic-bezier(.2,.8,.3,1);
+
 }
 
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ -webkit-text-size-adjust:100%; }
+
+/* =========================
+   الأساس
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-  font-family:'Amiri','Traditional Arabic','Scheherazade New',serif;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:34px 12px;
-  color:var(--ink);
-  background:
-    radial-gradient(ellipse 90% 60% at 50% -10%, #5a3a22 0%, #3a2415 45%, #241608 75%, #150c04 100%);
-  position:relative;
-  overflow-x:hidden;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:var(--ink);
+
+    background:
+
+        radial-gradient(
+            circle at 20% 15%,
+            rgba(120,80,25,.08) 0 2px,
+            transparent 3px
+        ),
+
+        radial-gradient(
+            circle at 75% 65%,
+            rgba(120,80,25,.06) 0 1px,
+            transparent 2px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(110,70,25,.04),
+            transparent 20%,
+            transparent 80%,
+            rgba(110,70,25,.04)
+        ),
+
+        var(--paper);
+
+    background-size:
+        35px 35px,
+        47px 47px,
+        100% 100%,
+        auto;
+
+    font-family:
+        "Cairo",
+        "Segoe UI",
+        sans-serif;
+
+    line-height:2;
+
+    animation: pageIn 1.1s var(--ease) both;
+
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.15;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='%23d4af5f' stroke-width='1'%3E%3Cpath d='M45 3 L87 45 L45 87 L3 45 Z'/%3E%3Cpath d='M45 15 L75 45 L45 75 L15 45 Z'/%3E%3Ccircle cx='45' cy='45' r='7'/%3E%3Cpath d='M45 0 L45 12 M45 78 L45 90 M0 45 L12 45 M78 45 L90 45'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:90px 90px;
-  animation:patternDrift 90s linear infinite;
-}
-@keyframes patternDrift{
-  from{ background-position:0 0; }
-  to  { background-position:180px 180px; }
+@keyframes pageIn{
+    from{ opacity:0; }
+    to{ opacity:1; }
 }
 
-/* ============================================================
-   المشهد والكتاب
-   ============================================================ */
-.scene{
-  width:100%;
-  max-width:900px;
-  perspective:1700px;
-  position:relative;
-  z-index:2;
+
+/* =========================
+   شريط التقدم
+========================= */
+
+.progress{
+
+    position:fixed;
+
+    top:0;
+    right:0;
+    left:0;
+
+    height:3px;
+
+    background:rgba(74,50,31,.12);
+
+    z-index:120;
+
+    pointer-events:none;
+
 }
 
-.book-container{
-  position:relative;
-  width:100%;
-  padding:28px 22px 22px;
-  border-radius:26px;
-  background:
-    radial-gradient(circle at 18% 12%, rgba(255,255,255,.7), transparent 45%),
-    linear-gradient(158deg, var(--paper-1) 0%, var(--paper-2) 55%, var(--paper-3) 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.85),
-    inset 0 -14px 26px -18px rgba(122,92,31,.5),
-    0 0 0 7px #6b4a2e,
-    0 0 0 10px var(--gold-2),
-    0 0 0 12px #402a16,
-    0 42px 70px -26px rgba(0,0,0,.95),
-    0 70px 110px -40px rgba(0,0,0,.9);
-  transform-style:preserve-3d;
-  transition:transform .45s cubic-bezier(.2,.85,.3,1);
-  animation:bookIn 1.15s cubic-bezier(.16,.9,.3,1) backwards;
-}
-@keyframes bookIn{
-  0%   { opacity:0; transform:perspective(1400px) rotateX(28deg) translateY(70px) scale(.9); }
-  60%  { opacity:1; }
-  100% { opacity:1; transform:perspective(1400px) rotateX(0) translateY(0) scale(1); }
+.progress span{
+
+    display:block;
+
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gold-dark),
+            var(--gold-light),
+            var(--gold-dark)
+        );
+
+    background-size:200% 100%;
+
+    box-shadow:
+        0 0 12px
+        rgba(214,181,109,.6);
+
+    transition:width .12s linear;
+
+    animation:
+        shine 3s linear infinite;
+
 }
 
-.book-container::before{
-  content:"";
-  position:absolute;
-  inset:13px;
-  border:1px solid rgba(168,132,47,.4);
-  border-radius:17px;
-  pointer-events:none;
-}
-
-.corner{
-  position:absolute;
-  width:38px; height:38px;
-  border:2px solid var(--gold-2);
-  opacity:.75;
-  pointer-events:none;
-}
-.corner::after{
-  content:"";
-  position:absolute;
-  width:9px; height:9px;
-  background:var(--gold-2);
-  transform:rotate(45deg);
-  box-shadow:0 0 6px rgba(212,175,95,.9);
-}
-.c1{ top:16px; right:16px; border-left:none; border-bottom:none; border-radius:0 14px 0 0; }
-.c1::after{ top:6px; right:6px; }
-.c2{ top:16px; left:16px; border-right:none; border-bottom:none; border-radius:14px 0 0 0; }
-.c2::after{ top:6px; left:6px; }
-.c3{ bottom:16px; right:16px; border-left:none; border-top:none; border-radius:0 0 14px 0; }
-.c3::after{ bottom:6px; right:6px; }
-.c4{ bottom:16px; left:16px; border-right:none; border-top:none; border-radius:0 0 0 14px; }
-.c4::after{ bottom:6px; left:6px; }
-
-/* ============================================================
-   العنوان
-   ============================================================ */
-h1{
-  font-size:clamp(26px, 5.6vw, 44px);
-  font-weight:700;
-  text-align:center;
-  line-height:1.35;
-  letter-spacing:.5px;
-  margin:2px 0 0;
-  background:linear-gradient(100deg,
-      #3a2415 12%, #a8842f 32%, #f9edc4 48%, #d4af5f 56%, #a8842f 70%, #3a2415 90%);
-  background-size:260% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
-  animation:shine 7s linear infinite;
-  filter:
-    drop-shadow(0 1px 0 rgba(255,255,255,.9))
-    drop-shadow(0 5px 9px rgba(58,36,21,.3));
-}
 @keyframes shine{
-  from{ background-position:0% center; }
-  to  { background-position:260% center; }
+    from{ background-position:0% 0; }
+    to{ background-position:200% 0; }
 }
 
-.subtitle{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  margin:10px 0 18px;
-  font-size:clamp(13px, 2.9vw, 18px);
-  font-weight:700;
-  color:#5a4029;
-  text-align:center;
-  letter-spacing:.2px;
-  line-height:1.6;
-}
-.subtitle::before,
-.subtitle::after{
-  content:"";
-  flex:1 1 auto;
-  max-width:90px;
-  height:1px;
-  position:relative;
-}
-.subtitle::before{ background:linear-gradient(270deg, transparent, var(--gold-3), transparent); }
-.subtitle::after { background:linear-gradient(90deg, transparent, var(--gold-3), transparent); }
 
-/* ============================================================
-   صندوق الإدخال
-   ============================================================ */
-.input-section{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  padding:15px 14px;
-  margin-bottom:10px;
-  border-radius:18px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.15)),
-    linear-gradient(160deg, #eaddbe, #ddcaa3);
-  border:1px solid rgba(122,92,31,.55);
-  box-shadow:
-    inset 0 2px 6px rgba(255,255,255,.85),
-    inset 0 -6px 14px -8px rgba(90,64,41,.45),
-    0 8px 18px -12px rgba(0,0,0,.6);
-}
+/* =========================
+   غلاف الكتاب
+========================= */
 
-.input-label{
-  font-size:clamp(17px, 3.8vw, 24px);
-  font-weight:700;
-  color:#4d2e1a;
-  text-shadow:0 1px 0 rgba(255,255,255,.7);
-}
+.book{
 
-#yearInput{
-  width:118px;
-  max-width:40vw;
-  padding:9px 6px;
-  font-size:clamp(19px, 4.4vw, 26px);
-  font-weight:700;
-  text-align:center;
-  color:#1f140c;
-  font-family:'Amiri','Courier New',monospace;
-  background:linear-gradient(180deg, #fffdf4, #f3e9d2);
-  border:2px solid var(--wood-2);
-  border-radius:12px;
-  box-shadow:
-    inset 0 3px 7px rgba(90,64,41,.3),
-    0 1px 0 rgba(255,255,255,.9),
-    0 4px 10px -6px rgba(0,0,0,.6);
-  transition:box-shadow .3s, border-color .3s, transform .3s;
-  outline:none;
-}
-#yearInput:focus{
-  border-color:var(--gold-2);
-  transform:translateY(-1px);
-  box-shadow:
-    inset 0 3px 7px rgba(90,64,41,.28),
-    0 0 0 3px rgba(212,175,95,.35),
-    0 8px 18px -8px rgba(0,0,0,.6);
-}
+    width:min(920px,100%);
 
-button{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  padding:11px 24px;
-  font-family:inherit;
-  font-size:clamp(17px, 3.9vw, 24px);
-  font-weight:700;
-  color:#2b1c07;
-  cursor:pointer;
-  border:1px solid rgba(90,64,20,.6);
-  border-radius:15px;
-  background:linear-gradient(180deg, #f6e3ad 0%, #dcb95f 42%, #b8912f 62%, #8a6a1e 100%);
-  text-shadow:0 1px 0 rgba(255,255,255,.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    inset 0 -2px 6px rgba(90,64,20,.35),
-    0 6px 0 #5c4413,
-    0 12px 20px -8px rgba(0,0,0,.7);
-  transform:translateY(0);
-  transition:transform .12s cubic-bezier(.2,.85,.3,1),
-             box-shadow .12s cubic-bezier(.2,.85,.3,1),
-             filter .25s;
-}
-button:hover{
-  filter:brightness(1.08);
-  transform:translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    inset 0 -2px 6px rgba(90,64,20,.35),
-    0 8px 0 #5c4413,
-    0 16px 26px -8px rgba(0,0,0,.75);
-}
-button:active{
-  transform:translateY(5px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.7),
-    inset 0 -1px 4px rgba(90,64,20,.4),
-    0 1px 0 #5c4413,
-    0 5px 10px -6px rgba(0,0,0,.7);
-}
-button:focus-visible{
-  outline:3px solid rgba(212,175,95,.85);
-  outline-offset:3px;
-}
-button .ico{ font-size:1.15em; line-height:1; }
+    margin:auto;
 
-/* ============================================================
-   شريط السنة الحالية
-   ============================================================ */
-.current-year-bar{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:0 0 16px;
-  font-size:clamp(12px, 2.7vw, 15px);
-  color:#5a4029;
-  font-weight:700;
-}
-.current-year-bar .hint{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 12px;
-  border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25));
-  border:1px dashed rgba(122,92,31,.5);
-  color:#4d2e1a;
-}
-.current-year-bar .hint .dot{
-  width:8px; height:8px;
-  border-radius:50%;
-  background:#3a7a4a;
-  box-shadow:0 0 0 3px rgba(58,122,74,.2);
-  animation:pulseDot 2.4s ease-in-out infinite;
-}
-@keyframes pulseDot{
-  0%,100%{ box-shadow:0 0 0 3px rgba(58,122,74,.2); }
-  50%    { box-shadow:0 0 0 6px rgba(58,122,74,.05); }
-}
+    min-height:100vh;
 
-#goCurrentBtn{
-  font-size:clamp(11px, 2.5vw, 14px);
-  padding:6px 14px;
-  border-radius:999px;
-  background:linear-gradient(180deg, #fff5d8, #ecd09a);
-  color:#5a3a14;
-  border:1px solid rgba(122,92,31,.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    0 2px 0 #7a5c1f,
-    0 6px 12px -6px rgba(0,0,0,.6);
-  text-shadow:none;
-  gap:6px;
-  transition:transform .14s, box-shadow .14s, filter .2s;
-}
-#goCurrentBtn:hover{
-  filter:brightness(1.05);
-  transform:translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    0 3px 0 #7a5c1f,
-    0 8px 14px -6px rgba(0,0,0,.65);
-}
-#goCurrentBtn:active{
-  transform:translateY(3px);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.7),
-    0 0 0 #7a5c1f,
-    0 3px 8px -5px rgba(0,0,0,.6);
-}
-#goCurrentBtn[hidden]{ display:none; }
+    background:
 
-/* ============================================================
-   لوحة السنة الهجرية
-   ============================================================ */
-.hijri-sign{
-  position:relative;
-  overflow:hidden;
-  padding:11px 10px;
-  margin-bottom:20px;
-  text-align:center;
-  font-size:clamp(19px, 4.6vw, 30px);
-  font-weight:700;
-  letter-spacing:4px;
-  color:#ffeec2;
-  border-radius:16px;
-  border:1px solid rgba(212,175,95,.65);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-    linear-gradient(180deg, var(--teal-1), var(--teal-2));
-  text-shadow:0 2px 6px rgba(0,0,0,.75);
-  box-shadow:
-    0 0 0 4px rgba(212,175,95,.14),
-    inset 0 2px 12px rgba(0,0,0,.6),
-    0 14px 26px -14px rgba(0,0,0,.9);
-}
-.hijri-sign::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(105deg,
-      transparent 34%, rgba(255,255,255,.3) 50%, transparent 66%);
-  transform:translateX(-130%);
-  animation:sweep 5.5s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes sweep{
-  0%,55%{ transform:translateX(-130%); }
-  100%   { transform:translateX(130%); }
-}
-.hijri-sign.flip{ animation:flipIn .7s cubic-bezier(.2,.85,.3,1); }
-@keyframes flipIn{
-  0%  { opacity:0; transform:perspective(700px) rotateX(-88deg); }
-  100%{ opacity:1; transform:perspective(700px) rotateX(0); }
-}
+        linear-gradient(
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.15)
+        ),
 
-/* ============================================================
-   الجدول
-   ============================================================ */
-.table-wrap{
-  width:100%;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  perspective:1200px;
-  transition:opacity .26s ease, transform .26s ease, filter .26s ease;
-  padding-bottom:2px;
-}
-.table-wrap.reloading{
-  opacity:0;
-  transform:translateY(14px) rotateX(-7deg);
-  filter:blur(3px);
-}
+        var(--paper-light);
 
-table{
-  width:100%;
-  border-collapse:separate;
-  border-spacing:0 7px;
-  font-family:inherit;
-  table-layout:fixed;
-}
-
-colgroup col:nth-child(1){ width:20%; }
-colgroup col:nth-child(2){ width:17%; }
-colgroup col:nth-child(3){ width:17%; }
-colgroup col:nth-child(4){ width:46%; }
-
-thead th{
-  padding:13px 6px;
-  font-size:clamp(13px, 1.7vw, 19px);
-  font-weight:700;
-  color:var(--gold-1);
-  text-align:center;
-  letter-spacing:.3px;
-  background:linear-gradient(180deg, #7a5535 0%, #5a3c22 45%, #3d2814 100%);
-  border-top:1px solid rgba(212,175,95,.55);
-  border-bottom:2px solid rgba(0,0,0,.5);
-  text-shadow:0 2px 3px rgba(0,0,0,.7);
-}
-thead th:first-child{ border-radius:0 15px 15px 0; }
-thead th:last-child { border-radius:15px 0 0 15px; }
-
-tbody tr{
-  transform-origin:center top;
-  animation:rowIn .72s cubic-bezier(.2,.85,.3,1) backwards;
-  transition:transform .38s cubic-bezier(.2,.85,.3,1), filter .38s;
-  will-change:transform;
-}
-@keyframes rowIn{
-  0%  { opacity:0; transform:perspective(800px) rotateX(-78deg) translateY(-10px); }
-  100%{ opacity:1; transform:perspective(800px) rotateX(0) translateY(0); }
-}
-
-tbody td{
-  padding:12px 6px;
-  text-align:center;
-  font-size:clamp(13px, 1.7vw, 18px);
-  color:var(--ink);
-  vertical-align:middle;
-  background:linear-gradient(180deg, #fffdf6, #f6efdd);
-  border-top:1px solid rgba(168,132,47,.35);
-  border-bottom:1px solid rgba(168,132,47,.35);
-  box-shadow:0 3px 6px -3px rgba(58,36,21,.35);
-  transition:background .35s ease, color .35s ease;
-}
-tbody td:first-child{
-  border-right:1px solid rgba(168,132,47,.45);
-  border-radius:0 14px 14px 0;
-}
-tbody td:last-child{
-  border-left:1px solid rgba(168,132,47,.45);
-  border-radius:14px 0 0 14px;
-}
-
-tbody tr:nth-child(even) td{
-  background:linear-gradient(180deg, #f8f1e1, #eee3c9);
-}
-
-tbody tr:hover{
-  transform:translateY(-5px) scale(1.012);
-  filter:drop-shadow(0 16px 16px rgba(58,36,21,.4));
-  z-index:3;
-  position:relative;
-}
-tbody tr:hover td{
-  background:linear-gradient(180deg, #fffaea, #f8ebc6);
-}
-
-tbody tr.ramadan td{
-  background:linear-gradient(180deg, #fff8e4, #f7e9c2);
-  border-top-color:rgba(212,175,95,.75);
-  border-bottom-color:rgba(212,175,95,.75);
-}
-tbody tr.ramadan td:first-child{
-  border-right:5px solid var(--gold-2);
-  box-shadow:-6px 0 16px -8px rgba(212,175,95,.9);
-}
-tbody tr.ramadan:hover td{
-  background:linear-gradient(180deg, #fffdf2, #f9edcd);
-}
-
-.month-name{
-  font-weight:700;
-  font-size:clamp(14px, 1.9vw, 20px);
-  color:#6b3f1c;
-  letter-spacing:.2px;
-}
-
-.day-badge,
-.gregorian-badge{
-  display:inline-block;
-  max-width:100%;
-  padding:5px 11px;
-  border-radius:999px;
-  font-weight:700;
-  line-height:1.65;
-  white-space:normal;
-  word-break:break-word;
-}
-.day-badge{
-  font-size:clamp(12px, 1.6vw, 16px);
-  color:#5e3e24;
-  background:linear-gradient(180deg, #fbe7c4, #f2d79f);
-  border:1px solid rgba(168,132,47,.4);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
-}
-.gregorian-badge{
-  font-size:clamp(11px, 1.5vw, 15px);
-  color:#123f45;
-  background:linear-gradient(180deg, #e6f4f3, #cfe6e4);
-  border:1px solid rgba(31,77,74,.3);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
-}
-.greg-tag{ color:#0d5b52; font-weight:700; }
-.greg-day{ font-size:.9em; opacity:.85; }
-
-.greg-list{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  align-items:center;
-  justify-content:center;
-}
-
-.msg-row td{
-  padding:30px 12px !important;
-  font-size:clamp(15px, 2.4vw, 21px) !important;
-  font-weight:700;
-  color:#8a3b2a;
-  background:linear-gradient(180deg, #fff4ee, #f7e2d8) !important;
-  border:1px solid rgba(168,60,40,.35) !important;
-  border-radius:14px !important;
-}
-
-/* ============================================================
-   التذييل
-   ============================================================ */
-.footer-note{
-  margin-top:24px;
-  padding-top:16px;
-  text-align:center;
-  font-size:clamp(12px, 2.6vw, 16px);
-  font-weight:700;
-  color:#5a4029;
-  line-height:1.9;
-  border-top:2px dashed rgba(155,126,92,.55);
-  position:relative;
-}
-.footer-note::before{
-  content:"❖";
-  position:absolute;
-  top:-13px;
-  right:50%;
-  transform:translateX(50%);
-  background:var(--paper-2);
-  padding:0 12px;
-  color:var(--gold-3);
-  font-size:16px;
-}
-.footer-note .dev{ display:inline-block; color:#7a4a1c; font-weight:700; }
-
-/* ============================================================
-   تابلت
-   ============================================================ */
-@media (max-width:900px){
-  .book-container{ padding:24px 16px 18px; }
-  .corner{ width:30px; height:30px; }
-  .c1::after,.c2::after,.c3::after,.c4::after{ width:7px; height:7px; }
-  thead th{ padding:12px 4px; }
-  tbody td{ padding:11px 4px; }
-  table{ border-spacing:0 6px; }
-}
-
-/* ============================================================
-   جوال
-   ============================================================ */
-@media (max-width:640px){
-
-  body{ padding:20px 8px; }
-  .book-container{ padding:22px 12px 16px; border-radius:20px; }
-  .book-container::before{ inset:9px; border-radius:13px; }
-  .corner{ width:24px; height:24px; border-width:1.5px; }
-  .c1::after,.c2::after,.c3::after,.c4::after{ width:6px; height:6px; }
-
-  .input-section{ gap:8px; padding:12px 10px; }
-  #yearInput{ width:94px; }
-  button{ padding:10px 18px; }
-  .hijri-sign{ letter-spacing:2px; padding:10px 8px; }
-
-  table{
-    min-width:0 !important;
-    border-spacing:0;
-    table-layout:auto;
-    display:block;
-  }
-  colgroup{ display:none; }
-  thead{ display:none; }
-  tbody{ display:block; }
-
-  tbody tr{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:0;
-    margin-bottom:13px;
-    border-radius:14px;
-    overflow:hidden;
-    border:1px solid rgba(168,132,47,.5);
-    background:linear-gradient(180deg,#fffdf6,#f6efdd);
     box-shadow:
-      0 2px 0 rgba(255,255,255,.7) inset,
-      0 8px 18px -10px rgba(58,36,21,.55);
-    animation:rowInMobile .55s cubic-bezier(.2,.85,.3,1) backwards;
-  }
-  @keyframes rowInMobile{
-    0%  { opacity:0; transform:translateY(18px) rotateX(-40deg); }
-    100%{ opacity:1; transform:translateY(0) rotateX(0); }
-  }
+        0 0 45px rgba(45,30,15,.18);
 
-  tbody tr:hover{ transform:none; filter:none; }
+    animation: bookIn 1.3s var(--ease) both;
 
-  tbody td{
+}
+
+@keyframes bookIn{
+    from{
+        opacity:0;
+        transform: translateY(30px) scale(.985);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* =========================
+   الغلاف
+========================= */
+
+.cover{
+
+    min-height:100vh;
+
+    padding:
+        35px
+        25px;
+
     display:flex;
-    flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
-    gap:5px;
-    padding:11px 6px !important;
+
     text-align:center;
-    border:none !important;
-    border-radius:0 !important;
-    box-shadow:none !important;
-    background:transparent !important;
-  }
 
-  tbody td::before{
-    content:attr(data-label);
-    font-size:.68em;
-    font-weight:700;
-    letter-spacing:.4px;
-    color:#8a6820;
-    background:rgba(212,175,95,.18);
-    padding:2px 8px;
-    border-radius:6px;
-    line-height:1.4;
-  }
+    position:relative;
 
-  tbody td.month-name{
-    grid-column:1 / -1;
-    flex-direction:row;
-    gap:0;
-    padding:11px 12px !important;
-    font-size:clamp(15px, 4.2vw, 18px);
-    color:#3a2415;
-    background:linear-gradient(180deg,#f7e5b4,#e1c17a) !important;
-    border-bottom:2px solid rgba(90,64,20,.35) !important;
-    border-radius:0 !important;
-    letter-spacing:.3px;
-  }
-  tbody td.month-name::before{ display:none; }
+    overflow:hidden;
 
-  tbody td[data-label="البداية"]{
-    border-left:1px dashed rgba(168,132,47,.4) !important;
-    border-bottom:1px dashed rgba(168,132,47,.35) !important;
-  }
-  tbody td[data-label="النهاية"]{
-    border-bottom:1px dashed rgba(168,132,47,.35) !important;
-  }
+    color:#f7e9c5;
 
-  tbody td[data-label="الميلادي"]{
-    grid-column:1 / -1;
-    padding:12px 10px !important;
-    gap:8px;
-    background:linear-gradient(180deg, rgba(230,244,243,.35), rgba(230,244,243,.7)) !important;
-    border-radius:0 0 14px 14px !important;
-  }
+    background:
 
-  .greg-list{ flex-direction:column; gap:6px; width:100%; }
-  .gregorian-badge{
-    display:block;
-    width:100%;
-    padding:6px 10px;
-    border-radius:12px;
-    font-size:clamp(11.5px, 3.2vw, 13.5px);
-    white-space:normal;
-    text-align:center;
-  }
-  .day-badge{
-    font-size:clamp(12px, 3.3vw, 14.5px);
-    padding:5px 12px;
-  }
+        radial-gradient(
+            circle at center,
+            rgba(210,170,90,.16),
+            transparent 35%
+        ),
 
-  tbody tr.ramadan{
-    border-color:var(--gold-2);
+        linear-gradient(
+            145deg,
+            #241910,
+            #4b321e 50%,
+            #251a10
+        );
+
+}
+
+
+/* إطار الغلاف */
+
+.cover::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:
+        2px solid
+        rgba(210,177,108,.65);
+
+    pointer-events:none;
+
+    animation:
+        frameIn 1.6s var(--ease) .15s both,
+        frameGlow 5s ease-in-out 1.6s infinite;
+
+}
+
+
+.cover::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:28px;
+
+    border:
+        1px solid
+        rgba(210,177,108,.35);
+
+    pointer-events:none;
+
+    animation: frameIn 1.6s var(--ease) .35s both;
+
+}
+
+@keyframes frameIn{
+    from{
+        opacity:0;
+        transform:scale(1.06);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes frameGlow{
+    0%,100%{
+        box-shadow:
+            inset 0 0 0 rgba(214,181,109,0);
+    }
+    50%{
+        box-shadow:
+            inset 0 0 45px rgba(214,181,109,.10);
+    }
+}
+
+
+/* غبار ذهبي */
+
+.cover-dust{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:1;
+
+}
+
+.cover-dust span{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:
+        rgba(214,181,109,.55);
+
     box-shadow:
-      0 0 0 2px rgba(212,175,95,.35),
-      0 8px 20px -8px rgba(212,175,95,.7);
-  }
-  tbody tr.ramadan td.month-name{
-    background:linear-gradient(180deg,#f9e5a8,#d4af5f) !important;
-  }
-  tbody tr.ramadan td[data-label="الميلادي"]{
-    background:linear-gradient(180deg, rgba(249,237,205,.6), rgba(247,233,194,.9)) !important;
-  }
+        0 0 10px
+        rgba(214,181,109,.45);
 
-  tbody tr.msg-row{ display:block; }
-  tbody tr.msg-row td{
+    animation:
+        dust 12s linear infinite;
+
+}
+
+.cover-dust span:nth-child(1){ right:12%; bottom:-10px; animation-delay:0s;   animation-duration:14s; }
+.cover-dust span:nth-child(2){ right:28%; bottom:-10px; animation-delay:2.5s; animation-duration:17s; }
+.cover-dust span:nth-child(3){ right:47%; bottom:-10px; animation-delay:5s;   animation-duration:13s; }
+.cover-dust span:nth-child(4){ right:66%; bottom:-10px; animation-delay:1.4s; animation-duration:19s; }
+.cover-dust span:nth-child(5){ right:81%; bottom:-10px; animation-delay:7s;   animation-duration:15s; }
+.cover-dust span:nth-child(6){ right:92%; bottom:-10px; animation-delay:3.8s; animation-duration:21s; }
+
+@keyframes dust{
+    0%{
+        transform:translateY(0) scale(.6);
+        opacity:0;
+    }
+    12%{
+        opacity:.9;
+    }
+    85%{
+        opacity:.55;
+    }
+    100%{
+        transform:translateY(-100vh) scale(1.15);
+        opacity:0;
+    }
+}
+
+
+.cover-inner{
+
+    width:min(700px,100%);
+
+    position:relative;
+
+    z-index:2;
+
+    padding:
+        55px
+        25px;
+
+    border-top:
+        1px solid
+        rgba(214,181,109,.5);
+
+    border-bottom:
+        1px solid
+        rgba(214,181,109,.5);
+
+    animation: innerIn 1.2s var(--ease) .2s both;
+
+}
+
+@keyframes innerIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* رمز الغلاف */
+
+.cover-symbol{
+
+    width:100px;
+
+    height:100px;
+
+    margin:
+        0 auto
+        25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        2px solid
+        var(--gold-light);
+
+    border-radius:50%;
+
+    font-size:48px;
+
+    box-shadow:
+        0 0 0 8px
+        rgba(190,145,65,.08),
+
+        0 0 35px
+        rgba(190,145,65,.15);
+
+    animation:
+        symbolIn 1.1s var(--ease) .3s both,
+        floatY 4.5s ease-in-out 1.4s infinite;
+
+}
+
+@keyframes symbolIn{
+    0%{
+        opacity:0;
+        transform:scale(.4) rotate(-25deg);
+    }
+    70%{
+        transform:scale(1.08) rotate(4deg);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+}
+
+@keyframes floatY{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-11px); }
+}
+
+
+/* عنوان صغير */
+
+.cover-label{
+
+    color:
+        var(--gold-light);
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+
+    animation:
+        fadeUp .9s var(--ease) .5s both;
+
+}
+
+
+/* العنوان */
+
+.cover h1{
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    font-size:
+        clamp(42px,8vw,72px);
+
+    line-height:1.2;
+
+    color:#f8e9c4;
+
+    text-shadow:
+        0 3px 4px
+        rgba(0,0,0,.35);
+
+    animation:
+        fadeUp 1s var(--ease) .65s both,
+        titleGlow 6s ease-in-out 2s infinite;
+
+}
+
+@keyframes titleGlow{
+    0%,100%{
+        text-shadow:0 3px 4px rgba(0,0,0,.35);
+    }
+    50%{
+        text-shadow:
+            0 3px 4px rgba(0,0,0,.35),
+            0 0 30px rgba(214,181,109,.35);
+    }
+}
+
+
+.cover h2{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:
+        clamp(22px,5vw,30px);
+
+    color:
+        var(--gold-light);
+
+    margin-top:10px;
+
+    animation: fadeUp .9s var(--ease) .8s both;
+
+}
+
+
+.cover-line{
+
+    width:100px;
+
+    height:2px;
+
+    background:
+        var(--gold);
+
+    margin:
+        27px auto;
+
+    transform-origin:center;
+
+    animation: lineIn 1s var(--ease) .95s both;
+
+}
+
+@keyframes lineIn{
+    from{
+        opacity:0;
+        transform:scaleX(0);
+    }
+    to{
+        opacity:1;
+        transform:scaleX(1);
+    }
+}
+
+
+.cover-description{
+
+    max-width:570px;
+
+    margin:auto;
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:20px;
+
+    line-height:2.2;
+
+    color:#ded0ae;
+
+    animation: fadeUp 1s var(--ease) 1.05s both;
+
+}
+
+
+.cover-author{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    color:
+        #cdb47f;
+
+    font-size:17px;
+
+    animation: fadeUp 1s var(--ease) 1.25s both;
+
+}
+
+
+.cover-author strong{
+
     display:block;
-    padding:24px 14px !important;
-    font-size:15px !important;
+
+    margin-top:7px;
+
+    color:#f0d79e;
+
+    font-size:25px;
+
+}
+
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(28px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   شريط التبويبات
+========================= */
+
+.tabs{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:90;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    padding:
+        13px
+        clamp(12px,4vw,38px);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(248,239,217,.98),
+            rgba(238,224,193,.96)
+        );
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    box-shadow:
+        0 6px 20px
+        rgba(57,38,18,.10);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+}
+
+
+.tab-btn{
+
+    flex:1 1 210px;
+
+    max-width:330px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:
+        10px 16px;
+
+    background:
+        rgba(255,250,236,.72);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:10px;
+
+    color:
+        var(--brown);
+
+    font-family:
+        "Cairo",
+        sans-serif;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    text-align:right;
+
+    transition:
+        transform .45s var(--ease),
+        box-shadow .45s var(--ease),
+        border-color .45s var(--ease),
+        background .45s var(--ease),
+        color .45s var(--ease);
+
+}
+
+
+.tab-btn:hover{
+
+    transform:translateY(-3px);
+
+    border-color:var(--gold);
+
+    box-shadow:
+        0 10px 22px
+        rgba(70,45,20,.14);
+
+}
+
+
+.tab-btn.active{
+
+    background:
+        linear-gradient(
+            145deg,
+            #302116,
+            #4b321e
+        );
+
+    color:#f4e5c2;
+
+    border-color:var(--gold);
+
+    box-shadow:
+        0 10px 26px
+        rgba(45,30,15,.28),
+        0 0 0 3px
+        rgba(177,132,62,.12);
+
+}
+
+
+.tab-icon{
+
+    font-size:22px;
+
+    line-height:1;
+
+    flex-shrink:0;
+
+}
+
+
+.tab-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    line-height:1.5;
+
+}
+
+
+.tab-text strong{
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+.tab-text small{
+
+    font-size:11px;
+
+    font-weight:400;
+
+    opacity:.7;
+
+}
+
+
+.tab-btn.active .tab-text small{
+
+    color:var(--gold-light);
+
+    opacity:.9;
+
+}
+
+
+/* =========================
+   لوحات المحتوى
+========================= */
+
+.panel{
+
+    display:none;
+
+}
+
+.panel.active{
+
+    display:block;
+
+    animation:
+        panelIn .75s var(--ease) both;
+
+}
+
+@keyframes panelIn{
+    from{
+        opacity:0;
+        transform:translateY(22px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* =========================
+   المحتوى
+========================= */
+
+.content{
+
+    padding:
+        55px
+        clamp(20px,7vw,70px)
+        70px;
+
+}
+
+
+/* =========================
+   رأس الفصل
+========================= */
+
+.chapter-head{
+
     text-align:center;
-    border-radius:12px !important;
-  }
-  tbody tr.msg-row td::before{ display:none; }
 
-  .footer-note{ margin-top:20px; padding-top:14px; }
+    margin-bottom:55px;
+
 }
 
-@media (max-width:380px){
-  .book-container{ padding:18px 8px 14px; }
-  h1{ font-size:24px; }
-  .subtitle{ font-size:12px; }
-  .input-section{ padding:10px 8px; }
-  .hijri-sign{ font-size:17px; letter-spacing:1px; }
-  tbody td{ padding:9px 4px !important; }
-  tbody td.month-name{ font-size:14px; padding:9px 8px !important; }
-  .gregorian-badge{ font-size:11px; padding:5px 8px; }
+
+.chapter-head .symbol{
+
+    font-size:35px;
+
+    margin-bottom:10px;
+
+    display:inline-block;
+
+    animation: floatY 4s ease-in-out infinite;
+
 }
+
+
+.chapter-head small{
+
+    color:
+        var(--gold-dark);
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
+
+
+.chapter-head h2{
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    color:
+        var(--brown-dark);
+
+    font-size:
+        clamp(32px,6vw,45px);
+
+    line-height:1.4;
+
+}
+
+
+.chapter-head p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    color:
+        var(--ink-soft);
+
+    font-size:18px;
+
+}
+
+
+/* =========================
+   مقدمة
+========================= */
+
+.intro{
+
+    position:relative;
+
+    background:
+        rgba(255,250,236,.75);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-right:
+        5px solid
+        var(--gold);
+
+    padding:28px;
+
+    margin-bottom:55px;
+
+    border-radius:8px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(70,45,20,.07);
+
+    transition:
+        transform .5s var(--ease),
+        box-shadow .5s var(--ease),
+        border-color .5s var(--ease);
+
+}
+
+.intro:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 16px 34px
+        rgba(70,45,20,.14);
+
+    border-color:
+        var(--gold);
+
+}
+
+
+.intro::before{
+
+    content:"❝";
+
+    position:absolute;
+
+    top:-25px;
+
+    right:15px;
+
+    font-family:Georgia,serif;
+
+    font-size:80px;
+
+    color:
+        rgba(177,132,62,.18);
+
+    animation:
+        quotePulse 5s ease-in-out infinite;
+
+}
+
+@keyframes quotePulse{
+    0%,100%{ opacity:.55; transform:translateY(0); }
+    50%{ opacity:1; transform:translateY(-5px); }
+}
+
+
+.intro p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:20px;
+
+    line-height:2.3;
+
+    text-align:justify;
+
+}
+
+
+/* =========================
+   عنوان القصة / الطريقة
+========================= */
+
+.story{
+
+    margin-bottom:75px;
+
+}
+
+
+.story-title{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+
+.story-number{
+
+    width:65px;
+
+    height:65px;
+
+    margin:
+        0 auto
+        12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        var(--brown);
+
+    color:
+        var(--gold-light);
+
+    border:
+        3px double
+        var(--gold);
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:28px;
+
+    box-shadow:
+        0 5px 15px
+        var(--shadow);
+
+    transition:
+        transform .6s var(--ease),
+        box-shadow .6s var(--ease);
+
+}
+
+.story-number:hover{
+
+    transform:
+        rotate(360deg)
+        scale(1.08);
+
+    box-shadow:
+        0 0 0 8px
+        rgba(177,132,62,.10),
+        0 10px 26px
+        rgba(57,38,18,.3);
+
+}
+
+
+.story-title small{
+
+    color:
+        var(--gold-dark);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.story-title h3{
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    color:
+        var(--brown-dark);
+
+    font-size:
+        clamp(28px,5vw,38px);
+
+    line-height:1.5;
+
+}
+
+
+.story-title p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    color:
+        var(--ink-soft);
+
+    font-size:18px;
+
+    margin-top:4px;
+
+}
+
+
+/* =========================
+   النص
+========================= */
+
+.story-text{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:20px;
+
+    line-height:2.3;
+
+    text-align:justify;
+
+    margin-bottom:25px;
+
+}
+
+
+.story-text:first-letter{
+
+    font-size:58px;
+
+    float:right;
+
+    line-height:.8;
+
+    padding-left:8px;
+
+    color:
+        var(--gold-dark);
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   صندوق المشهد
+========================= */
+
+.scene{
+
+    display:grid;
+
+    grid-template-columns:60px 1fr;
+
+    gap:17px;
+
+    padding:22px;
+
+    margin:
+        22px 0;
+
+    background:
+        rgba(248,239,217,.85);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:9px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(60,40,20,.06);
+
+    transition:
+        transform .5s var(--ease),
+        box-shadow .5s var(--ease),
+        border-color .5s var(--ease),
+        background .5s var(--ease);
+
+}
+
+.scene:hover{
+
+    transform: translateY(-6px);
+
+    background:
+        rgba(255,250,236,.95);
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        0 18px 36px
+        rgba(60,40,20,.15);
+
+}
+
+
+.scene-icon{
+
+    width:55px;
+
+    height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        #e5d3ad;
+
+    border-radius:50%;
+
+    font-size:28px;
+
+    transition: transform .5s var(--ease);
+
+}
+
+.scene:hover .scene-icon{
+
+    animation: iconPop .7s var(--ease);
+
+}
+
+@keyframes iconPop{
+    0%{ transform:scale(1) rotate(0); }
+    45%{ transform:scale(1.18) rotate(-8deg); }
+    100%{ transform:scale(1) rotate(0); }
+}
+
+
+.scene h4{
+
+    color:
+        var(--brown);
+
+    font-size:17px;
+
+    margin-bottom:4px;
+
+}
+
+
+.scene p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:18px;
+
+    line-height:2;
+
+    color:
+        var(--ink-soft);
+
+}
+
+
+/* =========================
+   اقتباس
+========================= */
+
+.quote{
+
+    position:relative;
+
+    padding:
+        30px
+        35px;
+
+    margin:
+        32px 0;
+
+    text-align:center;
+
+    color:#f2e3c2;
+
+    background:
+        linear-gradient(
+            145deg,
+            #302116,
+            #4b321e
+        );
+
+    border-radius:8px;
+
+    border:
+        1px solid
+        rgba(213,179,103,.35);
+
+    overflow:hidden;
+
+    transition:
+        transform .6s var(--ease),
+        box-shadow .6s var(--ease);
+
+}
+
+.quote::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    bottom:0;
+
+    width:60%;
+
+    background:
+        linear-gradient(
+            100deg,
+            transparent,
+            rgba(214,181,109,.14),
+            transparent
+        );
+
+    transform:
+        translateX(220%);
+
+    animation:
+        sweep 6s ease-in-out infinite;
+
+    pointer-events:none;
+
+}
+
+@keyframes sweep{
+    0%{ transform:translateX(220%); }
+    55%{ transform:translateX(-220%); }
+    100%{ transform:translateX(-220%); }
+}
+
+
+.quote:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 20px 42px
+        rgba(45,30,15,.30),
+        0 0 0 1px
+        rgba(214,181,109,.35);
+
+}
+
+
+.quote::before{
+
+    content:"“";
+
+    position:absolute;
+
+    right:10px;
+
+    top:-30px;
+
+    font-size:110px;
+
+    color:
+        rgba(214,181,109,.12);
+
+}
+
+
+.quote p{
+
+    position:relative;
+
+    z-index:1;
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:23px;
+
+    line-height:2;
+
+}
+
+
+.quote small{
+
+    display:block;
+
+    margin-top:10px;
+
+    color:
+        var(--gold-light);
+
+}
+
+
+/* =========================
+   درس / تطبيق
+========================= */
+
+.lesson{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1e3c5,
+            #f9f1df
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-right:
+        5px solid
+        var(--gold);
+
+    border-radius:8px;
+
+    transition:
+        transform .5s var(--ease),
+        box-shadow .5s var(--ease),
+        border-right-width .4s var(--ease);
+
+}
+
+.lesson:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 16px 34px
+        rgba(70,45,20,.14);
+
+}
+
+
+.lesson-title{
+
+    color:
+        var(--brown);
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.lesson p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:18px;
+
+    line-height:2.15;
+
+}
+
+
+/* =========================
+   مثال رقمي
+========================= */
+
+.example{
+
+    margin-top:25px;
+
+    padding:23px;
+
+    border-radius:9px;
+
+    color:#f2e3c2;
+
+    background:
+        linear-gradient(
+            145deg,
+            #26382e,
+            #36503f
+        );
+
+    border:
+        1px solid
+        rgba(214,181,109,.35);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .55s var(--ease),
+        box-shadow .55s var(--ease);
+
+}
+
+.example::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-40%;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(214,181,109,.16),
+            transparent 55%
+        );
+
+    animation:
+        breathe 7s ease-in-out infinite;
+
+    pointer-events:none;
+
+}
+
+@keyframes breathe{
+    0%,100%{ opacity:.4; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.12); }
+}
+
+.example:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 18px 38px
+        rgba(38,56,46,.35);
+
+}
+
+.example-title{
+
+    position:relative;
+
+    color:
+        var(--gold-light);
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+}
+
+.example p{
+
+    position:relative;
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:18px;
+
+    line-height:2.1;
+
+}
+
+.example strong{
+
+    color:#fff0c9;
+
+}
+
+
+/* =========================
+   الفاصل
+========================= */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:
+        65px 0;
+
+    color:
+        var(--gold);
+
+}
+
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:
+        var(--border);
+
+    transform-origin:center;
+
+}
+
+
+.divider span{
+
+    font-size:22px;
+
+    animation:
+        spinSlow 9s linear infinite;
+
+}
+
+@keyframes spinSlow{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+}
+
+
+/* =========================
+   الخلاصة
+========================= */
+
+.conclusion{
+
+    padding:
+        35px 25px;
+
+    margin-top:30px;
+
+    color:#f3e5c5;
+
+    background:
+        linear-gradient(
+            145deg,
+            #26382e,
+            #344d3e
+        );
+
+    border-radius:12px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(214,181,109,.4);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        box-shadow .6s var(--ease);
+
+}
+
+.conclusion::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-40%;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(214,181,109,.16),
+            transparent 55%
+        );
+
+    animation:
+        breathe 7s ease-in-out infinite;
+
+    pointer-events:none;
+
+}
+
+
+.conclusion h2{
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    color:
+        var(--gold-light);
+
+    font-size:32px;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+}
+
+
+.conclusion p{
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:19px;
+
+    line-height:2.3;
+
+    position:relative;
+
+}
+
+
+/* =========================
+   نقاط الخلاصة
+========================= */
+
+.points{
+
+    margin-top:25px;
+
+    text-align:right;
+
+    position:relative;
+
+}
+
+
+.point{
+
+    padding:
+        10px 0;
+
+    border-bottom:
+        1px solid
+        rgba(214,181,109,.16);
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:18px;
+
+    transition:
+        transform .45s var(--ease),
+        color .45s var(--ease),
+        padding-right .45s var(--ease);
+
+}
+
+
+.point:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.point:hover{
+
+    transform:translateX(-8px);
+
+    color:#fff3d4;
+
+    padding-right:8px;
+
+}
+
+
+/* =========================
+   الخاتمة
+========================= */
+
+.ending{
+
+    text-align:center;
+
+    padding:
+        75px
+        10px
+        30px;
+
+}
+
+
+.ending-symbol{
+
+    font-size:45px;
+
+    margin-bottom:10px;
+
+    display:inline-block;
+
+    animation:
+        floatY 4.5s ease-in-out infinite;
+
+}
+
+
+.ending h2{
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    color:
+        var(--brown-dark);
+
+    font-size:38px;
+
+    line-height:1.5;
+
+}
+
+
+.ending p{
+
+    max-width:650px;
+
+    margin:
+        15px auto;
+
+    font-family:
+        "Amiri",
+        serif;
+
+    color:
+        var(--ink-soft);
+
+    font-size:19px;
+
+    line-height:2.3;
+
+}
+
+
+/* =========================
+   اسم المعد
+========================= */
+
+.credit{
+
+    margin:
+        35px auto
+        10px;
+
+    padding:
+        22px
+        20px;
+
+    max-width:400px;
+
+    border-top:
+        1px solid
+        var(--gold);
+
+    border-bottom:
+        1px solid
+        var(--gold);
+
+    transition:
+        transform .5s var(--ease),
+        box-shadow .5s var(--ease);
+
+}
+
+.credit:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(70,45,20,.12);
+
+}
+
+
+.credit span{
+
+    display:block;
+
+    font-family:
+        "Cairo",
+        sans-serif;
+
+    color:
+        var(--gold-dark);
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+}
+
+
+.credit strong{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-family:
+        "Scheherazade New",
+        "Amiri",
+        serif;
+
+    color:
+        var(--brown-dark);
+
+    font-size:31px;
+
+}
+
+
+/* =========================
+   الفوتر
+========================= */
+
+.footer{
+
+    text-align:center;
+
+    padding:
+        30px 20px
+        45px;
+
+    color:
+        var(--ink-soft);
+
+    border-top:
+        1px solid
+        var(--border);
+
+    font-size:12px;
+
+}
+
+
+/* =========================
+   زر العودة
+========================= */
+
+.top{
+
+    position:fixed;
+
+    bottom:18px;
+
+    left:18px;
+
+    width:45px;
+
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        var(--brown);
+
+    color:
+        var(--gold-light);
+
+    text-decoration:none;
+
+    font-size:20px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.2);
+
+    z-index:50;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:
+        translateY(18px)
+        scale(.85);
+
+    transition:
+        opacity .45s var(--ease),
+        transform .45s var(--ease),
+        visibility .45s,
+        box-shadow .45s var(--ease);
+
+}
+
+.top.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+.top:hover{
+
+    box-shadow:
+        0 0 0 8px
+        rgba(177,132,62,.15),
+        0 10px 26px
+        rgba(0,0,0,.3);
+
+    animation:
+        topBounce .8s var(--ease);
+
+}
+
+@keyframes topBounce{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+    100%{ transform:translateY(0); }
+}
+
+
+/* =========================
+   كشف العناصر عند التمرير
+========================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+        translateY(38px);
+
+    transition:
+        opacity .95s var(--ease),
+        transform .95s var(--ease);
+
+    will-change:
+        opacity,
+        transform;
+
+}
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* ظهور خاص للأشكال */
+
+.reveal.reveal-scale{
+
+    transform:
+        translateY(30px)
+        scale(.94);
+
+}
+
+.reveal.reveal-scale.visible{
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+.reveal.reveal-right{
+
+    transform:
+        translateX(45px);
+
+}
+
+.reveal.reveal-right.visible{
+
+    transform:
+        translateX(0);
+
+}
+
+
+/* =========================
+   الجوال
+========================= */
+
+@media(max-width:600px){
+
+    body{
+
+        background:
+            var(--paper);
+
+    }
+
+
+    .cover{
+
+        min-height:100svh;
+
+        padding:20px 15px;
+
+    }
+
+
+    .cover::before{
+
+        inset:12px;
+
+    }
+
+
+    .cover::after{
+
+        inset:20px;
+
+    }
+
+
+    .cover-inner{
+
+        padding:
+            45px
+            20px;
+
+    }
+
+
+    .cover-symbol{
+
+        width:78px;
+
+        height:78px;
+
+        font-size:38px;
+
+    }
+
+
+    .cover h1{
+
+        font-size:43px;
+
+    }
+
+
+    .cover h2{
+
+        font-size:21px;
+
+    }
+
+
+    .cover-description{
+
+        font-size:18px;
+
+    }
+
+
+    .tabs{
+
+        gap:8px;
+
+        padding:10px 12px;
+
+    }
+
+
+    .tab-btn{
+
+        flex:1 1 100%;
+
+        max-width:none;
+
+        padding:9px 14px;
+
+    }
+
+
+    .tab-icon{
+
+        font-size:19px;
+
+    }
+
+
+    .tab-text strong{
+
+        font-size:14px;
+
+    }
+
+
+    .content{
+
+        padding:
+            40px
+            17px
+            55px;
+
+    }
+
+
+    .intro{
+
+        padding:20px;
+
+    }
+
+
+    .intro p{
+
+        font-size:18px;
+
+        text-align:right;
+
+    }
+
+
+    .story-text{
+
+        font-size:19px;
+
+        text-align:right;
+
+    }
+
+
+    .scene{
+
+        grid-template-columns:45px 1fr;
+
+        gap:12px;
+
+        padding:17px;
+
+    }
+
+
+    .scene-icon{
+
+        width:43px;
+
+        height:43px;
+
+        font-size:22px;
+
+    }
+
+
+    .scene p{
+
+        font-size:17px;
+
+    }
+
+
+    .quote{
+
+        padding:
+            25px
+            18px;
+
+    }
+
+
+    .quote p{
+
+        font-size:20px;
+
+    }
+
+
+    .lesson{
+
+        padding:19px;
+
+    }
+
+
+    .lesson p{
+
+        font-size:17px;
+
+    }
+
+
+    .example{
+
+        padding:19px;
+
+    }
+
+
+    .example p{
+
+        font-size:17px;
+
+    }
+
+
+    .conclusion{
+
+        padding:
+            28px 19px;
+
+    }
+
+
+    .conclusion h2{
+
+        font-size:29px;
+
+    }
+
+
+    .conclusion p{
+
+        font-size:18px;
+
+    }
+
+
+    .ending h2{
+
+        font-size:32px;
+
+    }
+
+
+    .ending p{
+
+        font-size:18px;
+
+    }
+
+}
+
+
+/* =========================
+   التابلت
+========================= */
+
+@media(min-width:601px) and (max-width:1000px){
+
+    .content{
+
+        padding:
+            55px
+            45px
+            70px;
+
+    }
+
+}
+
+
+/* =========================
+   تقليل الحركة
+========================= */
 
 @media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
-  }
-  body::before{ animation:none; }
-  .hijri-sign::after{ animation:none; }
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.001ms !important;
+
+        animation-iteration-count:1 !important;
+
+        transition-duration:.001ms !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+    .reveal{
+
+        opacity:1 !important;
+
+        transform:none !important;
+
+    }
+
 }
+
+
+/* =========================
+   الطباعة
+========================= */
+
+@media print{
+
+    body{
+
+        background:white;
+
+    }
+
+
+    .book{
+
+        width:100%;
+
+        box-shadow:none;
+
+        animation:none;
+
+    }
+
+
+    .cover{
+
+        page-break-after:always;
+
+    }
+
+
+    .tabs{
+
+        display:none !important;
+
+    }
+
+
+    .panel{
+
+        display:block !important;
+
+        animation:none !important;
+
+    }
+
+
+    .story{
+
+        page-break-inside:avoid;
+
+    }
+
+
+    .scene,
+    .quote,
+    .lesson,
+    .example,
+    .conclusion{
+
+        break-inside:avoid;
+
+    }
+
+
+    .top,
+    .progress,
+    .cover-dust{
+
+        display:none !important;
+
+    }
+
+
+    .reveal{
+
+        opacity:1 !important;
+
+        transform:none !important;
+
+    }
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="scene" id="scene">
-  <div class="book-container" id="book">
-
-    <span class="corner c1"></span>
-    <span class="corner c2"></span>
-    <span class="corner c3"></span>
-    <span class="corner c4"></span>
-
-    <h1>📘 التوفيقات الإلهامية</h1>
-    <div class="subtitle">✨ التقويم الهجري الموافق لأم القرى (دقيق لجميع السنوات) ✨</div>
-
-    <div class="input-section">
-      <span class="input-label">عام هجري:</span>
-      <input type="number" id="yearInput" placeholder="١٤٤٨" value="1448" min="1356" max="1500" inputmode="numeric">
-      <button id="convertBtn">
-          <span class="ico">🔍</span> ادخل السنة
-      </button>
-    </div>
-
-    <div class="current-year-bar">
-      <span class="hint" id="currentYearHint">
-        <span class="dot"></span>
-        السنة الهجرية الحالية: <strong id="currentYearValue">—</strong>
-      </span>
-      <button id="goCurrentBtn" type="button" hidden>↺ العودة للسنة الحالية</button>
-    </div>
-
-    <div class="hijri-sign" id="hijriYearDisplay">🌙 ١٤٤٨ هـ 🌙</div>
-
-    <div class="table-wrap" id="tableWrap">
-      <table id="hijriTable">
-        <colgroup>
-          <col><col><col><col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th>الشهر الهجري</th>
-            <th>بداية الشهر</th>
-            <th>نهاية الشهر</th>
-            <th>التوافق الميلادي</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr class="msg-row"><td colspan="4">⏳ جاري التحميل...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="footer-note">
-      ✦ بناءً على تقويم أم القرى ✦ يعمل بدون إنترنت ✦ ١٣٥٦ - ١٥٠٠ هـ ✦<br>
-      <span class="dev">برمجة حسين العرياني 💫</span>
-    </div>
-
-  </div>
+<!-- شريط التقدم -->
+<div class="progress" aria-hidden="true">
+    <span id="progressBar"></span>
 </div>
 
+
+<div class="book">
+
+<!-- =========================
+     الغلاف
+========================= -->
+
+<section class="cover" id="top">
+
+    <div class="cover-dust" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="cover-inner">
+
+        <div class="cover-symbol">
+            🏺
+        </div>
+
+        <div class="cover-label">
+            من حكم بابل القديمة
+        </div>
+
+        <h1>
+            دستور بابل المالي
+        </h1>
+
+        <h2>
+            الطرق السبع &nbsp;·&nbsp; قصص الحظ والفرص
+        </h2>
+
+        <div class="cover-line"></div>
+
+        <p class="cover-description">
+
+            رحلة في مبادئ المال التي عرفها أهل بابل
+            قبل آلاف السنين:
+            كيف تدّخر، وتنفق، وتستثمر، وتحفظ ما تملك،
+            وكيف تلتقط الفرصة حين تمرّ.
+
+        </p>
+
+        <div class="cover-line"></div>
+
+        <div class="cover-author">
+
+            مستوحى من صفحات
+            «أغنى رجل في بابل»
+
+            <strong>
+                إعداد وترتيب: حسين العرياني
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     شريط التبويبات
+========================= -->
+
+<nav class="tabs" id="tabs" role="tablist" aria-label="أقسام الكتاب">
+
+    <button
+        class="tab-btn active"
+        id="tabBtn1"
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel1"
+        data-panel="panel1"
+        type="button"
+    >
+        <span class="tab-icon">📜</span>
+        <span class="tab-text">
+            <strong>الطرق السبع</strong>
+            <small>التغلب على المحافظ الخاوية</small>
+        </span>
+    </button>
+
+    <button
+        class="tab-btn"
+        id="tabBtn2"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel2"
+        data-panel="panel2"
+        type="button"
+    >
+        <span class="tab-icon">🏺</span>
+        <span class="tab-text">
+            <strong>قصص الحظ والفرص</strong>
+            <small>حين يطرق الحظ الباب</small>
+        </span>
+    </button>
+
+</nav>
+
+
+<main class="content">
+
+
+<!-- =========================================================
+     اللوحة الأولى : الطرق السبع
+========================================================= -->
+
+<div class="panel active" id="panel1" role="tabpanel" aria-labelledby="tabBtn1">
+
+    <!-- رأس القسم -->
+    <section class="chapter-head" data-reveal>
+
+        <div class="symbol">📜</div>
+
+        <small>القسم الأول</small>
+
+        <h2>
+            الطرق السبع للتغلب على المحافظ الخاوية
+        </h2>
+
+        <p>
+            سبع خطوات عملية في الحكمة المالية
+        </p>
+
+    </section>
+
+
+    <!-- المقدمة -->
+    <section class="intro" data-reveal>
+
+        <p>
+
+            منذ آلاف السنين كان أهل بابل يتعاملون مع المال
+            كما نتعامل معه اليوم:
+            بعضهم يجمعه، وبعضهم ينفقه بسرعة،
+            وبعضهم يحاول تنميته،
+            وقلة فقط تعرف كيف تجعل المال يعمل لصالحها.
+
+            <br><br>
+
+            الفكرة الأساسية هنا بسيطة:
+
+            <strong>
+                الثروة لا تبدأ بحجم الدخل،
+                بل بالطريقة التي يتعامل بها الإنسان
+                مع ما يدخل إلى يده.
+            </strong>
+
+        </p>
+
+    </section>
+
+
+    <div class="lesson" data-reveal>
+
+        <div class="lesson-title">
+            🏛️ المبدأ الذي يجمع الطرق السبع
+        </div>
+
+        <p>
+
+            لا تحاول أن تصبح ثرياً في ليلة واحدة.
+            ابدأ ببناء عادة مالية صحيحة، ثم كررها باستمرار.
+            المال الصغير الذي يُدار بحكمة يمكن أن يصبح
+            أساساً لثروة كبيرة مع مرور السنوات.
+
+        </p>
+
+    </div>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة الأولى ================= -->
+
+    <section class="story" id="rule1">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ١
+            </div>
+
+            <small>
+                الطريقة الأولى
+            </small>
+
+            <h3>
+                ابدأ في ملء محفظتك
+            </h3>
+
+            <p>
+                ادخر جزءاً من كل دخل قبل أن تبدأ في الإنفاق.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            أول خطوة نحو بناء الثروة ليست العثور على استثمار خارق،
+            ولا اكتشاف سر غامض يعرفه الأثرياء وحدهم.
+            البداية أبسط من ذلك بكثير:
+
+            <strong>
+                احتفظ بجزء من المال الذي تكسبه.
+            </strong>
+
+            اجعل لنفسك نصيباً ثابتاً من كل دخل يصل إليك،
+            ولا تسمح للمصاريف بأن تلتهمه بالكامل.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🪙
+            </div>
+
+            <div>
+
+                <h4>
+                    القاعدة الذهبية
+                </h4>
+
+                <p>
+
+                    إذا دخل إلى يدك 10 ريالات،
+                    تعامل مع 9 ريالات على أنها دخلك الحقيقي،
+                    واجعل الريال العاشر ملكاً لثروتك المستقبلية.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                💰
+            </div>
+
+            <div>
+
+                <h4>
+                    لماذا 10٪؟
+                </h4>
+
+                <p>
+
+                    لأن النسبة قابلة للتطبيق على أغلب الدخول
+                    إذا تم ضبط النفقات.
+                    والمقصود ليس الرقم نفسه بقدر ما هو بناء عادة:
+
+                    <strong>
+                        ادخر أولاً ثم أنفق.
+                    </strong>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «لا تجعل كل ما تكسبه يمر من بين يديك
+                دون أن يترك شيئاً لك.»
+
+            </p>
+
+            <small>
+                مبدأ الادخار
+            </small>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🎯 التطبيق العملي
+            </div>
+
+            <p>
+
+                عند نزول راتبك، افصل مبلغ الادخار مباشرة
+                في حساب مستقل.
+                لا تنتظر نهاية الشهر لترى ما تبقى،
+                لأن البشر اكتشفوا منذ زمن طويل
+                أن «ما تبقى» غالباً يساوي صفراً
+                بطريقة سحرية جداً.
+
+            </p>
+
+        </div>
+
+
+        <div class="example" data-reveal data-delay="1">
+
+            <div class="example-title">
+                📌 مثال بسيط
+            </div>
+
+            <p>
+
+                راتبك الشهري <strong>10,000 ريال</strong>.
+                ادخر 10٪ = <strong>1,000 ريال شهرياً</strong>.
+                خلال سنة يصبح لديك <strong>12,000 ريال</strong>
+                قبل احتساب أي عوائد استثمارية.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة الثانية ================= -->
+
+    <section class="story" id="rule2">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٢
+            </div>
+
+            <small>
+                الطريقة الثانية
+            </small>
+
+            <h3>
+                تحكم في نفقاتك
+            </h3>
+
+            <p>
+                فرّق بين ما تحتاجه وما ترغب فيه.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            الادخار وحده لا يكفي إذا كانت النفقات
+            تتوسع مع كل زيادة في الدخل.
+            كثير من الناس عندما يرتفع دخلهم
+            لا يشعرون بأنهم أصبحوا أغنى،
+            لأن مستوى إنفاقهم يرتفع معه مباشرة.
+            لذلك تحتاج إلى ميزانية واضحة
+            تحدد أين يذهب المال قبل أن يختفي.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                ⚖️
+            </div>
+
+            <div>
+
+                <h4>
+                    الاحتياجات ليست الرغبات
+                </h4>
+
+                <p>
+
+                    الطعام والسكن والمواصلات الأساسية
+                    تختلف عن شراء الأشياء لمجرد أنك تريدها الآن.
+                    الرغبة ليست مشكلة بحد ذاتها،
+                    لكن المشكلة عندما تعامل كل رغبة
+                    وكأنها ضرورة لا يمكن تأجيلها.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                📝
+            </div>
+
+            <div>
+
+                <h4>
+                    اكتب مصروفاتك
+                </h4>
+
+                <p>
+
+                    سجل مصاريفك الشهرية، ثم صنفها إلى:
+                    ضرورية، مهمة، ترفيهية،
+                    ويمكن الاستغناء عنها.
+                    مجرد رؤية الأرقام مكتوبة
+                    قد تكون أكثر إقناعاً من مئة نصيحة مالية.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «الرغبات كثيرة، أما الدخل فله حدود.
+                الحكمة أن تجعل نفقاتك تخدم أهدافك،
+                لا أن تجعل أهدافك تخدم نفقاتك.»
+
+            </p>
+
+            <small>
+                إدارة النفقات
+            </small>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🎯 التطبيق العملي
+            </div>
+
+            <p>
+
+                ضع سقفاً لكل نوع من المصاريف.
+                وعندما تنتهي ميزانية الترفيه مثلاً،
+                لا تسحب من مبلغ الادخار لتعويضها.
+                بهذه الطريقة يصبح الادخار
+                جزءاً محمياً من نظامك المالي.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة الثالثة ================= -->
+
+    <section class="story" id="rule3">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٣
+            </div>
+
+            <small>
+                الطريقة الثالثة
+            </small>
+
+            <h3>
+                أنمِ ثروتك
+            </h3>
+
+            <p>
+                اجعل مدخراتك تنتج دخلاً بدلاً من بقائها خاملة.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            بعد أن تبدأ في الادخار، تظهر الخطوة التالية:
+            ماذا ستفعل بهذا المال؟
+            المال الذي يجلس بلا هدف
+            قد يحافظ على قيمته الاسمية،
+            لكنه لا يعمل من أجلك.
+            أما المال المستثمر بعقلانية
+            فيمكن أن يولد عوائد،
+            وهذه العوائد يمكن أن تُعاد استثمارها
+            لتبدأ دائرة النمو.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                📈
+            </div>
+
+            <div>
+
+                <h4>
+                    اجعل المال يعمل
+                </h4>
+
+                <p>
+
+                    ابحث عن الاستثمارات التي تفهمها
+                    وتتناسب مع قدرتك على تحمل المخاطر.
+                    الهدف ليس مطاردة أعلى ربح ممكن،
+                    بل بناء مصدر نمو مستمر ومدروس.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                🌱
+            </div>
+
+            <div>
+
+                <h4>
+                    قوة التراكم
+                </h4>
+
+                <p>
+
+                    عندما تحقق استثماراً عائداً،
+                    ثم تعيد استثمار العائد،
+                    يصبح لديك أصل يولد عائداً،
+                    والعائد نفسه يبدأ في توليد عوائد إضافية.
+                    هذه الفكرة هي جوهر النمو المركب عبر الزمن.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «اجعل كل ريال تدخره
+                يبحث لك عن ريال آخر.»
+
+            </p>
+
+            <small>
+                قوة الاستثمار والتراكم
+            </small>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🎯 التطبيق العملي
+            </div>
+
+            <p>
+
+                حدد هدفاً استثمارياً طويل الأجل،
+                واختر أدوات استثمارية تفهم طبيعتها ومخاطرها،
+                ثم اجعل الإضافة المنتظمة عادة.
+                الاستمرارية أهم من محاولة معرفة
+                أفضل يوم للشراء وأفضل يوم للبيع.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة الرابعة ================= -->
+
+    <section class="story" id="rule4">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٤
+            </div>
+
+            <small>
+                الطريقة الرابعة
+            </small>
+
+            <h3>
+                حافظ على ثروتك من الضياع
+            </h3>
+
+            <p>
+                حماية رأس المال تسبق البحث عن الربح.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            جمع المال يحتاج إلى سنوات،
+            لكن خسارته قد تحتاج إلى قرار واحد فقط.
+            لذلك لا يكفي أن تعرف كيف تستثمر،
+            بل يجب أن تعرف كيف تحمي نفسك
+            من الاستثمارات التي لا تفهمها،
+            والوعود المبالغ فيها،
+            والمخاطر التي لا تستطيع تحملها.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🛡️
+            </div>
+
+            <div>
+
+                <h4>
+                    افهم قبل أن تستثمر
+                </h4>
+
+                <p>
+
+                    إذا لم تستطع شرح الاستثمار لشخص آخر
+                    بطريقة بسيطة،
+                    فهذه إشارة تستحق التوقف عندها
+                    ودراسة الموضوع أكثر.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h4>
+                    احذر الثراء السريع
+                </h4>
+
+                <p>
+
+                    الوعود بعوائد ضخمة ومضمونة خلال وقت قصير
+                    تستحق الحذر الشديد.
+                    لا يوجد استثمار مرتفع العائد بلا مخاطر
+                    لمجرد أن أحدهم وضع له صورة فاخرة وشعاراً ذهبياً.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="3">
+
+            <div class="scene-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h4>
+                    استشر أصحاب الخبرة
+                </h4>
+
+                <p>
+
+                    اطلب رأي المختصين عندما تكون القرارات
+                    كبيرة أو معقدة،
+                    وقارن المعلومات
+                    ولا تعتمد على نصيحة شخص واحد فقط.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «لا تجعل الرغبة في الربح
+                سبباً لخسارة ما جمعته بصعوبة.»
+
+            </p>
+
+            <small>
+                حماية رأس المال
+            </small>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة الخامسة ================= -->
+
+    <section class="story" id="rule5">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٥
+            </div>
+
+            <small>
+                الطريقة الخامسة
+            </small>
+
+            <h3>
+                اجعل منزلك استثماراً مريحاً
+            </h3>
+
+            <p>
+                فكر في السكن من زاوية مالية وعائلية معاً.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            ينظر الكتاب إلى امتلاك المسكن
+            باعتباره وسيلة لتحقيق الاستقرار
+            وتقليل بعض تكاليف السكن على المدى الطويل.
+            لكن القرار العقاري ليس قاعدة تصلح للجميع،
+            فهو يعتمد على السعر والدخل والتمويل
+            والموقع واحتياجات الأسرة.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🏠
+            </div>
+
+            <div>
+
+                <h4>
+                    الاستقرار
+                </h4>
+
+                <p>
+
+                    امتلاك منزل مناسب
+                    قد يمنح الأسرة شعوراً بالاستقرار
+                    ويجعل التخطيط للمستقبل أكثر وضوحاً.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h4>
+                    احسب قبل القرار
+                </h4>
+
+                <p>
+
+                    لا تنظر إلى القسط وحده.
+                    احسب الدفعة الأولى، تكلفة التمويل،
+                    الصيانة، الرسوم، التأمين،
+                    والمصاريف المرتبطة بالعقار
+                    قبل اتخاذ القرار.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🎯 التطبيق العملي
+            </div>
+
+            <p>
+
+                قارن بين تكلفة الإيجار وتكلفة التملك
+                على المدى الطويل،
+                ولا تجعل الرغبة في امتلاك منزل
+                أكبر من قدرتك المالية.
+                البيت الجميل يصبح عبئاً
+                إذا كان يبتلع ميزانيتك.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة السادسة ================= -->
+
+    <section class="story" id="rule6">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٦
+            </div>
+
+            <small>
+                الطريقة السادسة
+            </small>
+
+            <h3>
+                اضمن دخلاً للمستقبل
+            </h3>
+
+            <p>
+                لا تجعل مستقبلك المالي يعتمد على قدرتك على العمل إلى الأبد.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            الإنسان يعمل ويكسب خلال سنوات طويلة،
+            لكن الظروف تتغير.
+            قد يتغير العمل أو تقل القدرة على الكسب
+            أو تظهر مسؤوليات جديدة.
+            لذلك فإن التخطيط المالي للمستقبل ليس ترفاً،
+            بل وسيلة لتقليل المفاجآت
+            عندما تتغير ظروف الحياة.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                ⏳
+            </div>
+
+            <div>
+
+                <h4>
+                    ابدأ مبكراً
+                </h4>
+
+                <p>
+
+                    الوقت من أقوى عناصر الاستثمار طويل الأجل.
+                    المبلغ الصغير المنتظم يمكن أن يتراكم
+                    عبر سنوات طويلة،
+                    بينما تأجيل الادخار
+                    يجعل تحقيق الهدف أكثر صعوبة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                ☂️
+            </div>
+
+            <div>
+
+                <h4>
+                    ابنِ شبكة أمان
+                </h4>
+
+                <p>
+
+                    وجود احتياطي مالي للطوارئ
+                    يقلل الحاجة إلى بيع الاستثمارات
+                    أو الاقتراض عند حدوث ظرف غير متوقع.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="3">
+
+            <div class="scene-icon">
+                🏛️
+            </div>
+
+            <div>
+
+                <h4>
+                    فكر في المستقبل
+                </h4>
+
+                <p>
+
+                    ضع أهدافاً للسنوات القادمة،
+                    مثل التقاعد، تعليم الأبناء،
+                    شراء منزل، أو بناء مصدر دخل إضافي.
+                    ثم حوّل هذه الأهداف
+                    إلى مبالغ ومدة زمنية واضحة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «أفضل وقت للاستعداد للمستقبل
+                هو قبل أن يصبح المستقبل حاضراً.»
+
+            </p>
+
+            <small>
+                التخطيط طويل الأجل
+            </small>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- ================= الطريقة السابعة ================= -->
+
+    <section class="story" id="rule7">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٧
+            </div>
+
+            <small>
+                الطريقة السابعة
+            </small>
+
+            <h3>
+                زد قدرتك على الكسب
+            </h3>
+
+            <p>
+                الاستثمار في نفسك قد يكون من أكثر الاستثمارات تأثيراً على دخلك.
+            </p>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            لا يكفي أن تحاول تقليل المصاريف إلى الأبد.
+            هناك جانب آخر من المعادلة:
+
+            <strong>
+                زيادة قدرتك على إنتاج الدخل.
+            </strong>
+
+            تعلم مهارة جديدة، طور خبرتك،
+            حسّن جودة عملك،
+            وابحث عن طرق تجعل قيمتك المهنية أكبر.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🎓
+            </div>
+
+            <div>
+
+                <h4>
+                    طوّر معرفتك
+                </h4>
+
+                <p>
+
+                    كل مهارة جديدة يمكن أن تفتح لك فرصة جديدة.
+                    تعلم باستمرار في المجال الذي تعمل فيه،
+                    ولا تجعل خبرتك تتوقف
+                    عند ما تعلمته قبل سنوات.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                🎯
+            </div>
+
+            <div>
+
+                <h4>
+                    اجعل أهدافك محددة
+                </h4>
+
+                <p>
+
+                    بدلاً من قول «أريد أن أصبح غنياً»،
+                    حدد هدفاً قابلاً للقياس:
+                    ادخار مبلغ معين،
+                    زيادة الدخل بنسبة معينة،
+                    أو اكتساب مهارة خلال مدة محددة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="3">
+
+            <div class="scene-icon">
+                🌟
+            </div>
+
+            <div>
+
+                <h4>
+                    ابنِ شخصيتك المالية
+                </h4>
+
+                <p>
+
+                    الالتزام بالوعود، سداد الديون،
+                    تحمل المسؤولية، التخطيط للمستقبل،
+                    ومساعدة الآخرين ضمن قدرتك،
+                    كلها عادات تدعم الاستقرار والثقة بالنفس.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «كلما أصبحت أكثر قيمة في عملك،
+                زادت قدرتك على خلق دخل أكبر.»
+
+            </p>
+
+            <small>
+                تطوير الذات والمهارات
+            </small>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🎯 التطبيق العملي
+            </div>
+
+            <p>
+
+                اختر مهارة واحدة يمكن أن تزيد دخلك
+                خلال السنة القادمة،
+                ثم خصص لها وقتاً أسبوعياً ثابتاً.
+                المعرفة التي لا تتحول إلى ممارسة
+                تبقى مجرد ملف PDF آخر
+                ينتظر مصيره المأساوي في مجلد التنزيلات.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>✦</span>
+    </div>
+
+
+    <!-- الخلاصة -->
+    <section class="conclusion" data-reveal data-delay="1">
+
+        <h2>
+            🏺 الطرق السبع في صفحة واحدة
+        </h2>
+
+        <p>
+
+            سبع خطوات لا تعمل منفردة،
+            بل تكتمل ببعضها:
+            ادخار يبني الأساس،
+            وإنفاق منضبط يحمي الأساس،
+            واستثمار ينمّي الأساس،
+            وحماية تحفظ ما بُني.
+
+        </p>
+
+        <div class="points">
+
+            <div class="point">
+                ١ — احتفظ بجزء من كل دخل تكسبه.
+            </div>
+
+            <div class="point">
+                ٢ — سيطر على نفقاتك ولا تجعل الرغبات ضروريات.
+            </div>
+
+            <div class="point">
+                ٣ — استثمر مدخراتك بطريقة تفهمها وتناسب مخاطرك.
+            </div>
+
+            <div class="point">
+                ٤ — احمِ رأس مالك وتجنب المخاطر التي لا تفهمها.
+            </div>
+
+            <div class="point">
+                ٥ — خطط للسكن بطريقة تحقق الاستقرار دون إرهاق الميزانية.
+            </div>
+
+            <div class="point">
+                ٦ — خطط لدخلك ومستقبلك قبل أن تحتاج إليه.
+            </div>
+
+            <div class="point">
+                ٧ — طوّر مهاراتك وقدرتك على الكسب باستمرار.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الخاتمة -->
+    <section class="ending">
+
+        <div class="ending-symbol" data-reveal>
+            🌿
+        </div>
+
+        <h2 data-reveal>
+            الثروة عادة قبل أن تكون رقماً
+        </h2>
+
+        <p data-reveal>
+
+            قد تختلف الأسواق، وتتغير الأسعار،
+            وتتطور طرق الاستثمار،
+            لكن المبادئ الأساسية لإدارة المال
+            تبقى قريبة من الإنسان:
+            أن تنفق أقل مما تكسب،
+            وتدخر بانتظام،
+            وتحمي ما تملك،
+            وتستثمر بعقل،
+            وتطور قدرتك على الكسب.
+
+        </p>
+
+        <p data-reveal>
+
+            لا تبحث عن طريق سحري إلى الثراء.
+
+            <strong>
+                ابنِ طريقاً تستطيع السير فيه لسنوات.
+            </strong>
+
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     اللوحة الثانية : قصص الحظ والفرص
+========================================================= -->
+
+<div class="panel" id="panel2" role="tabpanel" aria-labelledby="tabBtn2">
+
+    <!-- رأس الفصل -->
+    <section class="chapter-head" data-reveal>
+
+        <div class="symbol">
+            🏺
+        </div>
+
+        <small>
+            القسم الثاني — من قصص بابل القديمة
+        </small>
+
+        <h2>
+            الحظ السعيد والفرص الضائعة
+        </h2>
+
+        <p>
+            قصتان، ودرس واحد لا يشيخ
+        </p>
+
+    </section>
+
+
+    <!-- المقدمة -->
+    <section class="intro" data-reveal>
+
+        <p>
+
+            في بابل القديمة، كان الناس يتحدثون عن الحظ
+            كما يتحدثون عن المطر؛
+            بعضهم يراه هبة تأتي فجأة،
+            وبعضهم يعتقد أن هناك أشخاصًا يولدون محظوظين
+            وآخرين لا يأتيهم الحظ أبدًا.
+
+            <br><br>
+
+            لكن أركاد كان ينظر إلى الأمر بطريقة مختلفة.
+
+            كان يريد أن يعرف:
+
+            <strong>
+                هل الحظ مجرد صدفة؟
+            </strong>
+
+            أم أن الإنسان يستطيع أن يزيد فرصه في العثور عليه؟
+
+            ومن هنا بدأت حكايات الرجال الذين
+
+            <strong>
+                رأوا الفرصة أمام أعينهم...
+                ثم تركوها تمر.
+            </strong>
+
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         القصة الأولى
+    ========================= -->
+
+    <section class="story">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ١
+            </div>
+
+            <small>
+                القصة الأولى
+            </small>
+
+            <h3>
+                🪙 التاجر والفرصة التي انتظرها طويلاً
+            </h3>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            كان هناك تاجر شاب بدأ حياته العملية،
+            وكان والده يتمنى أن يراه أكثر نجاحًا.
+            وفي أحد الأيام أخبره والده عن فرصة استثمارية
+            يمكن أن تفتح له بابًا نحو مستقبل أفضل.
+
+            <br><br>
+
+            كان المشروع يقوم على استصلاح أرض قاحلة
+            من خلال حفر القنوات والسواقي،
+            ثم تحويل الأرض إلى أرض صالحة للزراعة وبيعها.
+
+            🌱💧
+
+            وكانت الخطة تحتاج إلى مساهمة مجموعة من الرجال،
+            بحيث يدفع كل واحد منهم جزءًا من دخله،
+            ثم يشترك الجميع في الأرباح.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                👨‍👦
+            </div>
+
+            <div>
+
+                <h4>
+                    نصيحة الأب
+                </h4>
+
+                <p>
+
+                    نصح الأب ابنه بأن يحتفظ بجزء من دخله
+                    وأن يستثمره بدل أن ينفقه كله.
+
+                    كانت أمامه فرصة واضحة،
+                    وكان بإمكانه أن يبدأ بخطوة صغيرة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            لكن الشاب بدأ يفكر في الأشياء التي يرغب في شرائها.
+            كان يريد ثيابًا جديدة وفاخرة،
+            وشعر أن بإمكانه تأجيل الاستثمار إلى وقت آخر.
+
+            👔
+
+            قال في نفسه إنه لا يزال شابًا،
+            وأن أمامه سنوات طويلة،
+            وأن الفرص ستأتي مرة أخرى.
+
+            وهكذا بدأ يؤجل.
+
+        </p>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                «ليس كل من رأى الفرصة عرف قيمتها،
+                وليس كل من عرف قيمتها امتلك الشجاعة لاغتنامها.»
+
+            </p>
+
+            <small>
+                درس القصة
+            </small>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            مرت الأيام، ثم اكتشف الشاب
+            أن المشروع الذي تردد في الدخول فيه
+            قد حقق أرباحًا كبيرة.
+
+            💰
+
+            كانت الفرصة موجودة.
+            وكان المال موجودًا.
+            وكانت النصيحة موجودة.
+
+            لكن شيئًا واحدًا كان غائبًا:
+
+            <strong>
+                القرار.
+            </strong>
+
+            لقد لم يخسر لأنه لم يعرف الطريق،
+            بل لأنه سمح للتردد بأن يجعله يقف على جانب الطريق.
+
+        </p>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🌟 جوهر القصة
+            </div>
+
+            <p>
+
+                أحيانًا لا تحتاج الفرصة إلى ثروة كبيرة،
+                بل تحتاج إلى الاستعداد لرؤيتها
+                واتخاذ القرار المناسب في الوقت المناسب.
+
+                وما يبدو اليوم قرارًا صغيرًا،
+                قد يصبح بعد سنوات فرقًا كبيرًا.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>◆</span>
+    </div>
+
+
+    <!-- =========================
+         القصة الثانية
+    ========================= -->
+
+    <section class="story">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                ٢
+            </div>
+
+            <small>
+                القصة الثانية
+            </small>
+
+            <h3>
+                🐑 تاجر الحيوانات والقطيع الذي أفلت منه
+            </h3>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            كان أحد الرجال يعمل في تجارة الحيوانات.
+            وبعد رحلة شاقة استمرت عشرة أيام بحثًا عن الإبل،
+            عاد إلى بابل متأخرًا.
+
+            🌙
+
+            لكنه وصل بعد أن أُغلقت أبواب المدينة.
+
+            وبينما كان ينتظر، اقترب منه مزارع عجوز
+            وعرض عليه شراء قطيع كبير من الأغنام.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🐑
+            </div>
+
+            <div>
+
+                <h4>
+                    صفقة مغرية
+                </h4>
+
+                <p>
+
+                    كان المزارع يريد العودة سريعًا إلى منزله
+                    بسبب مرض زوجته،
+                    ولذلك كان مستعدًا للبيع.
+
+                    أما التاجر فكان يعرف سوق الحيوانات،
+                    وكان يرى أن بإمكانه بيع الأغنام
+                    داخل بابل بسعر أعلى.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            بدت الصفقة ممتازة.
+
+            كان هناك طلب على الحيوانات،
+            وكان السعر مناسبًا،
+            وكان التاجر يعرف كيف يحقق الربح منها.
+
+            لكنه واجه مشكلة واحدة:
+
+            <strong>
+                لم يستطع عد الأغنام في الظلام.
+            </strong>
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                🌙
+            </div>
+
+            <div>
+
+                <h4>
+                    لحظة التردد
+                </h4>
+
+                <p>
+
+                    عرض المزارع أن يدفع التاجر جزءًا من المال،
+                    وأن يترك معه أحد رجاله،
+                    ثم يقوم بعد الأغنام في الصباح ويدفع الباقي.
+
+                    لكن التاجر رفض أن يدفع
+                    قبل أن يتأكد بنفسه.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            كان ينتظر الصباح.
+
+            لكنه لم يكن يعلم أن الفرص لا تنتظر دائمًا.
+
+            🌅
+
+            عندما أشرقت الشمس وفُتحت أبواب بابل،
+            اندفع التجار إلى المدينة،
+            وكان الطلب على الحيوانات مرتفعًا.
+
+            وجد المزارع مشترين آخرين،
+            واستطاع أن يبيع الأغنام بسعر أعلى.
+
+            وهكذا اختفت الصفقة من يد التاجر.
+
+        </p>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                أحيانًا يكون الفرق بين الربح والفرصة الضائعة
+                هو لحظة واحدة من التردد.
+
+            </p>
+
+            <small>
+                من دروس الحكاية
+            </small>
+
+        </div>
+
+
+        <div class="lesson" data-reveal data-delay="1">
+
+            <div class="lesson-title">
+                🧠 جوهر القصة
+            </div>
+
+            <p>
+
+                الحذر مطلوب، لكن الحذر لا يعني
+                أن نرفض كل فرصة
+                لأننا نريد ضمان كل شيء بنسبة مئة بالمئة.
+
+                المهم أن ندرس القرار،
+                نفهم مخاطره،
+                ثم نتصرف عندما تكون الفرصة مناسبة.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider" data-reveal>
+        <span>✦</span>
+    </div>
+
+
+    <!-- =========================
+         الدرس العام
+    ========================= -->
+
+    <section class="story">
+
+        <div class="story-title" data-reveal>
+
+            <div class="story-number">
+                🍀
+            </div>
+
+            <small>
+                الدرس الأكبر
+            </small>
+
+            <h3>
+                حين يأتي الحظ على هيئة فرصة
+            </h3>
+
+        </div>
+
+
+        <p class="story-text" data-reveal>
+
+            عندما انتهى الرجال من سرد قصصهم،
+            اتضح أن القصتين مختلفتان في التفاصيل،
+            لكنهما تحملان المشكلة نفسها.
+
+            رجل رأى فرصة استثمارية لكنه أجل قراره.
+
+            ورجل وجد صفقة مربحة لكنه انتظر حتى ضاعت.
+
+            كلاهما كان قريبًا من النجاح،
+            لكن المماطلة والتردد وقفا بينه وبين الفرصة.
+
+        </p>
+
+
+        <div class="scene" data-reveal data-delay="1">
+
+            <div class="scene-icon">
+                👁️
+            </div>
+
+            <div>
+
+                <h4>
+                    الفرصة تحتاج إلى عين تلاحظها
+                </h4>
+
+                <p>
+
+                    قد تمر فرص كثيرة أمام الإنسان
+                    دون أن ينتبه إليها،
+                    لأن عينيه مشغولتان بما يملكه الآن
+                    بدل ما يمكن أن يبنيه غدًا.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="2">
+
+            <div class="scene-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h4>
+                    الفرصة تحتاج إلى عقل يدرسها
+                </h4>
+
+                <p>
+
+                    اغتنام الفرص لا يعني الاندفاع الأعمى.
+                    بل يعني فهم الفرصة،
+                    معرفة مخاطرها،
+                    ثم اتخاذ القرار بعد دراسة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scene" data-reveal data-delay="3">
+
+            <div class="scene-icon">
+                🚪
+            </div>
+
+            <div>
+
+                <h4>
+                    والفرصة تحتاج إلى يد تفتح الباب
+                </h4>
+
+                <p>
+
+                    قد تعرف الفرصة،
+                    وقد تفهمها،
+                    لكن إذا لم تتخذ خطوة عملية،
+                    فستبقى مجرد فكرة جميلة.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="quote" data-reveal data-delay="1">
+
+            <p>
+
+                🍀 الحظ قد يطرق الباب،
+                لكن الإنسان هو الذي يقرر
+                هل سيفتحه أم سيتركه حتى يرحل.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         الخلاصة
+    ========================= -->
+
+    <section class="conclusion" data-reveal data-delay="1">
+
+        <h2>
+            🏺 خلاصة قصص بابل
+        </h2>
+
+        <p>
+
+            ليست الحكاية أن كل فرصة ستنجح،
+            ولا أن كل قرار سريع سيكون صائبًا.
+
+            بل إن الحكمة تكمن في أن يكون الإنسان
+            مستعدًا للفرص،
+            واعيًا بمخاطرها،
+            وقادرًا على اتخاذ القرار
+            عندما يجد ما يناسبه.
+
+        </p>
+
+
+        <div class="points">
+
+            <div class="point">
+                👁️ راقب الفرص من حولك.
+            </div>
+
+            <div class="point">
+                🧠 ادرسها قبل اتخاذ القرار.
+            </div>
+
+            <div class="point">
+                ⚖️ لا تجعل الخوف يمنعك من كل خطوة.
+            </div>
+
+            <div class="point">
+                ⏳ لا تؤجل القرارات المهمة بلا سبب.
+            </div>
+
+            <div class="point">
+                🚪 عندما تكون الفرصة مناسبة، بادر.
+            </div>
+
+            <div class="point">
+                🍀 لا تنتظر الحظ، بل كن مستعدًا عندما يأتي.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         الخاتمة
+    ========================= -->
+
+    <section class="ending">
+
+        <div class="ending-symbol" data-reveal>
+            🏺
+        </div>
+
+        <h2 data-reveal>
+            كلمة أخيرة
+        </h2>
+
+        <p data-reveal>
+
+            ربما لا نستطيع أن نعرف متى سيأتي الحظ،
+            ولا نستطيع أن نضمن نتيجة كل قرار.
+
+            لكننا نستطيع أن نكون مستعدين.
+
+            نقرأ،
+            نتعلم،
+            ندخر،
+            نفكر،
+            ثم نتحرك عندما تظهر الفرصة المناسبة.
+
+        </p>
+
+        <p data-reveal>
+
+            فكم من باب مرّ أمام الإنسان
+            ولم يفتحه،
+            ثم ظل يتساءل بعد سنوات:
+
+            <strong>
+                ماذا لو أنني دخلت؟
+            </strong>
+
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     اسم المعد + الفوتر (مشترك بين التبويبين)
+========================================================= -->
+
+<div class="credit" data-reveal>
+
+    <span>
+        إعداد وترتيب
+    </span>
+
+    <strong>
+        حسين العرياني
+    </strong>
+
+</div>
+
+
+<footer class="footer" data-reveal>
+
+    <p>
+        🏺 دستور بابل المالي
+    </p>
+
+    <p>
+        الطرق السبع للتغلب على المحافظ الخاوية &nbsp;·&nbsp; قصص الحظ والفرص
+    </p>
+
+    <p>
+        ملخص تعليمي مستوحى من مبادئ كتاب «أغنى رجل في بابل» —
+        جميع الأمثلة لأغراض تعليمية وليست توصية استثمارية.
+    </p>
+
+</footer>
+
+</main>
+
+</div>
+
+
+<a href="#top" class="top" id="toTop" aria-label="العودة إلى الأعلى">
+    ↑
+</a>
+
+
 <script>
-/* ================================================================
-   بيانات تقويم أم القرى المدمجة - تعمل بدون إنترنت 100%
-   ================================================================ */
 
-const hijriMonths = [
-  "محرم", "صفر", "ربيع الأول", "ربيع الثاني",
-  "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان",
-  "رمضان", "شوال", "ذو القعدة", "ذو الحجة"
-];
+(function(){
 
-const weekDays = [
-  "الأحد", "الإثنين", "الثلاثاء", "الأربعاء",
-  "الخميس", "الجمعة", "السبت"
-];
+    "use strict";
 
-const gregorianMonths = [
-  "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-];
+    var reduceMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-/* ---- 1 محرم لكل سنة ---- */
-const hijriStartDates = {
-  1440: new Date(2018, 8, 11),
-  1441: new Date(2019, 7, 31),
-  1442: new Date(2020, 7, 20),
-  1443: new Date(2021, 7, 9),
-  1444: new Date(2022, 6, 30),
-  1445: new Date(2023, 6, 19),
-  1446: new Date(2024, 6, 7),
-  1447: new Date(2025, 5, 27),
-  1448: new Date(2026, 5, 16),
-  1449: new Date(2027, 5, 5),
-  1450: new Date(2028, 4, 24),
-  1451: new Date(2029, 4, 13),
-  1452: new Date(2030, 4, 3),
-  1453: new Date(2031, 3, 22),
-  1454: new Date(2032, 3, 11),
-  1455: new Date(2033, 2, 31),
-  1456: new Date(2034, 2, 20),
-  1457: new Date(2035, 2, 10),
-  1458: new Date(2036, 1, 27),
-  1459: new Date(2037, 1, 15),
-  1460: new Date(2038, 1, 4)
-};
 
-/* ---- أطوال الأشهر ---- */
-const monthLengthsDatabase = {
-  1447: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1448: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1449: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1450: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1451: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1452: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1453: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1454: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1455: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1456: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1457: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1458: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30],
-  1459: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
-  1460: [29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30]
-};
+    /* =========================
+       كشف العناصر عند التمرير
+    ========================= */
 
-const MIN_YEAR = 1356;
-const MAX_YEAR = 1500;
+    var revealItems =
+        document.querySelectorAll("[data-reveal]");
 
-/* ================================================================
-   دوال مساعدة
-   ================================================================ */
-function toArabicNumerals(num){
-  const arabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-  return String(num).split('').map(d => arabicDigits[parseInt(d, 10)] ?? d).join('');
-}
+    var observer = null;
 
-function formatGregorian(date){
-  return `${date.getDate()} ${gregorianMonths[date.getMonth()]} ${date.getFullYear()}`;
-}
 
-function getDayName(date){
-  return weekDays[date.getDay()];
-}
+    function prepareReveal(el){
 
-function getMonthLength(hijriYear, hijriMonth){
-  const monthIndex = hijriMonth - 1;
-  if (monthLengthsDatabase[hijriYear]) {
-    return monthLengthsDatabase[hijriYear][monthIndex];
-  }
-  const baseYear = 1447;
-  const basePattern = monthLengthsDatabase[1447];
-  const yearDiff = hijriYear - baseYear;
-  if (Math.abs(yearDiff) % 2 === 0) {
-    return basePattern[monthIndex];
-  }
-  return basePattern[monthIndex] === 30 ? 29 : 30;
-}
+        if(el.classList.contains("reveal")) return;
 
-function getHijriNewYearDate(hijriYear){
-  if (hijriStartDates[hijriYear]) {
-    return new Date(hijriStartDates[hijriYear]);
-  }
-  let baseYear, baseDate;
-  if (hijriYear > 1450) {
-    baseYear = 1450;
-    baseDate = new Date(hijriStartDates[1450]);
-  } else if (hijriYear > 1440) {
-    baseYear = 1447;
-    baseDate = new Date(hijriStartDates[1447]);
-  } else {
-    baseYear = 1440;
-    baseDate = new Date(hijriStartDates[1440]);
-  }
-  const yearDiff = hijriYear - baseYear;
-  const daysDiff = Math.round(yearDiff * 354.367);
-  const result = new Date(baseDate);
-  result.setDate(result.getDate() + daysDiff);
-  return result;
-}
+        el.classList.add("reveal");
 
-/* ================================================================
-   الحصول على السنة الهجرية الحالية تلقائيًا
-   يعتمد أولًا على واجهة Intl (تقويم أم القرى) في المتصفح
-   ويرجع إلى حساب تقريبي في حال عدم التوفر
-   ================================================================ */
-function getCurrentHijriYear(){
-  // المحاولة 1: استخدام Intl مع تقويم أم القرى (دقيق جدًا)
-  try {
-    const fmt = new Intl.DateTimeFormat('en-US-u-ca-islamic-umalqura', {
-      year: 'numeric', month: 'numeric', day: 'numeric'
-    });
-    const parts = fmt.formatToParts(new Date());
-    const yearPart = parts.find(p => p.type === 'year');
-    if (yearPart) {
-      const y = parseInt(yearPart.value, 10);
-      if (!isNaN(y)) return y;
-    }
-  } catch (e) { /* تجاهل */ }
-
-  // المحاولة 2: استخدام تقويم إسلامي عام
-  try {
-    const fmt2 = new Intl.DateTimeFormat('en-US-u-ca-islamic', { year: 'numeric' });
-    const y2 = parseInt(fmt2.format(new Date()), 10);
-    if (!isNaN(y2)) return y2;
-  } catch (e) { /* تجاهل */ }
-
-  // المحاولة 3: حساب تقريبي (بديل أخير)
-  const now = new Date();
-  const gregYear = now.getFullYear();
-  const gregMonth = now.getMonth(); // 0-11
-  // نقطة مرجعية: 1 محرم 1447 ≈ 27 يونيو 2025
-  const refGreg = new Date(2025, 5, 27);
-  const refHijri = 1447;
-  const daysDiff = Math.floor((now - refGreg) / 86400000);
-  const approx = refHijri + Math.floor(daysDiff / 354.367);
-  // تصحيح إذا كنا في بداية السنة الميلادية قبل محرم
-  return approx;
-}
-
-/* ================================================================
-   توليد الجدول
-   ================================================================ */
-function generateHijriCalendar(hijriYear){
-  if (hijriYear < MIN_YEAR || hijriYear > MAX_YEAR) {
-    return `<tr class="msg-row"><td colspan="4">
-              ❌ السنة خارج النطاق المدعوم (${toArabicNumerals(MIN_YEAR)} - ${toArabicNumerals(MAX_YEAR)} هـ)
-            </td></tr>`;
-  }
-
-  let rows = '';
-  let currentDate = getHijriNewYearDate(hijriYear);
-
-  for (let month = 1; month <= 12; month++) {
-
-    const monthStart = new Date(currentDate);
-    const monthLength = getMonthLength(hijriYear, month);
-    const monthEnd = new Date(monthStart);
-    monthEnd.setDate(monthEnd.getDate() + monthLength - 1);
-
-    const startDay  = getDayName(monthStart);
-    const endDay    = getDayName(monthEnd);
-    const startDate = formatGregorian(monthStart);
-    const endDate   = formatGregorian(monthEnd);
-
-    const gregorianRange =
-      `<div class="greg-list">
-         <span class="gregorian-badge"><span class="greg-tag">بداية:</span> ${startDate} <span class="greg-day">(${startDay})</span></span>
-         <span class="gregorian-badge"><span class="greg-tag">نهاية:</span> ${endDate} <span class="greg-day">(${endDay})</span></span>
-       </div>`;
-
-    const monthName = hijriMonths[month - 1];
-    const hijriStartFormatted = `١ ${monthName}`;
-    const hijriEndFormatted   = `${monthLength} ${monthName}`;
-
-    const isRamadan = (monthName === 'رمضان');
-
-    rows += `<tr${isRamadan ? ' class="ramadan"' : ''}>
-        <td class="month-name" data-label="الشهر">${monthName}</td>
-        <td data-label="البداية"><span class="day-badge">${hijriStartFormatted}</span></td>
-        <td data-label="النهاية"><span class="day-badge">${hijriEndFormatted}</span></td>
-        <td data-label="الميلادي">${gregorianRange}</td>
-      </tr>`;
-
-    currentDate = new Date(monthEnd);
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
-
-  return rows;
-}
-
-/* ================================================================
-   تأثيرات العرض
-   ================================================================ */
-function applyRowDelays(){
-  const rows = document.querySelectorAll('#tableBody tr');
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  const step = isMobile ? 40 : 55;
-  rows.forEach((tr, i) => {
-    tr.style.animationDelay = (i * step) + 'ms';
-  });
-}
-
-function updateHijriDisplay(year){
-  const el = document.getElementById('hijriYearDisplay');
-  el.innerHTML = `🌙 ${toArabicNumerals(year)} هـ 🌙`;
-  el.classList.remove('flip');
-  void el.offsetWidth;
-  el.classList.add('flip');
-}
-
-function renderTable(year){
-  document.getElementById('tableBody').innerHTML = generateHijriCalendar(year);
-  applyRowDelays();
-  updateHijriDisplay(year);
-}
-
-function loadCalendarForYear(year, animate = true){
-  const wrapper = document.getElementById('tableWrap');
-
-  if (!animate) {
-    renderTable(year);
-    return;
-  }
-
-  wrapper.classList.add('reloading');
-  window.setTimeout(() => {
-    renderTable(year);
-    requestAnimationFrame(() => wrapper.classList.remove('reloading'));
-  }, 270);
-}
-
-/* ================================================================
-   الأحداث
-   ================================================================ */
-document.addEventListener('DOMContentLoaded', function () {
-
-  const yearInput    = document.getElementById('yearInput');
-  const convertBtn   = document.getElementById('convertBtn');
-  const currentValEl = document.getElementById('currentYearValue');
-  const goCurrentBtn = document.getElementById('goCurrentBtn');
-  const currentHint  = document.getElementById('currentYearHint');
-
-  /* --- تحديد السنة الهجرية الحالية تلقائيًا --- */
-  let currentHijriYear = getCurrentHijriYear();
-
-  // التأكد من بقاء السنة ضمن النطاق المدعوم
-  if (isNaN(currentHijriYear)) currentHijriYear = 1448;
-  if (currentHijriYear < MIN_YEAR) currentHijriYear = MIN_YEAR;
-  if (currentHijriYear > MAX_YEAR) currentHijriYear = MAX_YEAR;
-
-  // عرض السنة الحالية في الشريط
-  currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
-
-  // تعيين قيمة الإدخال إلى السنة الحالية تلقائيًا
-  yearInput.value = currentHijriYear;
-
-  // عرض الجدول للسنة الحالية مباشرة
-  renderTable(currentHijriYear);
-
-  /* --- زر الاستخراج (إدخال يدوي) --- */
-  function run(animate = true){
-    const year = parseInt(yearInput.value, 10);
-    if (isNaN(year)) {
-      alert('الرجاء إدخال سنة هجرية صحيحة');
-      return;
-    }
-    if (year < MIN_YEAR || year > MAX_YEAR) {
-      alert('الرجاء إدخال سنة هجرية بين ' + MIN_YEAR + ' و ' + MAX_YEAR);
-      return;
-    }
-    loadCalendarForYear(year, animate);
-    updateGoCurrentButton(year);
-  }
-
-  convertBtn.addEventListener('click', () => run(true));
-
-  yearInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      run(true);
-    }
-  });
-
-  /* --- زر العودة للسنة الحالية --- */
-  function updateGoCurrentButton(displayedYear){
-    if (displayedYear !== currentHijriYear) {
-      goCurrentBtn.hidden = false;
-    } else {
-      goCurrentBtn.hidden = true;
-    }
-  }
-
-  goCurrentBtn.addEventListener('click', function(){
-    yearInput.value = currentHijriYear;
-    loadCalendarForYear(currentHijriYear, true);
-    updateGoCurrentButton(currentHijriYear);
-  });
-
-  // تحديث حالة زر "السنة الحالية" عند أي تغيير في الحقل
-  yearInput.addEventListener('input', function(){
-    const y = parseInt(yearInput.value, 10);
-    updateGoCurrentButton(isNaN(y) ? null : y);
-  });
-
-  /* --- التحقق التلقائي عند تغيّر اليوم (منتصف الليل) ---
-         بحيث تتحدث السنة الهجرية الحالية تلقائيًا عند بداية سنة جديدة */
-  let lastKnownYear = currentHijriYear;
-
-  function checkYearRollover(){
-    const nowYear = getCurrentHijriYear();
-    if (!isNaN(nowYear) && nowYear !== lastKnownYear) {
-      lastKnownYear = nowYear;
-      // تحديث النطاق إن لزم
-      if (nowYear >= MIN_YEAR && nowYear <= MAX_YEAR) {
-        currentHijriYear = nowYear;
-        currentValEl.textContent = toArabicNumerals(currentHijriYear) + ' هـ';
-
-        // إذا كان المستخدم يشاهد السنة الحالية السابقة، نحدّثها تلقائيًا
-        const displayed = parseInt(yearInput.value, 10);
-        if (displayed === lastKnownYear - (nowYear - lastKnownYear) || displayed === nowYear - 1) {
-          yearInput.value = nowYear;
-          loadCalendarForYear(nowYear, true);
-          updateGoCurrentButton(nowYear);
-        } else {
-          updateGoCurrentButton(displayed);
+        if(el.classList.contains("scene")){
+            el.classList.add("reveal-right");
         }
-        console.log('🎉 تم تحديث السنة الهجرية الحالية إلى:', nowYear);
-      }
+
+        if(
+            el.classList.contains("conclusion") ||
+            el.classList.contains("quote")
+        ){
+            el.classList.add("reveal-scale");
+        }
+
+        var delay =
+            parseInt(el.getAttribute("data-delay") || "0",10);
+
+        if(delay > 0){
+            el.style.transitionDelay = (delay * 0.13) + "s";
+        }
+
     }
-  }
 
-  // فحص كل ساعة (يغطي تغيّر منتصف الليل)
-  setInterval(checkYearRollover, 60 * 60 * 1000);
-  // فحص أولي بعد التحميل بقليل
-  setTimeout(checkYearRollover, 3000);
 
-  /* --- إعادة حساب تأخيرات الصفوف عند تغيير حجم الشاشة --- */
-  let resizeTimer = null;
-  window.addEventListener('resize', function(){
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyRowDelays, 180);
-  });
+    if(reduceMotion || !("IntersectionObserver" in window)){
 
-  /* --- اختبار داخلي --- */
-  (function selfTest(){
-    try {
-      let testDate = getHijriNewYearDate(1447);
-      for (let i = 1; i < 9; i++) {
-        testDate.setDate(testDate.getDate() + getMonthLength(1447, i));
-      }
-      console.log('✅ 1 رمضان 1447 =', formatGregorian(testDate), getDayName(testDate));
-      console.log('📅 السنة الهجرية الحالية المكتشفة =', currentHijriYear);
-    } catch(e){ console.warn('اختبار داخلي:', e); }
-  })();
+        revealItems.forEach(function(el){
+            el.classList.add("reveal","visible");
+        });
 
-  /* --- الميلان ثلاثي الأبعاد (سطح المكتب فقط) --- */
-  const scene = document.getElementById('scene');
-  const book  = document.getElementById('book');
-  const canTilt = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;
+    } else {
 
-  if (canTilt) {
-    let raf = null;
-    scene.addEventListener('mousemove', (e) => {
-      const r = scene.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        book.style.transform =
-          `rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 5).toFixed(2)}deg)`;
-      });
+        revealItems.forEach(function(el){
+            prepareReveal(el);
+        });
+
+        observer = new IntersectionObserver(
+
+            function(entries){
+
+                entries.forEach(function(entry){
+
+                    if(entry.isIntersecting){
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold:0.12,
+                rootMargin:"0px 0px -70px 0px"
+            }
+
+        );
+
+        revealItems.forEach(function(el){
+            observer.observe(el);
+        });
+
+    }
+
+
+    /* إظهار ما هو ظاهر داخل لوحة معيّنة */
+
+    function revealInView(container){
+
+        if(reduceMotion || !observer) return;
+
+        container.querySelectorAll(".reveal:not(.visible)")
+        .forEach(function(el){
+
+            var r = el.getBoundingClientRect();
+
+            if(
+                r.top < window.innerHeight * 0.92 &&
+                r.bottom > -60
+            ){
+
+                el.classList.add("visible");
+
+                observer.unobserve(el);
+
+            }
+
+        });
+
+    }
+
+
+    /* =========================
+       التبويبات
+    ========================= */
+
+    var tabBtns =
+        document.querySelectorAll(".tab-btn");
+
+    var panels =
+        document.querySelectorAll(".panel");
+
+    var tabsBar =
+        document.getElementById("tabs");
+
+
+    function activateTab(btn){
+
+        var targetId =
+            btn.getAttribute("data-panel");
+
+        tabBtns.forEach(function(b){
+
+            var on = (b === btn);
+
+            b.classList.toggle("active", on);
+
+            b.setAttribute(
+                "aria-selected",
+                on ? "true" : "false"
+            );
+
+        });
+
+        panels.forEach(function(p){
+
+            p.classList.toggle(
+                "active",
+                p.id === targetId
+            );
+
+        });
+
+        var activePanel =
+            document.getElementById(targetId);
+
+        if(activePanel){
+            revealInView(activePanel);
+        }
+
+    }
+
+
+    tabBtns.forEach(function(btn){
+
+        btn.addEventListener("click", function(){
+
+            if(btn.classList.contains("active")) return;
+
+            var y = tabsBar
+                ? tabsBar.getBoundingClientRect().top +
+                  (window.pageYOffset ||
+                   document.documentElement.scrollTop)
+                : 0;
+
+            activateTab(btn);
+
+            window.requestAnimationFrame(function(){
+
+                window.scrollTo({
+                    top: y,
+                    behavior: reduceMotion ? "auto" : "smooth"
+                });
+
+            });
+
+        });
+
     });
-    scene.addEventListener('mouseleave', () => {
-      if (raf) cancelAnimationFrame(raf);
-      book.style.transform = 'rotateY(0deg) rotateX(0deg)';
+
+
+    /* =========================
+       شريط التقدم + زر العودة
+    ========================= */
+
+    var bar = document.getElementById("progressBar");
+    var top = document.getElementById("toTop");
+
+    var ticking = false;
+
+    function onScroll(){
+
+        var doc = document.documentElement;
+
+        var scrolled =
+            doc.scrollTop || document.body.scrollTop;
+
+        var height =
+            doc.scrollHeight - doc.clientHeight;
+
+        var percent =
+            height > 0 ? (scrolled / height) * 100 : 0;
+
+        if(bar){
+            bar.style.width = percent + "%";
+        }
+
+        if(top){
+
+            if(scrolled > 320){
+                top.classList.add("show");
+            } else {
+                top.classList.remove("show");
+            }
+
+        }
+
+        ticking = false;
+
+    }
+
+
+    window.addEventListener("scroll", function(){
+
+        if(!ticking){
+
+            window.requestAnimationFrame(onScroll);
+
+            ticking = true;
+
+        }
+
+    }, { passive:true });
+
+
+    window.addEventListener("resize", onScroll);
+
+    window.addEventListener("load", onScroll);
+
+    onScroll();
+
+
+    /* =========================
+       تمرير ناعم لزر العودة
+    ========================= */
+
+    if(top){
+
+        top.addEventListener("click", function(e){
+
+            e.preventDefault();
+
+            window.scrollTo({
+                top:0,
+                behavior: reduceMotion ? "auto" : "smooth"
+            });
+
+        });
+
+    }
+
+
+    /* =========================
+       تأثير لمس بسيط على النقاط
+    ========================= */
+
+    document.querySelectorAll(".point").forEach(function(p){
+
+        p.addEventListener("click", function(){
+
+            p.animate(
+
+                [
+                    { transform:"translateX(-8px)" },
+                    { transform:"translateX(0)" }
+                ],
+
+                {
+                    duration:420,
+                    easing:"cubic-bezier(.2,.8,.3,1)"
+                }
+
+            );
+
+        });
+
     });
-  }
-});
+
+
+    /* =========================
+       تأثير دوران على أرقام الطرق
+    ========================= */
+
+    document.querySelectorAll(".story-number").forEach(function(n){
+
+        n.style.cursor = "pointer";
+
+        n.addEventListener("click", function(){
+
+            n.animate(
+
+                [
+                    { transform:"rotate(0deg) scale(1)" },
+                    { transform:"rotate(180deg) scale(1.12)" },
+                    { transform:"rotate(360deg) scale(1)" }
+                ],
+
+                {
+                    duration:800,
+                    easing:"cubic-bezier(.2,.8,.3,1)"
+                }
+
+            );
+
+        });
+
+    });
+
+})();
+
 </script>
 
 </body>
-</html>
+   </html>

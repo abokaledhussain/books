@@ -2,4829 +2,1659 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>حكايات بابل وصناعة الثروة</title>
+<title>أسرار بابل المالية | نسخة تفاعلية موسّعة</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa+Ink&family=Scheherazade+New:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
-
     --paper:#efe0bf;
     --paper-light:#f8efd9;
     --paper-dark:#d9c397;
-
     --ink:#382b1c;
     --ink-soft:#65533a;
-
     --brown:#4a321f;
     --brown-dark:#2e2015;
-
     --gold:#b1843e;
     --gold-light:#d6b56d;
     --gold-dark:#765321;
-
     --green:#26382e;
-
     --border:#b99b69;
-
     --shadow:rgba(57,38,18,.20);
-
     --ease:cubic-bezier(.2,.8,.3,1);
-
 }
 
-
-/* =========================
-   الأساس
-========================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
 body{
-
     min-height:100vh;
-
     overflow-x:hidden;
-
     color:var(--ink);
-
     background:
-
-        radial-gradient(
-            circle at 20% 15%,
-            rgba(120,80,25,.08) 0 2px,
-            transparent 3px
-        ),
-
-        radial-gradient(
-            circle at 75% 65%,
-            rgba(120,80,25,.06) 0 1px,
-            transparent 2px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(110,70,25,.04),
-            transparent 20%,
-            transparent 80%,
-            rgba(110,70,25,.04)
-        ),
-
+        radial-gradient(circle at 20% 15%, rgba(120,80,25,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 75% 65%, rgba(120,80,25,.06) 0 1px, transparent 2px),
+        linear-gradient(90deg, rgba(110,70,25,.04), transparent 20%, transparent 80%, rgba(110,70,25,.04)),
         var(--paper);
-
-    background-size:
-        35px 35px,
-        47px 47px,
-        100% 100%,
-        auto;
-
-    font-family:
-        "Cairo",
-        "Segoe UI",
-        sans-serif;
-
+    background-size:35px 35px,47px 47px,100% 100%,auto;
+    font-family:"Cairo","Segoe UI",sans-serif;
     line-height:2;
-
-    animation: pageIn 1.1s var(--ease) both;
-
+    animation:pageIn 1.1s var(--ease) both;
 }
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
 
-@keyframes pageIn{
-    from{ opacity:0; }
-    to{ opacity:1; }
-}
+/* شريط التقدم */
+.progress{position:fixed;top:0;right:0;left:0;height:3px;background:rgba(74,50,31,.12);z-index:120;pointer-events:none;}
+.progress span{display:block;height:100%;width:0%;
+    background:linear-gradient(90deg,var(--gold-dark),var(--gold-light),var(--gold-dark));
+    background-size:200% 100%;box-shadow:0 0 12px rgba(214,181,109,.6);
+    transition:width .12s linear;animation:shine 3s linear infinite;}
+@keyframes shine{from{background-position:0% 0}to{background-position:200% 0}}
 
-
-/* =========================
-   شريط التقدم
-========================= */
-
-.progress{
-
-    position:fixed;
-
-    top:0;
-    right:0;
-    left:0;
-
-    height:3px;
-
-    background:rgba(74,50,31,.12);
-
-    z-index:120;
-
-    pointer-events:none;
-
-}
-
-.progress span{
-
-    display:block;
-
-    height:100%;
-
-    width:0%;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--gold-dark),
-            var(--gold-light),
-            var(--gold-dark)
-        );
-
-    background-size:200% 100%;
-
-    box-shadow:
-        0 0 12px
-        rgba(214,181,109,.6);
-
-    transition:width .12s linear;
-
-    animation:
-        shine 3s linear infinite;
-
-}
-
-@keyframes shine{
-    from{ background-position:0% 0; }
-    to{ background-position:200% 0; }
-}
-
-
-/* =========================
-   غلاف الكتاب
-========================= */
-
+/* الكتاب */
 .book{
-
-    width:min(920px,100%);
-
-    margin:auto;
-
-    min-height:100vh;
-
-    background:
-
-        linear-gradient(
-            rgba(255,255,255,.15),
-            rgba(255,255,255,.15)
-        ),
-
-        var(--paper-light);
-
-    box-shadow:
-        0 0 45px rgba(45,30,15,.18);
-
-    animation: bookIn 1.3s var(--ease) both;
-
+    width:min(920px,100%);margin:auto;min-height:100vh;
+    background:linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)),var(--paper-light);
+    box-shadow:0 0 45px rgba(45,30,15,.18);
+    animation:bookIn 1.3s var(--ease) both;
 }
+@keyframes bookIn{from{opacity:0;transform:translateY(30px) scale(.985)}to{opacity:1;transform:none}}
 
-@keyframes bookIn{
-    from{
-        opacity:0;
-        transform: translateY(30px) scale(.985);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-
-/* =========================
-   الغلاف
-========================= */
-
+/* الغلاف */
 .cover{
-
-    min-height:100vh;
-
-    padding:
-        35px
-        25px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    color:#f7e9c5;
-
+    min-height:100vh;min-height:100svh;padding:35px 25px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    position:relative;overflow:hidden;color:#f7e9c5;
     background:
+        radial-gradient(circle at center,rgba(210,170,90,.16),transparent 35%),
+        linear-gradient(145deg,#241910,#4b321e 50%,#251a10);
+}
+.cover::before{content:"";position:absolute;inset:18px;border:2px solid rgba(210,177,108,.65);pointer-events:none;
+    animation:frameIn 1.6s var(--ease) .15s both,frameGlow 5s ease-in-out 1.6s infinite;}
+.cover::after{content:"";position:absolute;inset:28px;border:1px solid rgba(210,177,108,.35);pointer-events:none;
+    animation:frameIn 1.6s var(--ease) .35s both;}
+@keyframes frameIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+@keyframes frameGlow{0%,100%{box-shadow:inset 0 0 0 rgba(214,181,109,0)}50%{box-shadow:inset 0 0 45px rgba(214,181,109,.10)}}
 
-        radial-gradient(
-            circle at center,
-            rgba(210,170,90,.16),
-            transparent 35%
-        ),
+.cover-dust{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+.cover-dust span{position:absolute;width:4px;height:4px;border-radius:50%;
+    background:rgba(214,181,109,.55);box-shadow:0 0 10px rgba(214,181,109,.45);
+    animation:dust 12s linear infinite;}
+.cover-dust span:nth-child(1){right:12%;bottom:-10px;animation-delay:0s;animation-duration:14s}
+.cover-dust span:nth-child(2){right:28%;bottom:-10px;animation-delay:2.5s;animation-duration:17s}
+.cover-dust span:nth-child(3){right:47%;bottom:-10px;animation-delay:5s;animation-duration:13s}
+.cover-dust span:nth-child(4){right:66%;bottom:-10px;animation-delay:1.4s;animation-duration:19s}
+.cover-dust span:nth-child(5){right:81%;bottom:-10px;animation-delay:7s;animation-duration:15s}
+.cover-dust span:nth-child(6){right:92%;bottom:-10px;animation-delay:3.8s;animation-duration:21s}
+@keyframes dust{0%{transform:translateY(0) scale(.6);opacity:0}12%{opacity:.9}85%{opacity:.55}100%{transform:translateY(-100vh) scale(1.15);opacity:0}}
 
-        linear-gradient(
-            145deg,
-            #241910,
-            #4b321e 50%,
-            #251a10
-        );
-
+.cover-inner{width:100%;height:100%;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.cover-image{
+    max-width:100%;max-height:85vh;object-fit:contain;
+    border-radius:8px;
+    box-shadow:0 15px 45px rgba(0,0,0,.5), 0 0 0 1px rgba(214,181,109,.35);
 }
 
-
-/* إطار الغلاف */
-
-.cover::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:18px;
-
-    border:
-        2px solid
-        rgba(210,177,108,.65);
-
-    pointer-events:none;
-
-    animation:
-        frameIn 1.6s var(--ease) .15s both,
-        frameGlow 5s ease-in-out 1.6s infinite;
-
-}
-
-
-.cover::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:28px;
-
-    border:
-        1px solid
-        rgba(210,177,108,.35);
-
-    pointer-events:none;
-
-    animation: frameIn 1.6s var(--ease) .35s both;
-
-}
-
-@keyframes frameIn{
-    from{
-        opacity:0;
-        transform:scale(1.06);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-@keyframes frameGlow{
-    0%,100%{
-        box-shadow:
-            inset 0 0 0 rgba(214,181,109,0);
-    }
-    50%{
-        box-shadow:
-            inset 0 0 45px rgba(214,181,109,.10);
-    }
-}
-
-
-/* غبار ذهبي */
-
-.cover-dust{
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    z-index:1;
-
-}
-
-.cover-dust span{
-
-    position:absolute;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:
-        rgba(214,181,109,.55);
-
-    box-shadow:
-        0 0 10px
-        rgba(214,181,109,.45);
-
-    animation:
-        dust 12s linear infinite;
-
-}
-
-.cover-dust span:nth-child(1){ right:12%; bottom:-10px; animation-delay:0s;   animation-duration:14s; }
-.cover-dust span:nth-child(2){ right:28%; bottom:-10px; animation-delay:2.5s; animation-duration:17s; }
-.cover-dust span:nth-child(3){ right:47%; bottom:-10px; animation-delay:5s;   animation-duration:13s; }
-.cover-dust span:nth-child(4){ right:66%; bottom:-10px; animation-delay:1.4s; animation-duration:19s; }
-.cover-dust span:nth-child(5){ right:81%; bottom:-10px; animation-delay:7s;   animation-duration:15s; }
-.cover-dust span:nth-child(6){ right:92%; bottom:-10px; animation-delay:3.8s; animation-duration:21s; }
-
-@keyframes dust{
-    0%{
-        transform:translateY(0) scale(.6);
-        opacity:0;
-    }
-    12%{
-        opacity:.9;
-    }
-    85%{
-        opacity:.55;
-    }
-    100%{
-        transform:translateY(-100vh) scale(1.15);
-        opacity:0;
-    }
-}
-
-
-.cover-inner{
-
-    width:min(700px,100%);
-
-    position:relative;
-
-    z-index:2;
-
-    padding:
-        55px
-        25px;
-
-    border-top:
-        1px solid
-        rgba(214,181,109,.5);
-
-    border-bottom:
-        1px solid
-        rgba(214,181,109,.5);
-
-    animation: innerIn 1.2s var(--ease) .2s both;
-
-}
-
-@keyframes innerIn{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-
-/* رمز الغلاف */
-
-.cover-symbol{
-
-    width:100px;
-
-    height:100px;
-
-    margin:
-        0 auto
-        25px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border:
-        2px solid
-        var(--gold-light);
-
-    border-radius:50%;
-
-    font-size:48px;
-
-    box-shadow:
-        0 0 0 8px
-        rgba(190,145,65,.08),
-
-        0 0 35px
-        rgba(190,145,65,.15);
-
-    animation:
-        symbolIn 1.1s var(--ease) .3s both,
-        floatY 4.5s ease-in-out 1.4s infinite;
-
-}
-
-@keyframes symbolIn{
-    0%{
-        opacity:0;
-        transform:scale(.4) rotate(-25deg);
-    }
-    70%{
-        transform:scale(1.08) rotate(4deg);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1) rotate(0);
-    }
-}
-
-@keyframes floatY{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-11px); }
-}
-
-
-/* عنوان صغير */
-
-.cover-label{
-
-    color:
-        var(--gold-light);
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    margin-bottom:15px;
-
-    animation:
-        fadeUp .9s var(--ease) .5s both;
-
-}
-
-
-/* العنوان */
-
-.cover h1{
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    font-size:
-        clamp(42px,8vw,72px);
-
-    line-height:1.2;
-
-    color:#f8e9c4;
-
-    text-shadow:
-        0 3px 4px
-        rgba(0,0,0,.35);
-
-    animation:
-        fadeUp 1s var(--ease) .65s both,
-        titleGlow 6s ease-in-out 2s infinite;
-
-}
-
-@keyframes titleGlow{
-    0%,100%{
-        text-shadow:0 3px 4px rgba(0,0,0,.35);
-    }
-    50%{
-        text-shadow:
-            0 3px 4px rgba(0,0,0,.35),
-            0 0 30px rgba(214,181,109,.35);
-    }
-}
-
-
-.cover h2{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:
-        clamp(22px,5vw,30px);
-
-    color:
-        var(--gold-light);
-
-    margin-top:10px;
-
-    animation: fadeUp .9s var(--ease) .8s both;
-
-}
-
-
-.cover-line{
-
-    width:100px;
-
-    height:2px;
-
-    background:
-        var(--gold);
-
-    margin:
-        27px auto;
-
-    transform-origin:center;
-
-    animation: lineIn 1s var(--ease) .95s both;
-
-}
-
-@keyframes lineIn{
-    from{
-        opacity:0;
-        transform:scaleX(0);
-    }
-    to{
-        opacity:1;
-        transform:scaleX(1);
-    }
-}
-
-
-.cover-description{
-
-    max-width:570px;
-
-    margin:auto;
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:20px;
-
-    line-height:2.2;
-
-    color:#ded0ae;
-
-    animation: fadeUp 1s var(--ease) 1.05s both;
-
-}
-
-
-.cover-author{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    color:
-        #cdb47f;
-
-    font-size:17px;
-
-    animation: fadeUp 1s var(--ease) 1.25s both;
-
-}
-
-
-.cover-author strong{
-
-    display:block;
-
-    margin-top:7px;
-
-    color:#f0d79e;
-
-    font-size:25px;
-
-}
-
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(28px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-/* =========================
-   شريط التبويبات
-========================= */
-
+/* شريط التبويبات */
 .tabs{
-
-    position:sticky;
-
-    top:0;
-
-    z-index:90;
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    padding:
-        13px
-        clamp(12px,4vw,38px);
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(248,239,217,.98),
-            rgba(238,224,193,.96)
-        );
-
-    border-bottom:
-        1px solid
-        var(--border);
-
-    box-shadow:
-        0 6px 20px
-        rgba(57,38,18,.10);
-
-    backdrop-filter:blur(8px);
-
-    -webkit-backdrop-filter:blur(8px);
-
+    position:sticky;top:0;z-index:90;
+    display:flex;justify-content:center;flex-wrap:wrap;gap:6px;
+    padding:11px clamp(9px,2.6vw,22px);
+    background:linear-gradient(180deg,rgba(248,239,217,.98),rgba(238,224,193,.96));
+    border-bottom:1px solid var(--border);
+    box-shadow:0 6px 20px rgba(57,38,18,.10);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 }
-
-
 .tab-btn{
-
-    flex:1 1 210px;
-
-    max-width:330px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    padding:
-        10px 16px;
-
-    background:
-        rgba(255,250,236,.72);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:10px;
-
-    color:
-        var(--brown);
-
-    font-family:
-        "Cairo",
-        sans-serif;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    text-align:right;
-
-    transition:
-        transform .45s var(--ease),
-        box-shadow .45s var(--ease),
-        border-color .45s var(--ease),
-        background .45s var(--ease),
-        color .45s var(--ease);
-
+    flex:1 1 150px;max-width:220px;
+    display:flex;align-items:center;gap:7px;padding:8px 10px;
+    background:rgba(255,250,236,.72);
+    border:1px solid var(--border);border-radius:10px;
+    color:var(--brown);font-family:"Cairo",sans-serif;font-weight:600;
+    cursor:pointer;text-align:right;min-height:44px;
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease),background .45s var(--ease),color .45s var(--ease);
 }
-
-
-.tab-btn:hover{
-
-    transform:translateY(-3px);
-
-    border-color:var(--gold);
-
-    box-shadow:
-        0 10px 22px
-        rgba(70,45,20,.14);
-
-}
-
-
+.tab-btn:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 10px 22px rgba(70,45,20,.14);}
+.tab-btn:active{transform:translateY(-1px) scale(.98);}
 .tab-btn.active{
-
-    background:
-        linear-gradient(
-            145deg,
-            #302116,
-            #4b321e
-        );
-
-    color:#f4e5c2;
-
-    border-color:var(--gold);
-
-    box-shadow:
-        0 10px 26px
-        rgba(45,30,15,.28),
-        0 0 0 3px
-        rgba(177,132,62,.12);
-
+    background:linear-gradient(145deg,#302116,#4b321e);
+    color:#f4e5c2;border-color:var(--gold);
+    box-shadow:0 10px 26px rgba(45,30,15,.28),0 0 0 3px rgba(177,132,62,.12);
 }
-
-
-.tab-icon{
-
-    font-size:22px;
-
-    line-height:1;
-
-    flex-shrink:0;
-
-}
-
-
-.tab-text{
-
-    display:flex;
-
-    flex-direction:column;
-
-    line-height:1.5;
-
-}
-
-
-.tab-text strong{
-
-    font-size:15px;
-
-    font-weight:700;
-
-}
-
-
-.tab-text small{
-
-    font-size:11px;
-
-    font-weight:400;
-
-    opacity:.7;
-
-}
-
-
-.tab-btn.active .tab-text small{
-
-    color:var(--gold-light);
-
-    opacity:.9;
-
-}
-
-
-/* =========================
-   لوحات المحتوى
-========================= */
-
-.panel{
-
-    display:none;
-
-}
-
-.panel.active{
-
-    display:block;
-
-    animation:
-        panelIn .75s var(--ease) both;
-
-}
-
-@keyframes panelIn{
-    from{
-        opacity:0;
-        transform:translateY(22px);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-
-/* =========================
-   المحتوى
-========================= */
-
-.content{
-
-    padding:
-        55px
-        clamp(20px,7vw,70px)
-        70px;
-
-}
-
-
-/* =========================
-   رأس الفصل
-========================= */
-
-.chapter-head{
-
-    text-align:center;
-
-    margin-bottom:55px;
-
-}
-
-
-.chapter-head .symbol{
-
-    font-size:35px;
-
-    margin-bottom:10px;
-
-    display:inline-block;
-
-    animation: floatY 4s ease-in-out infinite;
-
-}
-
-
-.chapter-head small{
-
-    color:
-        var(--gold-dark);
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
-}
-
-
-.chapter-head h2{
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    color:
-        var(--brown-dark);
-
-    font-size:
-        clamp(32px,6vw,45px);
-
-    line-height:1.4;
-
-}
-
-
-.chapter-head p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    color:
-        var(--ink-soft);
-
-    font-size:18px;
-
-}
-
-
-/* =========================
-   مقدمة
-========================= */
-
+.tab-icon{font-size:17px;line-height:1;flex-shrink:0;}
+.tab-text{display:flex;flex-direction:column;line-height:1.35;min-width:0;}
+.tab-text strong{font-size:12px;font-weight:700;}
+.tab-text small{font-size:9px;font-weight:400;opacity:.7;}
+.tab-btn.active .tab-text small{color:var(--gold-light);opacity:.9;}
+
+/* اللوحات */
+.panel{display:block;}
+@keyframes panelIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* المحتوى */
+.content{padding:55px clamp(20px,7vw,70px) 70px;}
+
+/* رأس الفصل */
+.chapter-head{text-align:center;margin-bottom:55px;}
+.chapter-head .symbol{font-size:35px;margin-bottom:10px;display:inline-block;animation:floatY 4s ease-in-out infinite;}
+.chapter-head small{color:var(--gold-dark);font-weight:bold;letter-spacing:2px;}
+.chapter-head h2{font-family:"Scheherazade New","Amiri",serif;color:var(--brown-dark);font-size:clamp(30px,5.6vw,43px);line-height:1.4;}
+.chapter-head p{font-family:"Amiri",serif;color:var(--ink-soft);font-size:18px;}
+
+/* مقدمة */
 .intro{
-
-    position:relative;
-
-    background:
-        rgba(255,250,236,.75);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-right:
-        5px solid
-        var(--gold);
-
-    padding:28px;
-
-    margin-bottom:55px;
-
-    border-radius:8px;
-
-    box-shadow:
-        0 5px 18px
-        rgba(70,45,20,.07);
-
-    transition:
-        transform .5s var(--ease),
-        box-shadow .5s var(--ease),
-        border-color .5s var(--ease);
-
+    position:relative;background:rgba(255,250,236,.75);
+    border:1px solid var(--border);border-right:5px solid var(--gold);
+    padding:28px;margin-bottom:55px;border-radius:8px;
+    box-shadow:0 5px 18px rgba(70,45,20,.07);
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease);
 }
+.intro:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(70,45,20,.14);border-color:var(--gold);}
+.intro::before{content:"❝";position:absolute;top:-25px;right:15px;font-family:Georgia,serif;font-size:80px;color:rgba(177,132,62,.18);animation:quotePulse 5s ease-in-out infinite;}
+@keyframes quotePulse{0%,100%{opacity:.55;transform:translateY(0)}50%{opacity:1;transform:translateY(-5px)}}
+.intro p{font-family:"Amiri",serif;font-size:20px;line-height:2.3;text-align:justify;margin-bottom:12px;}
+.intro p:last-child{margin-bottom:0;}
 
-.intro:hover{
-
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 16px 34px
-        rgba(70,45,20,.14);
-
-    border-color:
-        var(--gold);
-
-}
-
-
-.intro::before{
-
-    content:"❝";
-
-    position:absolute;
-
-    top:-25px;
-
-    right:15px;
-
-    font-family:Georgia,serif;
-
-    font-size:80px;
-
-    color:
-        rgba(177,132,62,.18);
-
-    animation:
-        quotePulse 5s ease-in-out infinite;
-
-}
-
-@keyframes quotePulse{
-    0%,100%{ opacity:.55; transform:translateY(0); }
-    50%{ opacity:1; transform:translateY(-5px); }
-}
-
-
-.intro p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:20px;
-
-    line-height:2.3;
-
-    text-align:justify;
-
-}
-
-
-/* =========================
-   عنوان القصة / الطريقة
-========================= */
-
-.story{
-
-    margin-bottom:75px;
-
-}
-
-
-.story-title{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-
+/* نص القصة */
+.story{margin-bottom:75px;}
+.story-title{text-align:center;margin-bottom:35px;}
 .story-number{
-
-    width:65px;
-
-    height:65px;
-
-    margin:
-        0 auto
-        12px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        var(--brown);
-
-    color:
-        var(--gold-light);
-
-    border:
-        3px double
-        var(--gold);
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:28px;
-
-    box-shadow:
-        0 5px 15px
-        var(--shadow);
-
-    transition:
-        transform .6s var(--ease),
-        box-shadow .6s var(--ease);
-
+    width:65px;height:65px;margin:0 auto 12px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;background:var(--brown);color:var(--gold-light);
+    border:3px double var(--gold);font-family:"Amiri",serif;font-size:28px;
+    box-shadow:0 5px 15px var(--shadow);
+    transition:transform .6s var(--ease),box-shadow .6s var(--ease);
 }
+.story-number:hover{transform:rotate(360deg) scale(1.08);box-shadow:0 0 0 8px rgba(177,132,62,.10),0 10px 26px rgba(57,38,18,.3);}
+.story-title small{color:var(--gold-dark);font-size:12px;font-weight:bold;}
+.story-title h3{font-family:"Scheherazade New","Amiri",serif;color:var(--brown-dark);font-size:clamp(28px,5vw,38px);line-height:1.5;}
+.story-title p{font-family:"Amiri",serif;color:var(--ink-soft);font-size:18px;margin-top:4px;}
 
-.story-number:hover{
-
-    transform:
-        rotate(360deg)
-        scale(1.08);
-
-    box-shadow:
-        0 0 0 8px
-        rgba(177,132,62,.10),
-        0 10px 26px
-        rgba(57,38,18,.3);
-
-}
-
-
-.story-title small{
-
-    color:
-        var(--gold-dark);
-
-    font-size:12px;
-
-    font-weight:bold;
-
-}
-
-
-.story-title h3{
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    color:
-        var(--brown-dark);
-
-    font-size:
-        clamp(28px,5vw,38px);
-
-    line-height:1.5;
-
-}
-
-
-.story-title p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    color:
-        var(--ink-soft);
-
-    font-size:18px;
-
-    margin-top:4px;
-
-}
-
-
-/* =========================
-   النص
-========================= */
-
+/* نص */
 .story-text{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:20px;
-
-    line-height:2.3;
-
-    text-align:justify;
-
-    margin-bottom:25px;
-
+    font-family:"Amiri",serif;font-size:20px;line-height:2.3;
+    text-align:justify;margin-bottom:25px;
 }
-
-
 .story-text:first-letter{
-
-    font-size:58px;
-
-    float:right;
-
-    line-height:.8;
-
-    padding-left:8px;
-
-    color:
-        var(--gold-dark);
-
-    font-weight:bold;
-
+    font-size:58px;float:right;line-height:.8;padding-left:8px;
+    color:var(--gold-dark);font-weight:bold;
 }
 
+/* بطاقة القصة */
+.story-card{
+    position:relative;margin:43px 0;padding:34px 30px 38px;
+    background:linear-gradient(135deg,rgba(255,255,255,.47),rgba(228,210,171,.28));
+    border:1px solid rgba(120,85,34,.40);border-radius:8px;
+    box-shadow:0 10px 30px rgba(70,45,20,.08);
+}
+.story-card::before{content:"";position:absolute;inset:11px;border:1px solid rgba(177,132,62,.18);border-radius:5px;pointer-events:none;}
+.story-head{position:relative;z-index:2;display:flex;align-items:center;gap:15px;margin-bottom:24px;}
+.story-icon{
+    width:62px;height:62px;min-width:62px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;background:var(--brown);font-size:31px;
+    box-shadow:0 5px 14px rgba(40,25,10,.20);
+}
+.story-label{color:var(--gold-dark);font-size:13px;}
+.story-head h2{font-family:"Scheherazade New","Amiri",serif;font-size:clamp(25px,4.4vw,35px);line-height:1.3;color:var(--brown-dark);}
+.story-card p{position:relative;z-index:2;font-family:"Amiri",serif;font-size:20px;line-height:2.25;text-align:justify;margin-bottom:18px;}
+.story-card p:last-child{margin-bottom:0;}
 
-/* =========================
-   صندوق المشهد
-========================= */
-
+/* مشهد */
 .scene{
-
-    display:grid;
-
-    grid-template-columns:60px 1fr;
-
-    gap:17px;
-
-    padding:22px;
-
-    margin:
-        22px 0;
-
-    background:
-        rgba(248,239,217,.85);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:9px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(60,40,20,.06);
-
-    transition:
-        transform .5s var(--ease),
-        box-shadow .5s var(--ease),
-        border-color .5s var(--ease),
-        background .5s var(--ease);
-
+    display:grid;grid-template-columns:60px 1fr;gap:17px;padding:22px;margin:22px 0;
+    background:rgba(248,239,217,.85);border:1px solid var(--border);border-radius:9px;
+    box-shadow:0 4px 15px rgba(60,40,20,.06);
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease),background .5s var(--ease);
 }
-
-.scene:hover{
-
-    transform: translateY(-6px);
-
-    background:
-        rgba(255,250,236,.95);
-
-    border-color:
-        var(--gold);
-
-    box-shadow:
-        0 18px 36px
-        rgba(60,40,20,.15);
-
-}
-
-
+.scene:hover{transform:translateY(-6px);background:rgba(255,250,236,.95);border-color:var(--gold);box-shadow:0 18px 36px rgba(60,40,20,.15);}
 .scene-icon{
-
-    width:55px;
-
-    height:55px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:
-        #e5d3ad;
-
-    border-radius:50%;
-
-    font-size:28px;
-
-    transition: transform .5s var(--ease);
-
+    width:55px;height:55px;display:flex;align-items:center;justify-content:center;
+    background:#e5d3ad;border-radius:50%;font-size:28px;
+    transition:transform .5s var(--ease);
 }
+.scene:hover .scene-icon{animation:iconPop .7s var(--ease);}
+@keyframes iconPop{0%{transform:scale(1) rotate(0)}45%{transform:scale(1.18) rotate(-8deg)}100%{transform:scale(1) rotate(0)}}
+.scene h4{color:var(--brown);font-size:17px;margin-bottom:4px;}
+.scene p{font-family:"Amiri",serif;font-size:18px;line-height:2;color:var(--ink-soft);}
 
-.scene:hover .scene-icon{
-
-    animation: iconPop .7s var(--ease);
-
-}
-
-@keyframes iconPop{
-    0%{ transform:scale(1) rotate(0); }
-    45%{ transform:scale(1.18) rotate(-8deg); }
-    100%{ transform:scale(1) rotate(0); }
-}
-
-
-.scene h4{
-
-    color:
-        var(--brown);
-
-    font-size:17px;
-
-    margin-bottom:4px;
-
-}
-
-
-.scene p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:18px;
-
-    line-height:2;
-
-    color:
-        var(--ink-soft);
-
-}
-
-
-/* =========================
-   اقتباس
-========================= */
-
+/* اقتباس */
 .quote{
-
-    position:relative;
-
-    padding:
-        30px
-        35px;
-
-    margin:
-        32px 0;
-
-    text-align:center;
-
-    color:#f2e3c2;
-
-    background:
-        linear-gradient(
-            145deg,
-            #302116,
-            #4b321e
-        );
-
-    border-radius:8px;
-
-    border:
-        1px solid
-        rgba(213,179,103,.35);
-
-    overflow:hidden;
-
-    transition:
-        transform .6s var(--ease),
-        box-shadow .6s var(--ease);
-
+    position:relative;padding:30px 35px;margin:32px 0;text-align:center;
+    color:#f2e3c2;background:linear-gradient(145deg,#302116,#4b321e);
+    border-radius:8px;border:1px solid rgba(213,179,103,.35);overflow:hidden;
+    transition:transform .6s var(--ease),box-shadow .6s var(--ease);
 }
+.quote::after{content:"";position:absolute;top:0;bottom:0;width:60%;
+    background:linear-gradient(100deg,transparent,rgba(214,181,109,.14),transparent);
+    transform:translateX(220%);animation:sweep 6s ease-in-out infinite;pointer-events:none;}
+@keyframes sweep{0%{transform:translateX(220%)}55%{transform:translateX(-220%)}100%{transform:translateX(-220%)}}
+.quote:hover{transform:translateY(-5px);box-shadow:0 20px 42px rgba(45,30,15,.30),0 0 0 1px rgba(214,181,109,.35);}
+.quote::before{content:"“";position:absolute;right:10px;top:-30px;font-size:110px;color:rgba(214,181,109,.12);}
+.quote p{position:relative;z-index:1;font-family:"Amiri",serif;font-size:23px;line-height:2;}
+.quote small{display:block;margin-top:10px;color:var(--gold-light);}
 
-.quote::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    bottom:0;
-
-    width:60%;
-
-    background:
-        linear-gradient(
-            100deg,
-            transparent,
-            rgba(214,181,109,.14),
-            transparent
-        );
-
-    transform:
-        translateX(220%);
-
-    animation:
-        sweep 6s ease-in-out infinite;
-
-    pointer-events:none;
-
-}
-
-@keyframes sweep{
-    0%{ transform:translateX(220%); }
-    55%{ transform:translateX(-220%); }
-    100%{ transform:translateX(-220%); }
-}
-
-
-.quote:hover{
-
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 20px 42px
-        rgba(45,30,15,.30),
-        0 0 0 1px
-        rgba(214,181,109,.35);
-
-}
-
-
-.quote::before{
-
-    content:"“";
-
-    position:absolute;
-
-    right:10px;
-
-    top:-30px;
-
-    font-size:110px;
-
-    color:
-        rgba(214,181,109,.12);
-
-}
-
-
-.quote p{
-
-    position:relative;
-
-    z-index:1;
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:23px;
-
-    line-height:2;
-
-}
-
-
-.quote small{
-
-    display:block;
-
-    margin-top:10px;
-
-    color:
-        var(--gold-light);
-
-}
-
-
-/* =========================
-   درس / تطبيق
-========================= */
-
+/* درس */
 .lesson{
-
-    margin-top:30px;
-
-    padding:25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f1e3c5,
-            #f9f1df
-        );
-
-    border:
-        1px solid
-        var(--border);
-
-    border-right:
-        5px solid
-        var(--gold);
-
-    border-radius:8px;
-
-    transition:
-        transform .5s var(--ease),
-        box-shadow .5s var(--ease),
-        border-right-width .4s var(--ease);
-
+    margin-top:30px;padding:25px;
+    background:linear-gradient(135deg,#f1e3c5,#f9f1df);
+    border:1px solid var(--border);border-right:5px solid var(--gold);border-radius:8px;
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease);
 }
+.lesson:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(70,45,20,.14);}
+.lesson-title{color:var(--brown);font-size:18px;font-weight:bold;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
+.lesson p{font-family:"Amiri",serif;font-size:18px;line-height:2.15;}
 
-.lesson:hover{
+/* صناديق الإثراء */
+.insight-box{margin:25px 0;padding:22px 24px;border-radius:8px;background:rgba(255,253,246,.9);border:1px dashed var(--border);position:relative;box-shadow:0 4px 12px rgba(0,0,0,0.03);}
+.insight-title{font-weight:700;font-size:16px;color:var(--brown-dark);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.insight-body{font-family:"Amiri",serif;font-size:18.5px;line-height:2.1;color:var(--ink);}
+.insight-deep{border-right:4px solid #5a3d28;background:#faf4e8;}
+.insight-wisdom{border-right:4px solid var(--gold-dark);background:#fdfaf3;}
+.insight-action{border-right:4px solid var(--green);background:#f2f7f4;}
+.insight-warning{border-right:4px solid #9c2a2a;background:#fdf2f2;}
+.insight-reflect{border-right:4px solid #2b547e;background:#f0f5fa;}
 
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 16px 34px
-        rgba(70,45,20,.14);
-
-}
-
-
-.lesson-title{
-
-    color:
-        var(--brown);
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    margin-bottom:7px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-}
-
-
-.lesson p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:18px;
-
-    line-height:2.15;
-
-}
-
-
-/* =========================
-   مثال رقمي
-========================= */
-
+/* مثال رقمي */
 .example{
-
-    margin-top:25px;
-
-    padding:23px;
-
-    border-radius:9px;
-
-    color:#f2e3c2;
-
-    background:
-        linear-gradient(
-            145deg,
-            #26382e,
-            #36503f
-        );
-
-    border:
-        1px solid
-        rgba(214,181,109,.35);
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:
-        transform .55s var(--ease),
-        box-shadow .55s var(--ease);
-
+    margin-top:25px;padding:23px;border-radius:9px;color:#f2e3c2;
+    background:linear-gradient(145deg,#26382e,#36503f);
+    border:1px solid rgba(214,181,109,.35);position:relative;overflow:hidden;
+    transition:transform .55s var(--ease),box-shadow .55s var(--ease);
 }
+.example::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 50% 0%,rgba(214,181,109,.16),transparent 55%);animation:breathe 7s ease-in-out infinite;pointer-events:none;}
+@keyframes breathe{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+.example:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(38,56,46,.35);}
+.example-title{position:relative;color:var(--gold-light);font-weight:bold;margin-bottom:8px;}
+.example p{position:relative;font-family:"Amiri",serif;font-size:18px;line-height:2.1;}
+.example strong{color:#fff0c9;}
 
-.example::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-40%;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(214,181,109,.16),
-            transparent 55%
-        );
-
-    animation:
-        breathe 7s ease-in-out infinite;
-
-    pointer-events:none;
-
+/* جدول */
+.table-wrap{
+    margin:25px 0;padding:18px;border-radius:9px;overflow-x:auto;
+    background:rgba(255,250,236,.75);border:1px solid var(--border);
+    box-shadow:0 4px 15px rgba(60,40,20,.06);
+    -webkit-overflow-scrolling:touch;
 }
+.table-wrap h4{color:var(--brown-dark);margin-bottom:12px;font-size:17px;display:flex;align-items:center;gap:8px;}
+table{width:100%;border-collapse:collapse;font-family:"Amiri",serif;font-size:17px;min-width:400px;}
+table th,table td{padding:11px 12px;border-bottom:1px solid rgba(120,85,34,.20);text-align:right;}
+table th{background:linear-gradient(145deg,#4b321e,#302116);color:#f2e3c2;font-weight:600;}
+table tr:nth-child(even) td{background:rgba(255,250,236,.55);}
+table tr:hover td{background:rgba(214,181,109,.15);}
 
-@keyframes breathe{
-    0%,100%{ opacity:.4; transform:scale(1); }
-    50%{ opacity:1; transform:scale(1.12); }
-}
+/* فاصل */
+.divider{display:flex;align-items:center;gap:15px;margin:65px 0;color:var(--gold);}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--border);transform-origin:center;}
+.divider span{font-size:22px;animation:spinSlow 9s linear infinite;}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-.example:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:
-        0 18px 38px
-        rgba(38,56,46,.35);
-
-}
-
-.example-title{
-
-    position:relative;
-
-    color:
-        var(--gold-light);
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-
-}
-
-.example p{
-
-    position:relative;
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:18px;
-
-    line-height:2.1;
-
-}
-
-.example strong{
-
-    color:#fff0c9;
-
-}
-
-
-/* =========================
-   الفاصل
-========================= */
-
-.divider{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin:
-        65px 0;
-
-    color:
-        var(--gold);
-
-}
-
-
-.divider::before,
-.divider::after{
-
-    content:"";
-
-    flex:1;
-
-    height:1px;
-
-    background:
-        var(--border);
-
-    transform-origin:center;
-
-}
-
-
-.divider span{
-
-    font-size:22px;
-
-    animation:
-        spinSlow 9s linear infinite;
-
-}
-
-@keyframes spinSlow{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
-}
-
-
-/* =========================
-   الخلاصة
-========================= */
-
+/* خلاصة */
 .conclusion{
-
-    padding:
-        35px 25px;
-
-    margin-top:30px;
-
-    color:#f3e5c5;
-
-    background:
-        linear-gradient(
-            145deg,
-            #26382e,
-            #344d3e
-        );
-
-    border-radius:12px;
-
-    text-align:center;
-
-    border:
-        1px solid
-        rgba(214,181,109,.4);
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:
-        box-shadow .6s var(--ease);
-
+    padding:35px 25px;margin-top:30px;color:#f3e5c5;
+    background:linear-gradient(145deg,#26382e,#344d3e);
+    border-radius:12px;text-align:center;
+    border:1px solid rgba(214,181,109,.4);
+    position:relative;overflow:hidden;
+    transition:box-shadow .6s var(--ease);
 }
+.conclusion::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 50% 0%,rgba(214,181,109,.16),transparent 55%);animation:breathe 7s ease-in-out infinite;pointer-events:none;}
+.conclusion h2{font-family:"Scheherazade New","Amiri",serif;color:var(--gold-light);font-size:32px;margin-bottom:20px;position:relative;}
+.conclusion p{font-family:"Amiri",serif;font-size:19px;line-height:2.3;position:relative;margin-bottom:12px;}
+.conclusion p:last-child{margin-bottom:0;}
 
-.conclusion::before{
+/* نقاط */
+.points{margin-top:25px;text-align:right;position:relative;}
+.point{padding:10px 0;border-bottom:1px solid rgba(214,181,109,.16);font-family:"Amiri",serif;font-size:18px;
+    transition:transform .45s var(--ease),color .45s var(--ease),padding-right .45s var(--ease);cursor:pointer;}
+.point:last-child{border-bottom:0;}
+.point:hover{transform:translateX(-8px);color:#fff3d4;padding-right:8px;}
 
-    content:"";
+/* شبكة نهائية */
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;position:relative;}
+.final-card{padding:19px 14px;background:rgba(255,255,255,.07);border:1px solid rgba(215,183,110,.28);border-radius:8px;
+    transition:transform .5s var(--ease),background .5s var(--ease);}
+.final-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.12);}
+.final-card .emoji{display:block;font-size:30px;margin-bottom:5px;}
+.final-card strong{display:block;font-family:"Amiri",serif;color:#f0d28b;font-size:18px;}
+.final-card span:last-child{display:block;color:#e4d7b9;font-size:14px;line-height:1.85;margin-top:4px;}
 
-    position:absolute;
-
-    inset:-40%;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(214,181,109,.16),
-            transparent 55%
-        );
-
-    animation:
-        breathe 7s ease-in-out infinite;
-
-    pointer-events:none;
-
+/* مبادئ */
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px;}
+.principle{
+    background:rgba(255,249,231,.65);
+    border:1px solid rgba(103,67,30,.30);
+    padding:20px;border-radius:8px;
+    box-shadow:0 5px 13px rgba(70,45,20,.12);
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease);
 }
-
-
-.conclusion h2{
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    color:
-        var(--gold-light);
-
-    font-size:32px;
-
-    margin-bottom:20px;
-
-    position:relative;
-
-}
-
-
-.conclusion p{
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:19px;
-
-    line-height:2.3;
-
-    position:relative;
-
-}
-
-
-/* =========================
-   نقاط الخلاصة
-========================= */
-
-.points{
-
-    margin-top:25px;
-
-    text-align:right;
-
-    position:relative;
-
-}
-
-
-.point{
-
-    padding:
-        10px 0;
-
-    border-bottom:
-        1px solid
-        rgba(214,181,109,.16);
-
-    font-family:
-        "Amiri",
-        serif;
-
-    font-size:18px;
-
-    transition:
-        transform .45s var(--ease),
-        color .45s var(--ease),
-        padding-right .45s var(--ease);
-
-}
-
-
-.point:last-child{
-
-    border-bottom:0;
-
-}
-
-
-.point:hover{
-
-    transform:translateX(-8px);
-
-    color:#fff3d4;
-
-    padding-right:8px;
-
-}
-
-
-/* =========================
-   الخاتمة
-========================= */
-
-.ending{
-
-    text-align:center;
-
-    padding:
-        75px
-        10px
-        30px;
-
-}
-
-
-.ending-symbol{
-
-    font-size:45px;
-
-    margin-bottom:10px;
-
-    display:inline-block;
-
-    animation:
-        floatY 4.5s ease-in-out infinite;
-
-}
-
-
-.ending h2{
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    color:
-        var(--brown-dark);
-
-    font-size:38px;
-
-    line-height:1.5;
-
-}
-
-
-.ending p{
-
-    max-width:650px;
-
-    margin:
-        15px auto;
-
-    font-family:
-        "Amiri",
-        serif;
-
-    color:
-        var(--ink-soft);
-
-    font-size:19px;
-
-    line-height:2.3;
-
-}
-
-
-/* =========================
-   اسم المعد
-========================= */
-
-.credit{
-
-    margin:
-        35px auto
-        10px;
-
-    padding:
-        22px
-        20px;
-
-    max-width:400px;
-
-    border-top:
-        1px solid
-        var(--gold);
-
-    border-bottom:
-        1px solid
-        var(--gold);
-
-    transition:
-        transform .5s var(--ease),
-        box-shadow .5s var(--ease);
-
-}
-
-.credit:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:
-        0 14px 30px
-        rgba(70,45,20,.12);
-
-}
-
-
-.credit span{
-
-    display:block;
-
-    font-family:
-        "Cairo",
-        sans-serif;
-
-    color:
-        var(--gold-dark);
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-}
-
-
-.credit strong{
-
-    display:block;
-
-    margin-top:5px;
-
-    font-family:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    color:
-        var(--brown-dark);
-
-    font-size:31px;
-
-}
-
-
-/* =========================
-   الفوتر
-========================= */
-
-.footer{
-
-    text-align:center;
-
-    padding:
-        30px 20px
-        45px;
-
-    color:
-        var(--ink-soft);
-
-    border-top:
-        1px solid
-        var(--border);
-
-    font-size:12px;
-
-}
-
-
-/* =========================
-   زر العودة
-========================= */
-
+.principle:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(70,45,20,.18);}
+.principle-icon{font-size:28px;float:right;margin-left:10px;}
+.principle h3{color:var(--green);font-size:20px;margin-bottom:6px;}
+.principle p{font-family:"Amiri",serif;font-size:17px;line-height:2;color:var(--ink-soft);}
+
+/* خط زمني */
+.timeline{border-right:3px solid var(--gold);margin:30px 15px;padding-right:25px;}
+.timeline-item{position:relative;margin-bottom:25px;}
+.timeline-item:before{content:"";position:absolute;right:-34px;top:8px;width:13px;height:13px;border-radius:50%;
+    background:var(--gold);border:3px solid var(--paper-light);box-shadow:0 0 0 1px var(--gold);}
+.timeline-item h3{color:var(--green);font-size:21px;margin-bottom:5px;}
+.timeline-item p{font-family:"Amiri",serif;font-size:18px;line-height:2.1;}
+
+/* خاتمة */
+.ending{text-align:center;padding:75px 10px 30px;}
+.ending-symbol{font-size:45px;margin-bottom:10px;display:inline-block;animation:floatY 4.5s ease-in-out infinite;}
+.ending h2{font-family:"Scheherazade New","Amiri",serif;color:var(--brown-dark);font-size:38px;line-height:1.5;}
+.ending p{max-width:650px;margin:15px auto;font-family:"Amiri",serif;color:var(--ink-soft);font-size:19px;line-height:2.3;}
+
+/* اسم المعد */
+.credit{margin:35px auto 10px;padding:22px 20px;max-width:400px;text-align:center;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);transition:transform .5s var(--ease),box-shadow .5s var(--ease);}
+.credit:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(70,45,20,.12);}
+.credit span{display:block;font-family:"Cairo",sans-serif;color:var(--gold-dark);font-size:12px;letter-spacing:2px;}
+.credit strong{display:block;margin-top:5px;font-family:"Scheherazade New","Amiri",serif;color:var(--brown-dark);font-size:31px;}
+
+/* الفوتر */
+.footer{text-align:center;padding:30px 20px 45px;color:var(--ink-soft);border-top:1px solid var(--border);font-size:12px;}
+
+/* زر أعلى */
 .top{
-
-    position:fixed;
-
-    bottom:18px;
-
-    left:18px;
-
-    width:45px;
-
-    height:45px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        var(--brown);
-
-    color:
-        var(--gold-light);
-
-    text-decoration:none;
-
-    font-size:20px;
-
-    box-shadow:
-        0 5px 18px
-        rgba(0,0,0,.2);
-
-    z-index:50;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transform:
-        translateY(18px)
-        scale(.85);
-
-    transition:
-        opacity .45s var(--ease),
-        transform .45s var(--ease),
-        visibility .45s,
-        box-shadow .45s var(--ease);
-
+    position:fixed;bottom:18px;left:18px;
+    width:48px;height:48px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;background:var(--brown);color:var(--gold-light);
+    text-decoration:none;font-size:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.2);z-index:50;
+    opacity:0;visibility:hidden;
+    transform:translateY(18px) scale(.85);
+    transition:opacity .45s var(--ease),transform .45s var(--ease),visibility .45s,box-shadow .45s var(--ease);
 }
-
-.top.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-}
-
-.top:hover{
-
-    box-shadow:
-        0 0 0 8px
-        rgba(177,132,62,.15),
-        0 10px 26px
-        rgba(0,0,0,.3);
-
-    animation:
-        topBounce .8s var(--ease);
-
-}
-
-@keyframes topBounce{
-    0%{ transform:translateY(0); }
-    50%{ transform:translateY(-8px); }
-    100%{ transform:translateY(0); }
-}
-
-
-/* =========================
-   كشف العناصر عند التمرير
-========================= */
-
-.reveal{
-
-    opacity:0;
-
-    transform:
-        translateY(38px);
-
-    transition:
-        opacity .95s var(--ease),
-        transform .95s var(--ease);
-
-    will-change:
-        opacity,
-        transform;
-
-}
-
-.reveal.visible{
-
-    opacity:1;
-
-    transform:
-        translateY(0);
-
-}
-
-
-/* ظهور خاص للأشكال */
-
-.reveal.reveal-scale{
-
-    transform:
-        translateY(30px)
-        scale(.94);
-
-}
-
-.reveal.reveal-scale.visible{
-
-    transform:
-        translateY(0)
-        scale(1);
-
-}
-
-.reveal.reveal-right{
-
-    transform:
-        translateX(45px);
-
-}
-
-.reveal.reveal-right.visible{
-
-    transform:
-        translateX(0);
-
-}
-
-
-/* =========================
-   الجوال
-========================= */
-
-@media(max-width:600px){
-
-    body{
-
-        background:
-            var(--paper);
-
-    }
-
-
-    .cover{
-
-        min-height:100svh;
-
-        padding:20px 15px;
-
-    }
-
-
-    .cover::before{
-
-        inset:12px;
-
-    }
-
-
-    .cover::after{
-
-        inset:20px;
-
-    }
-
-
-    .cover-inner{
-
-        padding:
-            45px
-            20px;
-
-    }
-
-
-    .cover-symbol{
-
-        width:78px;
-
-        height:78px;
-
-        font-size:38px;
-
-    }
-
-
-    .cover h1{
-
-        font-size:43px;
-
-    }
-
-
-    .cover h2{
-
-        font-size:21px;
-
-    }
-
-
-    .cover-description{
-
-        font-size:18px;
-
-    }
-
-
+.top.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.top:hover{box-shadow:0 0 0 8px rgba(177,132,62,.15),0 10px 26px rgba(0,0,0,.3);}
+
+/* كشف العناصر */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .95s var(--ease),transform .95s var(--ease);will-change:opacity,transform;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal.reveal-scale{transform:translateY(30px) scale(.94);}
+.reveal.reveal-scale.visible{transform:translateY(0) scale(1);}
+.reveal.reveal-right{transform:translateX(45px);}
+.reveal.reveal-right.visible{transform:translateX(0);}
+
+/* ======== التابلت ======== */
+@media (min-width: 601px) and (max-width: 1000px) {
     .tabs{
-
-        gap:8px;
-
-        padding:10px 12px;
-
+        flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+        justify-content:flex-start;scrollbar-width:thin;
+        -webkit-overflow-scrolling:touch;padding-top:12px;padding-bottom:12px;
+        scroll-snap-type:x proximity;
     }
+    .tabs::-webkit-scrollbar{height:5px;}
+    .tabs::-webkit-scrollbar-track{background:rgba(74,50,31,.08);border-radius:3px;}
+    .tabs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+    .tab-btn{flex:0 0 auto;max-width:210px;scroll-snap-align:start;}
+    .content{padding:55px 45px 70px;}
+}
 
+/* ======== الجوال ======== */
+@media(max-width:600px){
+    body{background:var(--paper);line-height:1.95;}
+    .cover{min-height:100svh;padding:20px 15px;}
+    .cover::before{inset:12px;}
+    .cover::after{inset:20px;}
+    .cover-image{max-height:78vh;}
 
+    /* تبويبات أفقية قابلة للتمرير - أفضل على الجوال */
+    .tabs{
+        position:sticky;top:0;z-index:90;
+        flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+        justify-content:flex-start;gap:5px;padding:8px 9px;
+        scrollbar-width:none;-webkit-overflow-scrolling:touch;
+        scroll-snap-type:x mandatory;
+    }
+    .tabs::-webkit-scrollbar{display:none;}
     .tab-btn{
-
-        flex:1 1 100%;
-
-        max-width:none;
-
-        padding:9px 14px;
-
+        flex:0 0 auto;max-width:none;min-width:135px;
+        padding:8px 11px;scroll-snap-align:start;
+        min-height:52px;
     }
-
-
-    .tab-icon{
-
-        font-size:19px;
-
-    }
-
-
-    .tab-text strong{
-
-        font-size:14px;
-
-    }
-
-
-    .content{
-
-        padding:
-            40px
-            17px
-            55px;
-
-    }
-
-
-    .intro{
-
-        padding:20px;
-
-    }
-
-
-    .intro p{
-
-        font-size:18px;
-
-        text-align:right;
-
-    }
-
-
-    .story-text{
-
-        font-size:19px;
-
-        text-align:right;
-
-    }
-
-
-    .scene{
-
-        grid-template-columns:45px 1fr;
-
-        gap:12px;
-
-        padding:17px;
-
-    }
-
-
-    .scene-icon{
-
-        width:43px;
-
-        height:43px;
-
-        font-size:22px;
-
-    }
-
-
-    .scene p{
-
-        font-size:17px;
-
-    }
-
-
-    .quote{
-
-        padding:
-            25px
-            18px;
-
-    }
-
-
-    .quote p{
-
-        font-size:20px;
-
-    }
-
-
-    .lesson{
-
-        padding:19px;
-
-    }
-
-
-    .lesson p{
-
-        font-size:17px;
-
-    }
-
-
-    .example{
-
-        padding:19px;
-
-    }
-
-
-    .example p{
-
-        font-size:17px;
-
-    }
-
-
-    .conclusion{
-
-        padding:
-            28px 19px;
-
-    }
-
-
-    .conclusion h2{
-
-        font-size:29px;
-
-    }
-
-
-    .conclusion p{
-
-        font-size:18px;
-
-    }
-
-
-    .ending h2{
-
-        font-size:32px;
-
-    }
-
-
-    .ending p{
-
-        font-size:18px;
-
-    }
-
+    .tab-icon{font-size:15px;}
+    .tab-text strong{font-size:11.5px;}
+    .tab-text small{font-size:9px;}
+
+    .content{padding:40px 17px 55px;}
+    .chapter-head{margin-bottom:38px;}
+    .chapter-head h2{font-size:27px;}
+    .intro{padding:20px;}
+    .intro p{font-size:18px;text-align:right;}
+    .story{margin-bottom:60px;}
+    .story-text{font-size:19px;text-align:right;}
+    .story-text:first-letter{font-size:44px;}
+    .story-card{padding:27px 18px 30px;margin:35px 0;}
+    .story-head{align-items:flex-start;gap:12px;}
+    .story-icon{width:49px;height:49px;min-width:49px;font-size:24px;}
+    .story-head h2{font-size:23px;}
+    .story-card p{font-size:18px;line-height:2.1;text-align:right;}
+    .scene{grid-template-columns:45px 1fr;gap:12px;padding:17px;}
+    .scene-icon{width:43px;height:43px;font-size:22px;}
+    .scene h4{font-size:16px;}
+    .scene p{font-size:16.5px;}
+    .quote{padding:25px 18px;}
+    .quote p{font-size:20px;line-height:1.9;}
+    .lesson{padding:19px;margin-top:22px;}
+    .lesson p{font-size:17px;}
+    .example{padding:19px;}
+    .example p{font-size:17px;}
+    .principles{grid-template-columns:1fr;}
+    .principle h3{font-size:18px;}
+    .principle p{font-size:16px;}
+    .timeline{margin-right:8px;padding-right:22px;}
+    .timeline-item h3{font-size:19px;}
+    .timeline-item p{font-size:16.5px;}
+    .conclusion{padding:28px 19px;}
+    .conclusion h2{font-size:26px;}
+    .conclusion p{font-size:17.5px;}
+    .final-grid{grid-template-columns:1fr;}
+    .point{font-size:17px;padding:9px 0;}
+    .ending{padding:55px 10px 25px;}
+    .ending h2{font-size:29px;}
+    .ending p{font-size:17.5px;}
+    .credit strong{font-size:27px;}
+    .table-wrap{padding:14px;}
+    table{font-size:16px;min-width:360px;}
+    table th,table td{padding:9px 10px;}
+    .insight-body{font-size:17.5px;}
+    .top{width:44px;height:44px;bottom:14px;left:14px;}
 }
 
-
-/* =========================
-   التابلت
-========================= */
-
-@media(min-width:601px) and (max-width:1000px){
-
-    .content{
-
-        padding:
-            55px
-            45px
-            70px;
-
-    }
-
+/* شاشات صغيرة جدًا */
+@media(max-width:380px){
+    .content{padding:35px 14px 50px;}
+    .story-head h2{font-size:21px;}
+    .chapter-head h2{font-size:25px;}
 }
-
-
-/* =========================
-   تقليل الحركة
-========================= */
 
 @media (prefers-reduced-motion: reduce){
-
-    *,
-    *::before,
-    *::after{
-
+    *,*::before,*::after{
         animation-duration:.001ms !important;
-
         animation-iteration-count:1 !important;
-
         transition-duration:.001ms !important;
-
         scroll-behavior:auto !important;
-
     }
-
-    .reveal{
-
-        opacity:1 !important;
-
-        transform:none !important;
-
-    }
-
+    .reveal{opacity:1 !important;transform:none !important;}
 }
-
-
-/* =========================
-   الطباعة
-========================= */
 
 @media print{
-
-    body{
-
-        background:white;
-
-    }
-
-
-    .book{
-
-        width:100%;
-
-        box-shadow:none;
-
-        animation:none;
-
-    }
-
-
-    .cover{
-
-        page-break-after:always;
-
-    }
-
-
-    .tabs{
-
-        display:none !important;
-
-    }
-
-
-    .panel{
-
-        display:block !important;
-
-        animation:none !important;
-
-    }
-
-
-    .story{
-
-        page-break-inside:avoid;
-
-    }
-
-
-    .scene,
-    .quote,
-    .lesson,
-    .example,
-    .conclusion{
-
-        break-inside:avoid;
-
-    }
-
-
-    .top,
-    .progress,
-    .cover-dust{
-
-        display:none !important;
-
-    }
-
-
-    .reveal{
-
-        opacity:1 !important;
-
-        transform:none !important;
-
-    }
-
+    body{background:white;}
+    .book{width:100%;box-shadow:none;animation:none;}
+    .cover{page-break-after:always;}
+    .tabs{display:none !important;}
+    .panel{display:block !important;animation:none !important;}
+    .story,.story-card{page-break-inside:avoid;}
+    .scene,.quote,.lesson,.example,.conclusion,.final-grid,.principle,.timeline-item,.table-wrap{break-inside:avoid;}
+    .top,.progress,.cover-dust{display:none !important;}
+    .reveal{opacity:1 !important;transform:none !important;}
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- شريط التقدم -->
-<div class="progress" aria-hidden="true">
-    <span id="progressBar"></span>
-</div>
-
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
 <div class="book">
 
-<!-- =========================
-     الغلاف
-========================= -->
-
+<!-- ======== الغلاف ======== -->
 <section class="cover" id="top">
-
     <div class="cover-dust" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
     </div>
-
     <div class="cover-inner">
-
-        <div class="cover-symbol">
-            🏺
-        </div>
-
-        <div class="cover-label">
-            من حكم بابل القديمة
-        </div>
-
-        <h2>
-            حكايات بابل وصناعة الثروة
-        </h2>
-
-        <h2>
-            الطرق السبع &nbsp;·&nbsp; قصص الحظ والفرص
-        </h2>
-
-        <div class="cover-line"></div>
-
-        <p class="cover-description">
-
-            رحلة في مبادئ المال التي عرفها أهل بابل
-            قبل آلاف السنين:
-            كيف تدّخر، وتنفق، وتستثمر، وتحفظ ما تملك،
-            وكيف تلتقط الفرصة حين تمرّ.
-
-        </p>
-
-        <div class="cover-line"></div>
-
-        <div class="cover-author">
-
-            مستوحى من صفحات
-            «أغنى رجل في بابل»
-
-            <strong>
-                إعداد وترتيب: حسين العرياني
-            </strong>
-
-        </div>
-
+        <img src="Babylon.jpg" alt="غلاف أسرار بابل المالية" class="cover-image">
     </div>
-
 </section>
 
-
-<!-- =========================
-     شريط التبويبات
-========================= -->
-
+<!-- ======== التبويبات ======== -->
 <nav class="tabs" id="tabs" role="tablist" aria-label="أقسام الكتاب">
-
-    <button
-        class="tab-btn active"
-        id="tabBtn1"
-        role="tab"
-        aria-selected="true"
-        aria-controls="panel1"
-        data-panel="panel1"
-        type="button"
-    >
-        <span class="tab-icon">📜</span>
-        <span class="tab-text">
-            <strong>الطرق السبع</strong>
-            <small>التغلب على المحافظ الخاوية</small>
-        </span>
-    </button>
-
-    <button
-        class="tab-btn"
-        id="tabBtn2"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel2"
-        data-panel="panel2"
-        type="button"
-    >
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel1" data-panel="panel1" type="button">
         <span class="tab-icon">🏺</span>
-        <span class="tab-text">
-            <strong>قصص الحظ والفرص</strong>
-            <small>حين يطرق الحظ الباب</small>
-        </span>
+        <span class="tab-text"><strong>نبذة تاريخية</strong><small>عن مدينة بابل</small></span>
     </button>
-
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel2" data-panel="panel2" type="button">
+        <span class="tab-icon">💭</span>
+        <span class="tab-text"><strong>الرجل الذي يحلم بالثراء</strong><small>بداية الحكاية</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel3" data-panel="panel3" type="button">
+        <span class="tab-icon">📜</span>
+        <span class="tab-text"><strong>الطرق السبع</strong><small>التغلب على المحافظ الخاوية</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel4" data-panel="panel4" type="button">
+        <span class="tab-icon">🍀</span>
+        <span class="tab-text"><strong>قصص الحظ والفرص</strong><small>حين يطرق الحظ الباب</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel5" data-panel="panel5" type="button">
+        <span class="tab-icon">🏺</span>
+        <span class="tab-text"><strong>حكاية نومسير</strong><small>القوانين الخمسة للمال</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel6" data-panel="panel6" type="button">
+        <span class="tab-icon">💰</span>
+        <span class="tab-text"><strong>تاجر الجواهر</strong><small>المال أمانة</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel7" data-panel="panel7" type="button">
+        <span class="tab-icon">🏰</span>
+        <span class="tab-text"><strong>أسوار بابل</strong><small>الحماية والنجاة</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel8" data-panel="panel8" type="button">
+        <span class="tab-icon">🐪</span>
+        <span class="tab-text"><strong>تاجر الإبل</strong><small>داباسير والديون</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel9" data-panel="panel9" type="button">
+        <span class="tab-icon">📜</span>
+        <span class="tab-text"><strong>ألواح بابل</strong><small>خطة الخروج من الديون</small></span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel10" data-panel="panel10" type="button">
+        <span class="tab-icon">🍀</span>
+        <span class="tab-text"><strong>الرجل الأكثر حظاً</strong><small>شارونادا وهادان جولا</small></span>
+    </button>
 </nav>
-
 
 <main class="content">
 
-
-<!-- =========================================================
-     اللوحة الأولى : الطرق السبع
-========================================================= -->
-
-<div class="panel active" id="panel1" role="tabpanel" aria-labelledby="tabBtn1">
-
-    <!-- رأس القسم -->
+<!-- ============ لوحة 1 ============ -->
+<div class="panel active" id="panel1" role="tabpanel">
     <section class="chapter-head" data-reveal>
-
-        <div class="symbol">📜</div>
-
-        <small>القسم الأول</small>
-
-        <h2>
-            الطرق السبع للتغلب على المحافظ الخاوية
-        </h2>
-
-        <p>
-            سبع خطوات عملية في الحكمة المالية
-        </p>
-
+        <div class="symbol">🏺</div>
+        <small>البداية — نبذة تاريخية</small>
+        <h2>نبذة تاريخية عن مدينة بابل</h2>
+        <p>المدينة التي غابت حجارتها وبقيت حكمتها</p>
     </section>
 
-
-    <!-- المقدمة -->
     <section class="intro" data-reveal>
-
-        <p>
-
-            منذ آلاف السنين كان أهل بابل يتعاملون مع المال
-            كما نتعامل معه اليوم:
-            بعضهم يجمعه، وبعضهم ينفقه بسرعة،
-            وبعضهم يحاول تنميته،
-            وقلة فقط تعرف كيف تجعل المال يعمل لصالحها.
-
-            <br><br>
-
-            الفكرة الأساسية هنا بسيطة:
-
-            <strong>
-                الثروة لا تبدأ بحجم الدخل،
-                بل بالطريقة التي يتعامل بها الإنسان
-                مع ما يدخل إلى يده.
-            </strong>
-
-        </p>
-
+        <p>قبل أن نبدأ الحكايات، من المفيد أن نعرف المدينة التي وُلدت فيها. فبابل لم تكن مجرد مكان على الخريطة، بل كانت حضارة كاملة صنعت مجدها بالعمل والهندسة والتنظيم. 🌍</p>
+        <p>وفي هذه الصفحات سنتعرف على كيف قامت بابل، وكيف ازدهرت، وكيف غابت، وما الذي تركته لنا من حكمة لا تزال تعيش حتى اليوم. 📖</p>
     </section>
 
+    <p class="story-text" data-reveal>لم تكن بابل مدينة عظيمة لأنها جمعت الذهب فقط. قامت حضارتها في أرض لم تكن وفيرة بالمياه الطبيعية، ولذلك اعتمد أهلها على بناء السدود وقنوات الري التي نقلت مياه النهر إلى الأراضي الزراعية. 💧🌾</p>
+
+    <p class="story-text" data-reveal>وبفضل هذه الأعمال الهندسية أصبحت الأرض قادرة على إنتاج المحاصيل، ونشأت مدينة قوية في منطقة لم تكن تبدو في البداية مناسبة لحضارة بهذا الحجم. وكان البابليون أيضاً من الشعوب التي اهتمت بالتسجيل والكتابة. فبدلاً من الورق الذي لم يكن موجوداً آنذاك، كانوا ينقشون كتاباتهم على ألواح من الطين ثم يحرقونها حتى تصبح صلبة. 📜🔥</p>
+
+    <div class="principles" data-reveal>
+        <div class="principle"><span class="principle-icon">💧</span><h3>الهندسة</h3><p>حولوا الماء إلى قوة منتجة من خلال السدود وقنوات الري.</p></div>
+        <div class="principle"><span class="principle-icon">📜</span><h3>التسجيل</h3><p>حفظوا المعرفة والمعاملات والأحداث على ألواح الطين.</p></div>
+        <div class="principle"><span class="principle-icon">🏰</span><h3>الحماية</h3><p>اشتهرت المدينة بأسوارها الضخمة التي كانت جزءاً أساسياً من دفاعها.</p></div>
+        <div class="principle"><span class="principle-icon">🧠</span><h3>المعرفة</h3><p>ترك البابليون إرثاً في الهندسة والفلك والحساب والتنظيم.</p></div>
+    </div>
+
+    <!-- جدول: مقارنة بين بابل والحضارات الأخرى -->
+    <div class="table-wrap" data-reveal>
+        <h4>🏛️ بابل في سياقها الحضاري</h4>
+        <table>
+            <thead>
+                <tr><th>المجال</th><th>إسهام بابل</th><th>أثره اليوم</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>الري</td><td>شبكة قنوات معقدة</td><td>أساس الهندسة المائية</td></tr>
+                <tr><td>الكتابة</td><td>المسمارية على الطين</td><td>أول سجلات مالية</td></tr>
+                <tr><td>القانون</td><td>شرائع منظمة</td><td>جذور القانون التجاري</td></tr>
+                <tr><td>الفلك</td><td>رصد النجوم والكسوف</td><td>أساس التقويم</td></tr>
+                <tr><td>المال</td><td>مقايضة ونظام وزن</td><td>بدايات العملة</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="insight-box insight-deep" data-reveal>
+        <div class="insight-title">🧠 فكرة أعمق</div>
+        <div class="insight-body">لم تُبنَ بابل على ثروة طبيعية جاهزة، بل على هندسة البيئة وتحويل الموارد الشحيحة إلى طاقة إنتاجية. الثروة الحقيقية ليست ما تجده جاهزاً، بل ما تصنعه من تنظيم وإدارة للموارد المتاحة. 💡</div>
+    </div>
+
+    <div class="insight-box insight-wisdom" data-reveal>
+        <div class="insight-title">⚖️ حكمة مستخلصة</div>
+        <div class="insight-body">«البيئة الضعيفة لا تمنع قيام المجد، بل يمنعه عجز الإنسان عن هندسة الحلول.» 🌟</div>
+    </div>
+
+    <p class="story-text" data-reveal>ومع مرور القرون تراجع مجد بابل، وانتهت المدينة إلى أطلال غطتها الرمال والعواصف، حتى جاءت بعثات التنقيب واكتشفت آثارها وألواحها. ورغم أن المدينة نفسها لم تعد قائمة كما كانت، بقيت آثارها شاهدة على قدرة الإنسان على بناء حضارة عظيمة في ظروف صعبة. 🏜️⛏️</p>
+
+    <div class="quote" data-reveal>
+        <p>🏺 قد تسقط المدن، لكن الحكمة التي تتركها وراءها تستطيع أن تعيش آلاف السنين.</p>
+        <small>خلاصة تاريخية</small>
+    </div>
+
+    <div class="insight-box insight-reflect" data-reveal>
+        <div class="insight-title">🪞 تأمل</div>
+        <div class="insight-body">اندثرت طوب بابل وذهبها، ولكن ألواحها الطينية التي دوّنت المعرفة ظلت حية. هل تبني حياتك على استهلاك أصول زائلة، أم تدوين وتأكيد قواعد وأصول تبقى؟ 🤔</div>
+    </div>
+
+    <div class="insight-box insight-action" data-reveal>
+        <div class="insight-title">🚀 جرّب الآن</div>
+        <div class="insight-body">اكتب على ورقة ثلاث مهارات تعلمتها في حياتك، وأسأل نفسك: أي منها يمكن تحويله إلى "لوح طيني" أي إلى أصل دائم ينتج قيمة لسنوات قادمة؟ ✍️</div>
+    </div>
+
+    <section class="ending">
+        <div class="ending-symbol" data-reveal>🌿</div>
+        <h2 data-reveal>من هنا تبدأ الرحلة</h2>
+        <p data-reveal>بعد أن عرفنا المدينة، حان الوقت لنعرف أهلها. في التبويبات التالية سنلتقي برجال ونساء عاشوا في بابل، وتعلموا دروساً في المال لا تزال تنفعنا حتى اليوم. 🚶‍♂️🚶‍♀️</p>
+    </section>
+</div>
+
+<!-- ============ لوحة 2 ============ -->
+<div class="panel" id="panel2" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">🏺</div>
+        <small>الفصل الأول</small>
+        <h2>الرجل الذي يحلم بالثراء</h2>
+        <p>حكاية بانسر وكوبي والبحث عن سر المال</p>
+    </section>
+
+    <section class="intro" data-reveal>
+        <p>في قلب <strong>بابل</strong>، المدينة الغنية والمزدحمة، كان هناك رجال يعيشون بين الذهب والقصور، ورجال آخرون يعملون طوال اليوم ولا يكادون يملكون ما يكفيهم. 🏛️💰</p>
+        <p>وكان من هؤلاء <strong>بانسر</strong>، صانع المركبات، وصديقه <strong>كوبي</strong>، عازف القيثارة. 🎻🛞</p>
+        <p>كلاهما كان ماهرًا في عمله، وكلاهما يعمل بجد، ومع ذلك كانت أكياس نقودهما فارغة. 😔</p>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🛞</div><div><div class="story-label">الحكاية الأولى</div><h2>بانسر... صانع المركبات الحزين</h2></div></div>
+        <p>كان <strong>بانسر</strong> يجلس فوق سور منزله، يراقب ورشته الصغيرة التي يعمل فيها على صناعة المركبات، بينما كان منزله متواضعًا وطعامه قليلًا. 🏠🍞</p>
+        <p>كان يعرف كيف يصنع مركبات رائعة لا يستطيع كثير من الصناع صنع مثلها، وكان يعمل من الصباح حتى حلول الظلام، لكنه لم يشعر أن عمله قاده إلى الثراء. ⏰💪</p>
+        <p>وبينما كان غارقًا في التفكير، ظهر صديقه القديم <strong>كوبي</strong> وهو يعزف على قيثارته. 🎵</p>
+        <p>طلب كوبي من صديقه أن يقرضه شيكلين، لكنه اكتشف أن بانسر نفسه لا يملك حتى شيكلًا واحدًا في كيسه. 🪙🚫</p>
+        <div class="quote"><p>كيف يمكن لرجل يعمل طوال حياته أن يصل إلى منتصف عمره ولا يملك في كيسه ما يكفي حتى لإقراض صديقه؟</p></div>
+        <p>لم يكن السؤال متعلقًا بالشيكلين فقط؛ كان السؤال أكبر بكثير: <strong>لماذا نعمل طوال هذه السنوات، ومع ذلك لا نصبح أغنياء؟</strong> 🤔</p>
+
+        <div class="insight-box insight-deep">
+            <div class="insight-title">🧠 فكرة أعمق</div>
+            <div class="insight-body">الجهد المادي وحده لا يضمن الاكتفاء. المهارة الشديدة في الإنتاج (صناعة المركبات) إذا لم ترتبط بمهارة إدارة المال المكتسب، تجعل صاحبها يُثري الآخرين دون أن يُثري نفسه. 🎯</div>
+        </div>
+
+        <div class="insight-box insight-wisdom">
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«العمل الشاق يجلب الرزق، ولكن الحكمة المالية هي التي تحافظ عليه وتنَمّيه.» 💎</div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">📊 مثال رقمي</div>
+            <p>صانع ماهر يكسب <strong>5,000</strong> شهرياً وينفق <strong>5,000</strong> = رصيد بعد سنة = <strong>0</strong>.<br>
+            صانع أقل مهارة يكسب <strong>4,000</strong> وينفق <strong>3,500</strong> = رصيد بعد سنة = <strong>6,000</strong>.<br>
+            <strong>الفرق ليس في الدخل، بل في الفارق بين الدخل والإنفاق.</strong> 💡</p>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">💭</div><div><div class="story-label">الحلم الذي كشف الحقيقة</div><h2>حلم بالثراء... ثم استيقظ فقيرًا</h2></div></div>
+        <p>أخبر بانسر صديقه أنه رأى حلمًا رائعًا: كان فيه رجلًا غنيًا، يحمل كيسًا ممتلئًا بالعملات. 💭💰</p>
+        <p>كان يملك العملات الفضية التي ينفق منها على ملابس جميلة لزوجته، ويشتري بها ما يشتهي، وكان يملك العملات الذهبية التي تمنحه شعورًا بالأمان تجاه المستقبل. 💍🪙</p>
+        <p>والأجمل من ذلك أن زوجته كانت سعيدة ومشرقة، وكأن هموم الحياة قد اختفت من وجهها. 😊✨</p>
+        <p>لكن عندما استيقظ بانسر وجد الحقيقة القاسية: <strong>كيس نقوده كان فارغًا.</strong> 😢</p>
+        <p>شعر بالغضب؛ لأنه أدرك أن ما رآه في الحلم هو الحياة التي يتمنى أن يعيشها في الواقع. 🔥</p>
+
+        <div class="lesson"><div class="lesson-title">💡 بداية السؤال</div><p>لم يكن بانسر يريد أن يحصل على المال دون عمل، بل كان يريد أن يعرف لماذا لا تكافئه سنوات العمل الشاق بما يكفي ليعيش حياة أفضل.</p></div>
+
+        <div class="insight-box insight-warning">
+            <div class="insight-title">⚠️ تنبيه</div>
+            <div class="insight-body">الأحلام المالية مجرد مخدر مؤقت إذا لم تُترجم إلى تساؤلات جادة وخطة تحرك واقعية للخروج من دائرة الاحتياج. 🚫💭</div>
+        </div>
+
+        <div class="insight-box insight-action">
+            <div class="insight-title">🚀 تطبيق عملي</div>
+            <div class="insight-body">حين تشعر بالإحباط المالي، لا تلجأ للهروب والتمني؛ اجلس واكتب تساؤلاً صريحاً: "أين يذهب كل ما أكسبه شهرياً؟" بداية العلاج هو تشخيص المصروفات. 📝</div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🏛️</div><div><div class="story-label">مفارقة بابل</div><h2>أغنى مدينة... وأفقر أكياس</h2></div></div>
+        <p>نظر بانسر وكوبي إلى بابل من حولهما: القصور الفخمة، المركبات، التجار، الحدائق، والذهب الذي يتدفق في المدينة. 🏛️🌳</p>
+        <p>كانت بابل واحدة من أغنى المدن، ومع ذلك كان الاثنان يشعران أنهما لا يملكان شيئًا من هذا الثراء. 😔</p>
+        <p>راقبا صفوف حاملي المياه وهم يعملون من النهر إلى الحدائق، يعملون يومًا بعد يوم وسنة بعد سنة، ومع ذلك لا تبدو السعادة على وجوههم. 🚶‍♂️💧</p>
+
+        <div class="quote"><p>نحن نعمل ونعمل ونعمل... ومع ذلك لا نحقق شيئًا.</p></div>
+
+        <p>عندها خطر لهما سؤال مهم: <strong>ربما هناك أسرار يعرفها الأغنياء ولا يعرفها الفقراء.</strong> 🔑</p>
+
+        <div class="insight-box insight-reflect">
+            <div class="insight-title">🪞 تأمل</div>
+            <div class="insight-body">تنشأ الوفرة المادية من حولنا كل يوم، لكن هل ندعها تمر أموداً كما يمر حاملو المياه بالنهر؟ هل تستفيد من اقتصاد بيئتك أم تكتفي بمشاهدته؟ 🤔</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>✦</span></div>
+
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">👑</div>
+        <small>الحكاية الثانية</small>
+        <h2>أغنى رجل في بابل</h2>
+        <p>قصة أركاد... الرجل الذي عرف سر الثروة</p>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">💰</div><div><div class="story-label">سر أركاد</div><h2>أركاد لم يكن الأغنى بالصدفة</h2></div></div>
+        <p>كان <strong>أركاد</strong> أشهر رجل ثري في بابل. لم يكن مشهورًا بثروته فقط، بل كان معروفًا أيضًا بكرمه مع عائلته وبإنفاقه على أعمال الخير، ومع ذلك كانت ثروته تزداد كل عام. 🌟💰</p>
+        <p>جاءه ذات يوم عدد من أصدقاء صباه، وقالوا له: لقد كنا جميعًا ندرس عند المعلم نفسه، ونلعب الألعاب نفسها، ولم تكن أكثر منا ذكاءً أو اجتهادًا، فلماذا أصبحت غنيًا ونحن ما زلنا نكافح من أجل البقاء؟ 🤝❓</p>
+        <p>لم يقل أركاد إن الحظ اختاره، بل أجابهم بأنهم لم يتعلموا <strong>القوانين التي تحكم بناء الثروة</strong>، أو أنهم لم يلتزموا بها. 📜</p>
+
+        <div class="insight-box insight-deep">
+            <div class="insight-title">🧠 فكرة أعمق</div>
+            <div class="insight-body">المساواة في البدايات والتعليم الموحد لا يعني المساواة في النتائج المالية؛ الفرق يصنعه استيعاب القوانين المالية غير المعلنة والالتزام بتطبيقها. 💎</div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🕯️</div><div><div class="story-label">نقطة التحول</div><h2>ألجاميش... الرجل الذي كشف السر</h2></div></div>
+        <p>عمل أركاد في شبابه ناسخًا في دار المحفوظات، وكان يعمل ساعات طويلة في كتابة الألواح الطينية، لكنه لم يستطع ادخار شيء من أجره. 📜✍️</p>
+        <p>وفي أحد الأيام جاء التاجر الثري <strong>ألجاميش</strong> وطلب منه نسخ قانون على لوح خلال وقت قصير. ⏳</p>
+        <p>عمل أركاد طوال الليل حتى أنهى المهمة عند الفجر، ثم طالب ألجاميش بأن يفي بوعده ويخبره كيف أصبح غنيًا. 🌅</p>
+        <p>ابتسم ألجاميش وقال له إن الشباب قد يملكون أفكارًا لامعة، لكن حكمة الرجال الذين سبقوهم تشبه النجوم الثابتة التي يهتدي بها المسافرون. ⭐🧭</p>
+
+        <div class="quote"><p>لقد وجدت الطريق إلى الثراء عندما قررت أن أحتفظ بجزء من إيراداتي.</p></div>
+        <p>كانت هذه الجملة أول حجر في الطريق الذي سيغير حياة أركاد بالكامل. 🪨</p>
+
+        <div class="insight-box insight-wisdom">
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«أثمن مقابل تأخذه عن جهدك الشاق ليس الأجر المادي، بل الحكمة التي تمنع ضياع ذلك الأجر.» 🧠</div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🪙</div><div><div class="story-label">البذرة الأولى</div><h2>ادفع لنفسك أولًا</h2></div></div>
+        <p>شرح ألجاميش لأركاد أن الإنسان يعمل من أجل الآخرين طوال الوقت: يدفع للترزي، ولصانع الأحذية، وللبائع، ولصاحب الطعام، ولغيرهم. 🧵👞🍞</p>
+        <p>لكنه ينسى الشخص الأهم: <strong>نفسه.</strong> 🎯</p>
+        <p>لذلك طلب منه أن يحتفظ بعُشر إيراداته على الأقل، وألا يسمح لمصاريفه أن تلتهم هذا الجزء. 🔒</p>
+        <p>وأوضح له أن أول قطعة نقدية يدخرها تشبه <strong>بذرة صغيرة</strong> ستنمو مع الوقت إلى شجرة ثروة. 🌱🌳</p>
+
+        <div class="lesson"><div class="lesson-title">🌱 الدرس</div><p>لا تنتظر أن يتبقى لك المال في نهاية الشهر. اجعل الادخار جزءًا من المال الذي تحصل عليه من البداية.</p></div>
+
+        <div class="example">
+            <div class="example-title">📊 مثال رقمي على قوة البداية</div>
+            <p>شخصان دخلهما <strong>8,000</strong> شهرياً:<br>
+            🔴 <strong>الأول</strong> ينتظر ما يتبقى آخر الشهر ← الباقي عادة = <strong>0</strong>.<br>
+            🟢 <strong>الثاني</strong> يقتطع 10% فوراً (800) ← بعد سنة = <strong>9,600</strong> بدون أي استثمار.</p>
+        </div>
+
+        <div class="insight-box insight-action">
+            <div class="insight-title">🚀 تطبيق عملي</div>
+            <div class="insight-body">اجعل اقتطاع نسبة 10% أوتوماتيكياً فور دخول دخلك إلى حسابك البنكي وقبل دفع أي فاتورة أو التزام آجل. ⚙️💸</div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">💎</div><div><div class="story-label">أول اختبار</div><h2>شجرة الثروة التي كادت أن تُقتلع</h2></div></div>
+        <p>بعد عام من الادخار، عاد ألجاميش وسأل أركاد: ماذا فعلت بمدخراتك؟ 🤔</p>
+        <p>أخبره أركاد أنه أعطى مدخراته إلى <strong>أزمور، صانع القرميد</strong>، ليشتري له جواهر نادرة من الفينيقيين أثناء سفره عبر البحار، ثم يبيعها له بربح. 🧱💎</p>
+        <p>لم يعجب ألجاميش بالتصرف إطلاقًا. وسأله: لماذا تثق بصانع القرميد في أمر لا يعرفه، وهو لا يملك خبرة في المجوهرات؟ 😠</p>
+
+        <div class="quote"><p>إذا أردت نصيحة بشأن الجواهر، فاذهب إلى تاجر المجوهرات، وإذا أردت معرفة الأغنام، فاذهب إلى راعي الأغنام.</p></div>
+
+        <p>وبالفعل، خُدع أزمور، واشترى قطعًا من الزجاج لا قيمة لها على أنها جواهر. وهكذا ضاعت مدخرات أركاد الأولى. 😢💔</p>
+
+        <div class="lesson"><div class="lesson-title">🧠 الدرس</div><p>ليس كل صاحب خبرة في مجال ما خبيرًا في كل شيء. النصيحة المالية ينبغي أن تأتي ممن يملك معرفة حقيقية بالمجال الذي يستثمر فيه المال.</p></div>
+
+        <div class="insight-box insight-warning">
+            <div class="insight-title">⚠️ تنبيه</div>
+            <div class="insight-body">لا تُسلِم أموالك لأشخاص حسنِي النية لكنهم يفتقرون للخبرة في مجال الاستثمار المطروح؛ النية الطيبة لا تحمي أصل المال من الجهل. 🚫</div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🍯</div><div><div class="story-label">الاختبار الثاني</div><h2>عندما أكل أركاد ثمار مدخراته</h2></div></div>
+        <p>لم يستسلم أركاد بعد خسارته. عاد إلى الادخار من جديد، حتى أصبح الأمر عادة ثابتة في حياته. 🔁</p>
+        <p>وبعد فترة استثمر مدخراته مع <strong>أجار، صانع التروس</strong>، الذي كان يشتري البرونز ويعطيه نصيبه من الأرباح. ⚙️</p>
+        <p>حصل أركاد على أرباح جيدة، لكنه أخبر ألجاميش أنه أنفقها على مأدبة كبيرة، ومشروبات جيدة، واشترى رداءً قرمزيًا، وكان يحلم بشراء حمار صغير. 🍷👕🐴</p>
+        <p>ضحك ألجاميش وقال له إن أركاد يأكل <strong>ثمار مدخراته</strong> بدل أن يجعل هذه الثمار تنتج ثمارًا جديدة. 😂🌳</p>
+
+        <div class="quote"><p>احصل أولًا على جيش من العبيد الذهبيين، وبعد ذلك يمكنك أن تستمتع بثمارهم.</p></div>
+
+        <div class="insight-box insight-deep">
+            <div class="insight-title">🧠 فكرة أعمق</div>
+            <div class="insight-body">الأرباح الأولى المبكرة ليست للإنفاق الاستهلاكي، بل لإعادة الاستثمار (الفائدة المركبة). إنفاق الأرباح سريعاً يقتل الشجرة قبل أن تصبح غابة كاملة النمو. 🌳🌲</div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">📈 قوة الفائدة المركبة على مدى 20 سنة (10% سنوياً)</div>
+            <p><strong>سيناريو أ:</strong> يدخر 1,000 سنوياً بدون استثمار ← بعد 20 سنة = <strong>20,000</strong>.<br>
+            <strong>سيناريو ب:</strong> يدخر 1,000 سنوياً بعائد مركب 10% ← بعد 20 سنة ≈ <strong>57,275</strong>.<br>
+            الفرق ≈ <strong>37,000</strong> ريال نتيجة الصبر وإعادة الاستثمار فقط! 🚀</p>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🌳</div><div><div class="story-label">بعد سنوات من التعلم</div><h2>شجرة الثروة بدأت تؤتي ثمارها</h2></div></div>
+        <p>بعد مرور السنوات، أصبح أركاد أكثر خبرة. لم يعد يكتفي بالادخار، بل تعلم كيف يحافظ على ماله، وكيف يستثمره، وكيف يجعل أرباحه تعمل لصالحه أيضًا. 🌟</p>
+        <p>وعندما عاد ألجاميش إليه بعد سنوات، وجده قد بدأ بالفعل في تحقيق الثروة التي حلم بها. 🎉</p>
+        <p>عندها قال له ألجاميش إن أركاد تعلم ثلاث مهارات أساسية: 🎓</p>
+
+        <div class="principles">
+            <div class="principle"><span class="principle-icon">🪙</span><h3>أولًا</h3><p>كيف يعيش بنفقات أقل مما يكسب.</p></div>
+            <div class="principle"><span class="principle-icon">🧠</span><h3>ثانيًا</h3><p>كيف يطلب النصيحة من أصحاب الخبرة الحقيقيين.</p></div>
+            <div class="principle"><span class="principle-icon">🌱</span><h3>ثالثًا</h3><p>كيف يجعل المال يعمل لصالحه.</p></div>
+        </div>
+    </section>
+
+    <section class="story-card" data-reveal>
+        <div class="story-head"><div class="story-icon">🔥</div><div><div class="story-label">سر الاستمرار</div><h2>قوة الإرادة ليست أمنية</h2></div></div>
+        <p>قال أحد أصدقاء أركاد إن قوة إرادته هي التي جعلته يستمر رغم خسارته لمدخراته في البداية. 💪</p>
+        <p>لكن أركاد أوضح أن قوة الإرادة ليست القدرة على القيام بأعمال ضخمة ومستحيلة، وإنما هي <strong>التصميم على إكمال المهمة التي قررت القيام بها</strong>. 🎯</p>
+        <p>فإذا قرر الإنسان أن يفعل شيئًا بسيطًا، فعليه أن يفي بوعده لنفسه وألا يبحث كل يوم عن أعذار جديدة لتأجيله أو تركه. ⏳</p>
+
+        <div class="lesson"><div class="lesson-title">🔥 الدرس</div><p>العادة الصغيرة التي تلتزم بها باستمرار أقوى من الحماس الكبير الذي ينطفئ بعد أيام.</p></div>
+
+        <div class="insight-box insight-wisdom">
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«الانضباط المالي هو تنفيذ ما تعهدت به لنفسك بعد أن يزول الحماس الذي كتبت به التعهد.» 🎯</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>✦</span></div>
+
+    <section class="conclusion" data-reveal>
+        <h2>🏺 بداية الطريق إلى الثروة</h2>
+        <p>لم تكن بداية أركاد كافية ليصبح غنيًا. فقد كان يعمل مثل غيره، ويكسب مثل غيره، لكنه تعلّم أن الفرق الحقيقي يبدأ من الطريقة التي يتعامل بها الإنسان مع ما يكسبه.</p>
+        <p>ومن هنا بدأت شجرة ثروته: <strong>بذرة صغيرة من أول قطعة نقدية ادخرها، ثم ادخار ثابت، ثم استثمار، ثم خبرة، ثم ثروة تنمو مع الوقت.</strong> 🌱🌳</p>
+
+        <div class="final-grid">
+            <div class="final-card"><span class="emoji">🪙</span><strong>احتفظ</strong><span>لا تنفق كل ما تكسب.</span></div>
+            <div class="final-card"><span class="emoji">🧠</span><strong>تعلّم</strong><span>اطلب الحكمة من أصحاب الخبرة.</span></div>
+            <div class="final-card"><span class="emoji">🌳</span><strong>أنمِ</strong><span>اجعل المال يعمل ويولد المزيد.</span></div>
+        </div>
+    </section>
+</div>
+
+<!-- ============ لوحة 3 ============ -->
+<div class="panel" id="panel3" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">📜</div>
+        <small>القسم الثالث</small>
+        <h2>الطرق السبع للتغلب على المحافظ الخاوية</h2>
+        <p>سبع خطوات عملية في الحكمة المالية</p>
+    </section>
+
+    <section class="intro" data-reveal>
+        <p>منذ آلاف السنين كان أهل بابل يتعاملون مع المال كما نتعامل معه اليوم: بعضهم يجمعه، وبعضهم ينفقه بسرعة، وبعضهم يحاول تنميته، وقلة فقط تعرف كيف تجعل المال يعمل لصالحها. 💰🧠</p>
+        <p>الفكرة الأساسية هنا بسيطة: <strong>الثروة لا تبدأ بحجم الدخل، بل بالطريقة التي يتعامل بها الإنسان مع ما يدخل إلى يده.</strong> 🔑</p>
+    </section>
+
+    <!-- الطريقة 1 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">١</div>
+            <small>الطريقة الأولى</small>
+            <h3>ابدأ في ملء محفظتك</h3>
+            <p>ادخر جزءاً من كل دخل قبل أن تبدأ في الإنفاق.</p>
+        </div>
+        <p class="story-text" data-reveal>أول خطوة نحو بناء الثروة ليست العثور على استثمار خارق، ولا اكتشاف سر غامض يعرفه الأثرياء وحدهم. البداية أبسط من ذلك بكثير: <strong>احتفظ بجزء من المال الذي تكسبه.</strong> 🪙</p>
+        <div class="scene" data-reveal><div class="scene-icon">🪙</div><div><h4>القاعدة الذهبية</h4><p>إذا دخل إلى يدك 10 ريالات، تعامل مع 9 ريالات على أنها دخلك الحقيقي، واجعل الريال العاشر ملكاً لثروتك المستقبلية.</p></div></div>
+        <div class="quote" data-reveal><p>«لا تجعل كل ما تكسبه يمر من بين يديك دون أن يترك شيئاً لك.»</p><small>مبدأ الادخار</small></div>
+        <div class="example" data-reveal>
+            <div class="example-title">📌 مثال بسيط</div>
+            <p>راتبك الشهري <strong>10,000 ريال</strong>. ادخر 10٪ = <strong>1,000 ريال شهرياً</strong>. خلال سنة يصبح لديك <strong>12,000 ريال</strong> قبل احتساب أي عوائد استثمارية. 💰</p>
+        </div>
+
+        <div class="insight-box insight-deep" data-reveal>
+            <div class="insight-title">💡 فكرة أعمق</div>
+            <div class="insight-body">اقتطاع الـ10% يعيد برمجة عقليتك المادية من الاستهلاك الكامل إلى الامتلاك. أنت تبني حاجزاً بين الجهد اليومي والاستنزاف الفوري. 🧠</div>
+        </div>
+
+        <div class="insight-box insight-action" data-reveal>
+            <div class="insight-title">🚀 جرّب الآن</div>
+            <div class="insight-body">افتح حساباً بنكياً منفصلاً، واطلب من مصرفك تحويل 10% من راتبك إليه تلقائياً في يوم الراتب. بعد 3 أشهر، لن تشعر بالفرق في معيشتك، لكن رصيدك سيكون قد نما. 🏦</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 2 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٢</div>
+            <small>الطريقة الثانية</small>
+            <h3>تحكم في نفقاتك</h3>
+            <p>فرّق بين ما تحتاجه وما ترغب فيه.</p>
+        </div>
+        <p class="story-text" data-reveal>الادخار وحده لا يكفي إذا كانت النفقات تتوسع مع كل زيادة في الدخل. كثير من الناس عندما يرتفع دخلهم لا يشعرون بأنهم أصبحوا أغنى، لأن مستوى إنفاقهم يرتفع معه مباشرة. 📈💸</p>
+        <div class="scene" data-reveal><div class="scene-icon">⚖️</div><div><h4>الاحتياجات ليست الرغبات</h4><p>الطعام والسكن والمواصلات الأساسية تختلف عن شراء الأشياء لمجرد أنك تريدها الآن. الرغبة ليست مشكلة بحد ذاتها، لكن المشكلة عندما تعامل كل رغبة وكأنها ضرورة لا يمكن تأجيلها.</p></div></div>
+        <div class="lesson" data-reveal><div class="lesson-title">🎯 التطبيق العملي</div><p>ضع سقفاً لكل نوع من المصاريف. وعندما تنتهي ميزانية الترفيه مثلاً، لا تسحب من مبلغ الادخار لتعويضها.</p></div>
+
+        <div class="table-wrap" data-reveal>
+            <h4>📊 تصنيف النفقات (قاعدة 50/30/20)</h4>
+            <table>
+                <thead>
+                    <tr><th>الفئة</th><th>النسبة</th><th>أمثلة</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🔴 ضروريات</td><td>50%</td><td>إيجار، طعام، فواتير، مواصلات</td></tr>
+                    <tr><td>🟡 رغبات</td><td>30%</td><td>ترفيه، مطاعم، تسوق، سفر</td></tr>
+                    <tr><td>🟢 ادخار واستثمار</td><td>20%</td><td>مدخرات، ديون، استثمار</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insight-box insight-wisdom" data-reveal>
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«النفقات الضرورية تنمو دائماً لتتساوى مع الدخل المتاح، ما لم نتصدَّ لها بوعي كافٍ.» 🎯</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 3 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٣</div>
+            <small>الطريقة الثالثة</small>
+            <h3>أنمِ ثروتك</h3>
+            <p>اجعل مدخراتك تنتج دخلاً بدلاً من بقائها خاملة.</p>
+        </div>
+        <p class="story-text" data-reveal>بعد أن تبدأ في الادخار، تظهر الخطوة التالية: ماذا ستفعل بهذا المال؟ المال الذي يجلس بلا هدف قد يحافظ على قيمته الاسمية، لكنه لا يعمل من أجلك. 📈</p>
+        <div class="scene" data-reveal><div class="scene-icon">📈</div><div><h4>اجعل المال يعمل</h4><p>ابحث عن الاستثمارات التي تفهمها وتتناسب مع قدرتك على تحمل المخاطر. الهدف ليس مطاردة أعلى ربح ممكن، بل بناء مصدر نمو مستمر ومدروس.</p></div></div>
+        <div class="quote" data-reveal><p>«اجعل كل ريال تدخره يبحث لك عن ريال آخر.»</p><small>قوة الاستثمار والتراكم</small></div>
+
+        <div class="table-wrap" data-reveal>
+            <h4>📈 مقارنة أنواع الاستثمار (تعليمي مبسط)</h4>
+            <table>
+                <thead>
+                    <tr><th>النوع</th><th>العائد المتوقع</th><th>المخاطرة</th><th>السيولة</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>🏦 ودائع بنكية</td><td>منخفض</td><td>منخفضة جداً</td><td>عالية</td></tr>
+                    <tr><td>📜 صناديق دخل ثابت</td><td>متوسط</td><td>منخفضة-متوسطة</td><td>عالية</td></tr>
+                    <tr><td>🏢 عقار</td><td>متوسط-مرتفع</td><td>متوسطة</td><td>منخفضة</td></tr>
+                    <tr><td>📊 أسهم متنوعة</td><td>مرتفع</td><td>مرتفعة</td><td>عالية</td></tr>
+                    <tr><td>💎 مشروع خاص</td><td>متفاوت</td><td>مرتفعة جداً</td><td>منخفضة</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insight-box insight-action" data-reveal>
+            <div class="insight-title">🚀 تطبيق عملي</div>
+            <div class="insight-body">اختر أداة استثمارية قليلة أو متوسطة المخاطر تناسب استيعابك، وقم بتحويل أرباحك الدورية إليها لتستفيد من خاصية العائد المركّب. 🎯</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 4 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٤</div>
+            <small>الطريقة الرابعة</small>
+            <h3>حافظ على ثروتك من الضياع</h3>
+            <p>حماية رأس المال تسبق البحث عن الربح.</p>
+        </div>
+        <p class="story-text" data-reveal>جمع المال يحتاج إلى سنوات، لكن خسارته قد تحتاج إلى قرار واحد فقط. لذلك لا يكفي أن تعرف كيف تستثمر، بل يجب أن تعرف كيف تحمي نفسك من الاستثمارات التي لا تفهمها. 🛡️</p>
+        <div class="scene" data-reveal><div class="scene-icon">🛡️</div><div><h4>افهم قبل أن تستثمر</h4><p>إذا لم تستطع شرح الاستثمار لشخص آخر بطريقة بسيطة، فهذه إشارة تستحق التوقف عندها ودراسة الموضوع أكثر.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">⚠️</div><div><h4>احذر الثراء السريع</h4><p>الوعود بعوائد ضخمة ومضمونة خلال وقت قصير تستحق الحذر الشديد.</p></div></div>
+
+        <div class="insight-box insight-warning" data-reveal>
+            <div class="insight-title">⚠️ تنبيه</div>
+            <div class="insight-body">العائد المرتفع خياليًا يرتبط دوماً بمخاطر إفلاس مرتفعة جداً؛ حماية أصل مالك هي الأولوية المطلقة قبل مطاردة الأرباح. 🚨</div>
+        </div>
+
+        <div class="example" data-reveal>
+            <div class="example-title">📉 حساب الخسارة قبل الربح</div>
+            <p>لو خسرت <strong>50%</strong> من رأس مالك، ستحتاج إلى ربح <strong>100%</strong> لتستعيد قيمتك الأصلية.<br>
+            🔴 <strong>100,000</strong> ← خسارة 50% ← <strong>50,000</strong><br>
+            🟢 للعودة إلى 100,000 تحتاج مضاعفة ما بقي (عائد 100%)! 📉📈</p>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 5 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٥</div>
+            <small>الطريقة الخامسة</small>
+            <h3>اجعل منزلك استثماراً مريحاً</h3>
+            <p>فكر في السكن من زاوية مالية وعائلية معاً.</p>
+        </div>
+        <p class="story-text" data-reveal>ينظر الكتاب إلى امتلاك المسكن باعتباره وسيلة لتحقيق الاستقرار وتقليل بعض تكاليف السكن على المدى الطويل. لكن القرار العقاري ليس قاعدة تصلح للجميع. 🏠</p>
+        <div class="scene" data-reveal><div class="scene-icon">🏠</div><div><h4>الاستقرار</h4><p>امتلاك منزل مناسب قد يمنح الأسرة شعوراً بالاستقرار ويجعل التخطيط للمستقبل أكثر وضوحاً.</p></div></div>
+
+        <div class="insight-box insight-deep" data-reveal>
+            <div class="insight-title">🧠 توضيح</div>
+            <div class="insight-body">امتلاك منزل يقلل من الضغط النفسي وتكلفة الإيجار المتزايدة، بشرط ألا تستنزف أقساط العقار كامل دخل المبادرة والاستثمار لديك. 💡</div>
+        </div>
+
+        <div class="insight-box insight-reflect" data-reveal>
+            <div class="insight-title">🪞 تأمل</div>
+            <div class="insight-body">هل تنظر إلى منزلك كمصروف شهري فقط، أم كأصل مالي طويل الأجل يحقق استقراراً لأسرتك؟ 🤔</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 6 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٦</div>
+            <small>الطريقة السادسة</small>
+            <h3>اضمن دخلاً للمستقبل</h3>
+            <p>لا تجعل مستقبلك المالي يعتمد على قدرتك على العمل إلى الأبد.</p>
+        </div>
+        <p class="story-text" data-reveal>الإنسان يعمل ويكسب خلال سنوات طويلة، لكن الظروف تتغير. قد يتغير العمل أو تقل القدرة على الكسب أو تظهر مسؤوليات جديدة. ⏳</p>
+        <div class="scene" data-reveal><div class="scene-icon">⏳</div><div><h4>ابدأ مبكراً</h4><p>الوقت من أقوى عناصر الاستثمار طويل الأجل. المبلغ الصغير المنتظم يمكن أن يتراكم عبر سنوات طويلة.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">☂️</div><div><h4>ابنِ شبكة أمان</h4><p>وجود احتياطي مالي للطوارئ يقلل الحاجة إلى بيع الاستثمارات أو الاقتراض عند حدوث ظرف غير متوقع.</p></div></div>
+
+        <div class="example" data-reveal>
+            <div class="example-title">⏰ قوة الوقت — مثال عملي</div>
+            <p>شخصان يستثمران <strong>500</strong> شهرياً بعائد 7% سنوياً:<br>
+            🟢 <strong>بدأ في سن 25</strong> ← عند التقاعد (65) = <strong>≈ 1,300,000</strong><br>
+            🔴 <strong>بدأ في سن 40</strong> ← عند التقاعد (65) = <strong>≈ 400,000</strong><br>
+            الفرق = <strong>900,000</strong> ناتج عن 15 سنة إضافية فقط من الانتظار! ⏳💰</p>
+        </div>
+
+        <div class="insight-box insight-reflect" data-reveal>
+            <div class="insight-title">🪞 تأمل</div>
+            <div class="insight-body">لو توقفت عن العمل اليوم لسبب طارئ، كم شهراً تستطيع عائلتك العيش بنفس المستوى المالي؟ إجابتك هي حجم شبكة أمانك الحالية. 🤔</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- الطريقة 7 -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٧</div>
+            <small>الطريقة السابعة</small>
+            <h3>زد قدرتك على الكسب</h3>
+            <p>الاستثمار في نفسك قد يكون من أكثر الاستثمارات تأثيراً على دخلك.</p>
+        </div>
+        <p class="story-text" data-reveal>لا يكفي أن تحاول تقليل المصاريف إلى الأبد. هناك جانب آخر من المعادلة: <strong>زيادة قدرتك على إنتاج الدخل.</strong> 🎓</p>
+        <div class="scene" data-reveal><div class="scene-icon">🎓</div><div><h4>طوّر معرفتك</h4><p>كل مهارة جديدة يمكن أن تفتح لك فرصة جديدة. تعلم باستمرار في المجال الذي تعمل فيه.</p></div></div>
+        <div class="quote" data-reveal><p>«كلما أصبحت أكثر قيمة في عملك، زادت قدرتك على خلق دخل أكبر.»</p><small>تطوير الذات</small></div>
+
+        <div class="insight-box insight-wisdom" data-reveal>
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«أفضل أصل يدر عليك أرباحاً هو عقلك ومهاراتك؛ تطوير ذاتك يسبق دوماً زيادة أرقام حسابك.» 🎓💎</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>✦</span></div>
+
+    <section class="conclusion" data-reveal>
+        <h2>🏺 الطرق السبع في صفحة واحدة</h2>
+        <div class="points">
+            <div class="point">١ — احتفظ بجزء من كل دخل تكسبه.</div>
+            <div class="point">٢ — سيطر على نفقاتك ولا تجعل الرغبات ضروريات.</div>
+            <div class="point">٣ — استثمر مدخراتك بطريقة تفهمها وتناسب مخاطرك.</div>
+            <div class="point">٤ — احمِ رأس مالك وتجنب المخاطر التي لا تفهمها.</div>
+            <div class="point">٥ — خطط للسكن بطريقة تحقق الاستقرار دون إرهاق الميزانية.</div>
+            <div class="point">٦ — خطط لدخلك ومستقبلك قبل أن تحتاج إليه.</div>
+            <div class="point">٧ — طوّر مهاراتك وقدرتك على الكسب باستمرار.</div>
+        </div>
+    </section>
+</div>
+
+<!-- ============ لوحة 4 ============ -->
+<div class="panel" id="panel4" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">🍀</div>
+        <small>القسم الرابع</small>
+        <h2>الحظ السعيد والفرص الضائعة</h2>
+        <p>قصتان، ودرس واحد لا يشيخ</p>
+    </section>
+
+    <section class="intro" data-reveal>
+        <p>في بابل القديمة، كان الناس يتحدثون عن الحظ كما يتحدثون عن المطر؛ بعضهم يراه هبة تأتي فجأة، وبعضهم يعتقد أن هناك أشخاصًا يولدون محظوظين وآخرين لا يأتيهم الحظ أبدًا. 🌧️🍀</p>
+        <p>لكن أركاد كان ينظر إلى الأمر بطريقة مختلفة. كان يريد أن يعرف: <strong>هل الحظ مجرد صدفة؟</strong> 🤔</p>
+    </section>
+
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">١</div>
+            <small>القصة الأولى</small>
+            <h3>🪙 التاجر والفرصة التي انتظرها طويلاً</h3>
+        </div>
+        <p class="story-text" data-reveal>كان هناك تاجر شاب بدأ حياته العملية، وكان والده يتمنى أن يراه أكثر نجاحًا. وفي أحد الأيام أخبره والده عن فرصة استثمارية يمكن أن تفتح له بابًا نحو مستقبل أفضل. 👨‍👦</p>
+        <p class="story-text" data-reveal>كان المشروع يقوم على استصلاح أرض قاحلة من خلال حفر القنوات والسواقي، ثم تحويل الأرض إلى أرض صالحة للزراعة وبيعها. 🏜️💧</p>
+
+        <div class="quote" data-reveal><p>«ليس كل من رأى الفرصة عرف قيمتها، وليس كل من عرف قيمتها امتلك الشجاعة لاغتنامها.»</p><small>درس القصة</small></div>
+
+        <div class="insight-box insight-deep" data-reveal>
+            <div class="insight-title">🧠 فكرة أعمق</div>
+            <div class="insight-body">الفرص الناجحة تتطلب العمل والتنفيذ؛ الأرض القاحلة تظل بلا قيمة حتى يتدخل الفكر والجهد بالاستصلاح. الفرصة ليست هبة جاهزة بل جهد ينتظر من يحوله لأرباح. 💡</div>
+        </div>
+
+        <div class="table-wrap" data-reveal>
+            <h4>🎯 تشريح الفرصة: أربعة أسئلة قبل القرار</h4>
+            <table>
+                <thead><tr><th>السؤال</th><th>لماذا هو مهم؟</th></tr></thead>
+                <tbody>
+                    <tr><td>1️⃣ هل أفهمها جيداً؟</td><td>الجهل بالتفاصيل هو أول أسباب الخسارة.</td></tr>
+                    <tr><td>2️⃣ ما حجم المخاطرة؟</td><td>هل يمكنني تحمل الخسارة؟</td></tr>
+                    <tr><td>3️⃣ ما العائد المتوقع؟</td><td>هل يستحق المجهود؟</td></tr>
+                    <tr><td>4️⃣ ما الوقت المناسب؟</td><td>هل الآن أفضل من الغد؟</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">٢</div>
+            <small>القصة الثانية</small>
+            <h3>🐑 تاجر الحيوانات والقطيع الذي أفلت منه</h3>
+        </div>
+        <p class="story-text" data-reveal>كان أحد الرجال يعمل في تجارة الحيوانات. وبعد رحلة شاقة استمرت عشرة أيام بحثًا عن الإبل، عاد إلى بابل متأخرًا. 🐪🌙</p>
+
+        <div class="quote" data-reveal><p>أحيانًا يكون الفرق بين الربح والفرصة الضائعة هو لحظة واحدة من التردد.</p><small>من دروس الحكاية</small></div>
+
+        <div class="insight-box insight-warning" data-reveal>
+            <div class="insight-title">⚠️ تنبيه</div>
+            <div class="insight-body">التسويف هو المدمّر الأول للفرص. المماطلة في اتخاذ القرار عند اكتمال الرؤية تُحيل الحظ السعيد إلى ندم دائم. ⏳</div>
+        </div>
+
+        <div class="insight-box insight-wisdom" data-reveal>
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«الحظ السعيد يبتسم لأولئك الذين يقتنصون الفرصة بالعمل المباشر، ولا يلتفت للواقفين في صالة المماطلة.» 🎯</div>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <!-- أمثلة واقعية إضافية -->
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">🎯</div>
+            <small>إثراء</small>
+            <h3>ثلاث فرص واقعية وكيف نتعامل معها</h3>
+        </div>
+
+        <div class="scene" data-reveal>
+            <div class="scene-icon">💼</div>
+            <div>
+                <h4>فرصة عمل بمرتب أعلى</h4>
+                <p>عرض عمل جديد براتب أعلى 30% لكن يتطلب انتقالاً لمدينة أخرى. السؤال: هل الزيادة تغطي فرق المعيشة والتكاليف النفسية؟ لا تقل "لا" فوراً ولا "نعم" بحماس. ادرسها.</p>
+            </div>
+        </div>
+
+        <div class="scene" data-reveal>
+            <div class="scene-icon">🏢</div>
+            <div>
+                <h4>فرصة شراكة تجارية</h4>
+                <p>صديق يعرض عليك الدخول شريكاً في مشروعه. قبل الموافقة: افحص السجلات المالية، تحدث مع شركاء سابقين، راجع العقد مع مختص، وحدد سقف خسارتك الأقصى.</p>
+            </div>
+        </div>
+
+        <div class="scene" data-reveal>
+            <div class="scene-icon">🏠</div>
+            <div>
+                <h4>فرصة عقارية</h4>
+                <p>عقار بسعر أقل من السوق بسبب ظرف مالكه. لا تستعجل. تحقق من الصك، الفحص الهندسي، واجعل خبيراً يرافقه معك. أحياناً "الرخيص" هو الأغلى على المدى الطويل.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="conclusion" data-reveal>
+        <h2>🏺 خلاصة قصص بابل</h2>
+        <div class="points">
+            <div class="point">👁️ راقب الفرص من حولك.</div>
+            <div class="point">🧠 ادرسها قبل اتخاذ القرار.</div>
+            <div class="point">⚖️ لا تجعل الخوف يمنعك من كل خطوة.</div>
+            <div class="point">⏳ لا تؤجل القرارات المهمة بلا سبب.</div>
+            <div class="point">🚪 عندما تكون الفرصة مناسبة، بادر.</div>
+            <div class="point">🍀 لا تنتظر الحظ، بل كن مستعدًا عندما يأتي.</div>
+        </div>
+    </section>
+</div>
+
+<!-- ============ لوحة 5 ============ -->
+<div class="panel" id="panel5" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">🏺</div>
+        <small>القسم الخامس</small>
+        <h2>حكاية نومسير والقوانين الخمسة للمال</h2>
+        <p>حقيبة الذهب أم لوح الحكمة؟</p>
+    </section>
+
+    <section class="intro" data-reveal>
+        <p>في إحدى ليالي الرحلة، جلس <strong>كالاباب</strong> مع رجاله حول نار الصحراء، وسألهم سؤالًا بدا سهلًا: لو خُيّرتم بين حقيبة ثقيلة من الذهب ولوح منقوش عليه الحكمة، فأيهما تختارون؟ 🔥💭</p>
+        <p>أجاب الرجال بلا تردد: <strong>الذهب!</strong> 🪙</p>
+    </section>
+
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">١</div>
+            <small>الحكاية الكبرى</small>
+            <h3>أركاد يختبر ابنه نومسير</h3>
+        </div>
+        <p class="story-text" data-reveal>كان <strong>أركاد</strong> من أغنى رجال بابل، لكنه لم يكن يرى أن أبناء الأغنياء يجب أن يعيشوا على ثروة آبائهم فقط. 👨‍👦</p>
+        <p class="story-text" data-reveal>وعندما بلغ ابنه <strong>نومسير</strong> سن الرجال، قرر أن يرسله إلى العالم ليبرهن أنه قادر على كسب المال والتعامل معه بحكمة. 🌍</p>
+
+        <div class="quote" data-reveal><p>لم تكن الرحلة اختبارًا لما يستطيع نومسير أن ينفقه من الذهب، بل اختبارًا لما يستطيع أن يتعلمه من الحكمة.</p></div>
+
+        <div class="insight-box insight-deep" data-reveal>
+            <div class="insight-title">🧠 فكرة أعمق</div>
+            <div class="insight-body">إعطاء المال غير المقترن بالخبرة للجيل الجديد يماثل سكب الماء في وعاء مثقوب. تربية الأبناء على كيفية إدارة رأس المال أهم بمراحل من إبراز حجم التركة. 💡</div>
+        </div>
+
+        <div class="example" data-reveal>
+            <div class="example-title">📊 اختبار نومسير</div>
+            <p>أعطى أركاد لابنه <strong>حقيبة ذهب</strong> و<strong>لوحاً بحكمة</strong>.<br>
+            💰 لو صرف الحقيبة دون تعلم = خسرها في أشهر.<br>
+            📜 لو تعلّم اللوح أولاً = يضاعف الحقيبة أضعافاً.</p>
+        </div>
+    </section>
+
+    <div class="divider" data-reveal><span>◆</span></div>
+
+    <section class="story">
+        <div class="story-title" data-reveal>
+            <div class="story-number">📜</div>
+            <small>الحكمة المكتوبة</small>
+            <h3>القوانين الخمسة للمال</h3>
+        </div>
+
+        <div class="scene" data-reveal><div class="scene-icon">🪙</div><div><h4>القانون الأول — ادخر جزءًا من إيرادك</h4><p>يأتي المال بسهولة وبكميات متزايدة لمن يدخر ما لا يقل عن عُشر إيراداته.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">🌱</div><div><h4>القانون الثاني — اجعل مالك يعمل</h4><p>يعمل المال بكد لصاحبه الحكيم الذي يجد وسيلة جيدة لإنمائه.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">🛡️</div><div><h4>القانون الثالث — احمِ مالك بالمشورة</h4><p>يبقى المال في حماية صاحبه الحريص عندما يستثمره وفق نصيحة الرجال البارعين.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">⚠️</div><div><h4>القانون الرابع — لا تستثمر فيما تجهله</h4><p>يفر المال سريعًا من الإنسان الذي يستثمره في أعمال أو أغراض لا يعرفها.</p></div></div>
+        <div class="scene" data-reveal><div class="scene-icon">🚫</div><div><h4>القانون الخامس — احذر الربح السريع</h4><p>يفر المال من الإنسان الذي يطارد الإيرادات غير الممكنة.</p></div></div>
+
+        <div class="insight-box insight-wisdom" data-reveal>
+            <div class="insight-title">⚖️ حكمة مستخلصة</div>
+            <div class="insight-body">«الذهب لمن يحفظ الحكمة؛ ومن يجهل القوانين ينفق ثروته ليشترِي بها دروس الجهل قسراً.» 💎</div>
+        </div>
+
+        <div class="insight-box insight-action" data-reveal>
+            <div class="insight-title">🚀 تطبيق عملي</div>
+            <div class="insight-body">قبل الدخول في أي فرصة تجارية جديدة، قم بفرزها على القوانين الخمسة: هل تفهم العملية؟ هل استشرت أهلاً للخبرة؟ هل تبتعد عن الأحلام غير الواقعية؟ 🎯</div>
+        </div>
+    </section>
+
+    <section class="conclusion" data-reveal>
+        <h2>🏺 خلاصة حكاية نومسير</h2>
+        <p>الثروة التي تأتي بسرعة قد تذهب بسرعة، أما الثروة التي تُبنى شيئًا فشيئًا بالمعرفة والادخار والمثابرة، فتكون أكثر قدرة على الاستمرار. 🌳</p>
+    </section>
+</div>
+
+<!-- ============ لوحة 6 ============ -->
+<div class="panel" id="panel6" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">💰</div>
+        <small>القسم السادس</small>
+        <h2>تاجر الجواهر في بابل</h2>
+        <p>حين يصبح المال أمانة تحتاج إلى عقل قبل أن تحتاج إلى شجاعة</p>
+    </section>
+
+    <p class="story-text" data-reveal>كان <strong>رودان</strong>، صانع الرماح في بابل، رجلاً بسيطاً اعتاد أن يعيش من عمل يديه. لكن حياته تغيرت عندما منحه الملك خمسين قطعة ذهبية مكافأة له على تصميم مميز صنعه لحراس القصر. 👑🪙</p>
+
+    <p class="story-text" data-reveal>ذهب إلى <strong>ماثون</strong>، تاجر الجواهر المعروف بخبرته في إقراض المال، طالباً المشورة. وهناك اكتشف أن أصعب قرار ليس كيف تحصل على المال، بل كيف تحافظ عليه عندما يصبح في يدك. 💎🧠</p>
+
+    <div class="quote" data-reveal><p>⚖️ المال الذي تمنحه للآخرين يجب أن يكون مصحوباً بالحكمة، لا بالعاطفة وحدها.</p><small>خلاصة ماثون</small></div>
+
+    <div class="principles">
+        <div class="principle"><span class="principle-icon">🔍</span><h3>افحص القدرة</h3><p>قبل أن تثق بمالِك لشخص، انظر إلى قدرته الحقيقية على الكسب والسداد.</p></div>
+        <div class="principle"><span class="principle-icon">🧠</span><h3>استشر الخبير</h3><p>الخبرة في مجال معين لا تعني الخبرة في كل المجالات.</p></div>
+        <div class="principle"><span class="principle-icon">🛡️</span><h3>احمِ رأس المال</h3><p>الربح الجميل لا قيمة له إذا كان الطريق إليه يعرض أصل المال للضياع.</p></div>
+        <div class="principle"><span class="principle-icon">⚠️</span><h3>الحذر القليل</h3><p>بعض الحذر قبل الصفقة أفضل كثيراً من الندم بعد خسارة المال.</p></div>
+    </div>
+
+    <div class="table-wrap" data-reveal>
+        <h4>🔎 فحص قبل إقراض أي شخص</h4>
+        <table>
+            <thead><tr><th>السؤال</th><th>الإشارة الخضراء ✅</th><th>الإشارة الحمراء 🚫</th></tr></thead>
+            <tbody>
+                <tr><td>مصدر دخله؟</td><td>ثابت وواضح</td><td>غامض أو متقطع</td></tr>
+                <tr><td>سجل سداده؟</td><td>ملتزم</td><td>متعثر سابقاً</td></tr>
+                <tr><td>الغرض من القرض؟</td><td>إنتاجي</td><td>استهلاكي</td></tr>
+                <tr><td>الضمانات؟</td><td>موجودة</td><td>لا شيء</td></tr>
+                <tr><td>الخطة للسداد؟</td><td>واضحة ومكتوبة</td><td>عامة ووعود</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="insight-box insight-deep" data-reveal>
+        <div class="insight-title">🧠 فكرة أعمق</div>
+        <div class="insight-body">المساعدة العاطفية غير المدروسة (إقراض الأقارب والشركاء دون ضمانات أو دراسة) تحوّل نيتك الطيبة إلى عبء ينتهي بخسارة المال والعلاقة معاً. 💔</div>
+    </div>
+
+    <div class="insight-box insight-reflect" data-reveal>
+        <div class="insight-title">🪞 تأمل</div>
+        <div class="insight-body">هل تجد صعوبة في قول "لا" عندما يطلب منك الآخرون ضمانات مالية أو قروضاً تفوق طاقتك؟ اتخاذ موقف حازم بحكمة خير من الالتزام برد ديون الآخرين. 🤔</div>
+    </div>
+
+    <div class="insight-box insight-action" data-reveal>
+        <div class="insight-title">🚀 تطبيق عملي — قاعدة "الثلاث لا"</div>
+        <div class="insight-body">لا تُقرض مبلغاً لا تستطيع تحمل خسارته. لا تُقرض دون عقد مكتوب. لا تُقرض لإرضاء شخص على حساب استقرارك المالي. 📝</div>
+    </div>
+</div>
+
+<!-- ============ لوحة 7 ============ -->
+<div class="panel" id="panel7" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">🏰</div>
+        <small>القسم السابع</small>
+        <h2>أسوار بابل</h2>
+        <p>عندما تصبح الحماية سبباً للنجاة</p>
+    </section>
+
+    <p class="story-text" data-reveal>كانت بابل في لحظة من أخطر لحظاتها. جيش عدو هاجم المدينة، وأصبح سقوط الأسوار يعني سقوط المدينة نفسها. ⚔️🏰</p>
+
+    <p class="story-text" data-reveal>وقف <strong>بانزار</strong>، أحد الحراس، بالقرب من نقطة الهجوم بينما كان الناس ينتظرون الأخبار في خوف شديد. 🛡️😰</p>
+
+    <div class="quote" data-reveal><p>🛡️ الحماية ليست شيئاً نفكر فيه بعد وقوع المصيبة، بل شيئاً نستعد له قبل أن تأتي.</p></div>
 
     <div class="lesson" data-reveal>
-
-        <div class="lesson-title">
-            🏛️ المبدأ الذي يجمع الطرق السبع
-        </div>
-
-        <p>
-
-            لا تحاول أن تصبح ثرياً في ليلة واحدة.
-            ابدأ ببناء عادة مالية صحيحة، ثم كررها باستمرار.
-            المال الصغير الذي يُدار بحكمة يمكن أن يصبح
-            أساساً لثروة كبيرة مع مرور السنوات.
-
-        </p>
-
+        <div class="lesson-title">🏰 الأسوار في حياتنا</div>
+        <p>القصة لا تتحدث عن الحجارة وحدها. فلكل إنسان أسوار يحتاج إليها: مال احتياطي، تخطيط للمستقبل، حماية للأسرة، وحذر من المخاطر.</p>
     </div>
 
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
+    <div class="principles" data-reveal>
+        <div class="principle"><span class="principle-icon">💰</span><h3>سور الادخار</h3><p>صندوق طوارئ يغطي 3-6 أشهر من المصاريف.</p></div>
+        <div class="principle"><span class="principle-icon">🛡️</span><h3>سور التأمين</h3><p>تأمين صحي، تأمين على الحياة للعائل، تأمين على الممتلكات.</p></div>
+        <div class="principle"><span class="principle-icon">🎓</span><h3>سور المهارات</h3><p>مهارات متعددة تقلل خطر فقدان مصدر الدخل الوحيد.</p></div>
+        <div class="principle"><span class="principle-icon">🤝</span><h3>سور العلاقات</h3><p>شبكة من الأصدقاء والزملاء يمكن الاعتماد عليهم وقت الحاجة.</p></div>
     </div>
 
-
-    <!-- ================= الطريقة الأولى ================= -->
-
-    <section class="story" id="rule1">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ١
-            </div>
-
-            <small>
-                الطريقة الأولى
-            </small>
-
-            <h3>
-                ابدأ في ملء محفظتك
-            </h3>
-
-            <p>
-                ادخر جزءاً من كل دخل قبل أن تبدأ في الإنفاق.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            أول خطوة نحو بناء الثروة ليست العثور على استثمار خارق،
-            ولا اكتشاف سر غامض يعرفه الأثرياء وحدهم.
-            البداية أبسط من ذلك بكثير:
-
-            <strong>
-                احتفظ بجزء من المال الذي تكسبه.
-            </strong>
-
-            اجعل لنفسك نصيباً ثابتاً من كل دخل يصل إليك،
-            ولا تسمح للمصاريف بأن تلتهمه بالكامل.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🪙
-            </div>
-
-            <div>
-
-                <h4>
-                    القاعدة الذهبية
-                </h4>
-
-                <p>
-
-                    إذا دخل إلى يدك 10 ريالات،
-                    تعامل مع 9 ريالات على أنها دخلك الحقيقي،
-                    واجعل الريال العاشر ملكاً لثروتك المستقبلية.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                💰
-            </div>
-
-            <div>
-
-                <h4>
-                    لماذا 10٪؟
-                </h4>
-
-                <p>
-
-                    لأن النسبة قابلة للتطبيق على أغلب الدخول
-                    إذا تم ضبط النفقات.
-                    والمقصود ليس الرقم نفسه بقدر ما هو بناء عادة:
-
-                    <strong>
-                        ادخر أولاً ثم أنفق.
-                    </strong>
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «لا تجعل كل ما تكسبه يمر من بين يديك
-                دون أن يترك شيئاً لك.»
-
-            </p>
-
-            <small>
-                مبدأ الادخار
-            </small>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🎯 التطبيق العملي
-            </div>
-
-            <p>
-
-                عند نزول راتبك، افصل مبلغ الادخار مباشرة
-                في حساب مستقل.
-                لا تنتظر نهاية الشهر لترى ما تبقى،
-                لأن البشر اكتشفوا منذ زمن طويل
-                أن «ما تبقى» غالباً يساوي صفراً
-                بطريقة سحرية جداً.
-
-            </p>
-
-        </div>
-
-
-        <div class="example" data-reveal data-delay="1">
-
-            <div class="example-title">
-                📌 مثال بسيط
-            </div>
-
-            <p>
-
-                راتبك الشهري <strong>10,000 ريال</strong>.
-                ادخر 10٪ = <strong>1,000 ريال شهرياً</strong>.
-                خلال سنة يصبح لديك <strong>12,000 ريال</strong>
-                قبل احتساب أي عوائد استثمارية.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
+    <div class="insight-box insight-wisdom" data-reveal>
+        <div class="insight-title">⚖️ حكمة مستخلصة</div>
+        <div class="insight-body">«لا تُقاس قوة مؤسستك المالية بأيام الرخاء، بل بمتانة أسوارها وقدرتها على الصمود أوقات الأزمات.» 🏰</div>
     </div>
 
-
-    <!-- ================= الطريقة الثانية ================= -->
-
-    <section class="story" id="rule2">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٢
-            </div>
-
-            <small>
-                الطريقة الثانية
-            </small>
-
-            <h3>
-                تحكم في نفقاتك
-            </h3>
-
-            <p>
-                فرّق بين ما تحتاجه وما ترغب فيه.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            الادخار وحده لا يكفي إذا كانت النفقات
-            تتوسع مع كل زيادة في الدخل.
-            كثير من الناس عندما يرتفع دخلهم
-            لا يشعرون بأنهم أصبحوا أغنى،
-            لأن مستوى إنفاقهم يرتفع معه مباشرة.
-            لذلك تحتاج إلى ميزانية واضحة
-            تحدد أين يذهب المال قبل أن يختفي.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                ⚖️
-            </div>
-
-            <div>
-
-                <h4>
-                    الاحتياجات ليست الرغبات
-                </h4>
-
-                <p>
-
-                    الطعام والسكن والمواصلات الأساسية
-                    تختلف عن شراء الأشياء لمجرد أنك تريدها الآن.
-                    الرغبة ليست مشكلة بحد ذاتها،
-                    لكن المشكلة عندما تعامل كل رغبة
-                    وكأنها ضرورة لا يمكن تأجيلها.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                📝
-            </div>
-
-            <div>
-
-                <h4>
-                    اكتب مصروفاتك
-                </h4>
-
-                <p>
-
-                    سجل مصاريفك الشهرية، ثم صنفها إلى:
-                    ضرورية، مهمة، ترفيهية،
-                    ويمكن الاستغناء عنها.
-                    مجرد رؤية الأرقام مكتوبة
-                    قد تكون أكثر إقناعاً من مئة نصيحة مالية.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «الرغبات كثيرة، أما الدخل فله حدود.
-                الحكمة أن تجعل نفقاتك تخدم أهدافك،
-                لا أن تجعل أهدافك تخدم نفقاتك.»
-
-            </p>
-
-            <small>
-                إدارة النفقات
-            </small>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🎯 التطبيق العملي
-            </div>
-
-            <p>
-
-                ضع سقفاً لكل نوع من المصاريف.
-                وعندما تنتهي ميزانية الترفيه مثلاً،
-                لا تسحب من مبلغ الادخار لتعويضها.
-                بهذه الطريقة يصبح الادخار
-                جزءاً محمياً من نظامك المالي.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
+    <div class="insight-box insight-action" data-reveal>
+        <div class="insight-title">🚀 تطبيق عملي</div>
+        <div class="insight-body">شيد سورك المالي: ضع تأميناً مناسباً، وادخر صمّام أمان يغطي مصاريف ما لا يقل عن 3 إلى 6 أشهر تحسباً لأي متقلبات غير متوقعة. 🛡️💰</div>
     </div>
-
-
-    <!-- ================= الطريقة الثالثة ================= -->
-
-    <section class="story" id="rule3">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٣
-            </div>
-
-            <small>
-                الطريقة الثالثة
-            </small>
-
-            <h3>
-                أنمِ ثروتك
-            </h3>
-
-            <p>
-                اجعل مدخراتك تنتج دخلاً بدلاً من بقائها خاملة.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            بعد أن تبدأ في الادخار، تظهر الخطوة التالية:
-            ماذا ستفعل بهذا المال؟
-            المال الذي يجلس بلا هدف
-            قد يحافظ على قيمته الاسمية،
-            لكنه لا يعمل من أجلك.
-            أما المال المستثمر بعقلانية
-            فيمكن أن يولد عوائد،
-            وهذه العوائد يمكن أن تُعاد استثمارها
-            لتبدأ دائرة النمو.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                📈
-            </div>
-
-            <div>
-
-                <h4>
-                    اجعل المال يعمل
-                </h4>
-
-                <p>
-
-                    ابحث عن الاستثمارات التي تفهمها
-                    وتتناسب مع قدرتك على تحمل المخاطر.
-                    الهدف ليس مطاردة أعلى ربح ممكن،
-                    بل بناء مصدر نمو مستمر ومدروس.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                🌱
-            </div>
-
-            <div>
-
-                <h4>
-                    قوة التراكم
-                </h4>
-
-                <p>
-
-                    عندما تحقق استثماراً عائداً،
-                    ثم تعيد استثمار العائد،
-                    يصبح لديك أصل يولد عائداً،
-                    والعائد نفسه يبدأ في توليد عوائد إضافية.
-                    هذه الفكرة هي جوهر النمو المركب عبر الزمن.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «اجعل كل ريال تدخره
-                يبحث لك عن ريال آخر.»
-
-            </p>
-
-            <small>
-                قوة الاستثمار والتراكم
-            </small>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🎯 التطبيق العملي
-            </div>
-
-            <p>
-
-                حدد هدفاً استثمارياً طويل الأجل،
-                واختر أدوات استثمارية تفهم طبيعتها ومخاطرها،
-                ثم اجعل الإضافة المنتظمة عادة.
-                الاستمرارية أهم من محاولة معرفة
-                أفضل يوم للشراء وأفضل يوم للبيع.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
-    </div>
-
-
-    <!-- ================= الطريقة الرابعة ================= -->
-
-    <section class="story" id="rule4">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٤
-            </div>
-
-            <small>
-                الطريقة الرابعة
-            </small>
-
-            <h3>
-                حافظ على ثروتك من الضياع
-            </h3>
-
-            <p>
-                حماية رأس المال تسبق البحث عن الربح.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            جمع المال يحتاج إلى سنوات،
-            لكن خسارته قد تحتاج إلى قرار واحد فقط.
-            لذلك لا يكفي أن تعرف كيف تستثمر،
-            بل يجب أن تعرف كيف تحمي نفسك
-            من الاستثمارات التي لا تفهمها،
-            والوعود المبالغ فيها،
-            والمخاطر التي لا تستطيع تحملها.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🛡️
-            </div>
-
-            <div>
-
-                <h4>
-                    افهم قبل أن تستثمر
-                </h4>
-
-                <p>
-
-                    إذا لم تستطع شرح الاستثمار لشخص آخر
-                    بطريقة بسيطة،
-                    فهذه إشارة تستحق التوقف عندها
-                    ودراسة الموضوع أكثر.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                ⚠️
-            </div>
-
-            <div>
-
-                <h4>
-                    احذر الثراء السريع
-                </h4>
-
-                <p>
-
-                    الوعود بعوائد ضخمة ومضمونة خلال وقت قصير
-                    تستحق الحذر الشديد.
-                    لا يوجد استثمار مرتفع العائد بلا مخاطر
-                    لمجرد أن أحدهم وضع له صورة فاخرة وشعاراً ذهبياً.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="3">
-
-            <div class="scene-icon">
-                🧠
-            </div>
-
-            <div>
-
-                <h4>
-                    استشر أصحاب الخبرة
-                </h4>
-
-                <p>
-
-                    اطلب رأي المختصين عندما تكون القرارات
-                    كبيرة أو معقدة،
-                    وقارن المعلومات
-                    ولا تعتمد على نصيحة شخص واحد فقط.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «لا تجعل الرغبة في الربح
-                سبباً لخسارة ما جمعته بصعوبة.»
-
-            </p>
-
-            <small>
-                حماية رأس المال
-            </small>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
-    </div>
-
-
-    <!-- ================= الطريقة الخامسة ================= -->
-
-    <section class="story" id="rule5">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٥
-            </div>
-
-            <small>
-                الطريقة الخامسة
-            </small>
-
-            <h3>
-                اجعل منزلك استثماراً مريحاً
-            </h3>
-
-            <p>
-                فكر في السكن من زاوية مالية وعائلية معاً.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            ينظر الكتاب إلى امتلاك المسكن
-            باعتباره وسيلة لتحقيق الاستقرار
-            وتقليل بعض تكاليف السكن على المدى الطويل.
-            لكن القرار العقاري ليس قاعدة تصلح للجميع،
-            فهو يعتمد على السعر والدخل والتمويل
-            والموقع واحتياجات الأسرة.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🏠
-            </div>
-
-            <div>
-
-                <h4>
-                    الاستقرار
-                </h4>
-
-                <p>
-
-                    امتلاك منزل مناسب
-                    قد يمنح الأسرة شعوراً بالاستقرار
-                    ويجعل التخطيط للمستقبل أكثر وضوحاً.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                📊
-            </div>
-
-            <div>
-
-                <h4>
-                    احسب قبل القرار
-                </h4>
-
-                <p>
-
-                    لا تنظر إلى القسط وحده.
-                    احسب الدفعة الأولى، تكلفة التمويل،
-                    الصيانة، الرسوم، التأمين،
-                    والمصاريف المرتبطة بالعقار
-                    قبل اتخاذ القرار.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🎯 التطبيق العملي
-            </div>
-
-            <p>
-
-                قارن بين تكلفة الإيجار وتكلفة التملك
-                على المدى الطويل،
-                ولا تجعل الرغبة في امتلاك منزل
-                أكبر من قدرتك المالية.
-                البيت الجميل يصبح عبئاً
-                إذا كان يبتلع ميزانيتك.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
-    </div>
-
-
-    <!-- ================= الطريقة السادسة ================= -->
-
-    <section class="story" id="rule6">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٦
-            </div>
-
-            <small>
-                الطريقة السادسة
-            </small>
-
-            <h3>
-                اضمن دخلاً للمستقبل
-            </h3>
-
-            <p>
-                لا تجعل مستقبلك المالي يعتمد على قدرتك على العمل إلى الأبد.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            الإنسان يعمل ويكسب خلال سنوات طويلة،
-            لكن الظروف تتغير.
-            قد يتغير العمل أو تقل القدرة على الكسب
-            أو تظهر مسؤوليات جديدة.
-            لذلك فإن التخطيط المالي للمستقبل ليس ترفاً،
-            بل وسيلة لتقليل المفاجآت
-            عندما تتغير ظروف الحياة.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                ⏳
-            </div>
-
-            <div>
-
-                <h4>
-                    ابدأ مبكراً
-                </h4>
-
-                <p>
-
-                    الوقت من أقوى عناصر الاستثمار طويل الأجل.
-                    المبلغ الصغير المنتظم يمكن أن يتراكم
-                    عبر سنوات طويلة،
-                    بينما تأجيل الادخار
-                    يجعل تحقيق الهدف أكثر صعوبة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                ☂️
-            </div>
-
-            <div>
-
-                <h4>
-                    ابنِ شبكة أمان
-                </h4>
-
-                <p>
-
-                    وجود احتياطي مالي للطوارئ
-                    يقلل الحاجة إلى بيع الاستثمارات
-                    أو الاقتراض عند حدوث ظرف غير متوقع.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="3">
-
-            <div class="scene-icon">
-                🏛️
-            </div>
-
-            <div>
-
-                <h4>
-                    فكر في المستقبل
-                </h4>
-
-                <p>
-
-                    ضع أهدافاً للسنوات القادمة،
-                    مثل التقاعد، تعليم الأبناء،
-                    شراء منزل، أو بناء مصدر دخل إضافي.
-                    ثم حوّل هذه الأهداف
-                    إلى مبالغ ومدة زمنية واضحة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «أفضل وقت للاستعداد للمستقبل
-                هو قبل أن يصبح المستقبل حاضراً.»
-
-            </p>
-
-            <small>
-                التخطيط طويل الأجل
-            </small>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
-    </div>
-
-
-    <!-- ================= الطريقة السابعة ================= -->
-
-    <section class="story" id="rule7">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٧
-            </div>
-
-            <small>
-                الطريقة السابعة
-            </small>
-
-            <h3>
-                زد قدرتك على الكسب
-            </h3>
-
-            <p>
-                الاستثمار في نفسك قد يكون من أكثر الاستثمارات تأثيراً على دخلك.
-            </p>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            لا يكفي أن تحاول تقليل المصاريف إلى الأبد.
-            هناك جانب آخر من المعادلة:
-
-            <strong>
-                زيادة قدرتك على إنتاج الدخل.
-            </strong>
-
-            تعلم مهارة جديدة، طور خبرتك،
-            حسّن جودة عملك،
-            وابحث عن طرق تجعل قيمتك المهنية أكبر.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🎓
-            </div>
-
-            <div>
-
-                <h4>
-                    طوّر معرفتك
-                </h4>
-
-                <p>
-
-                    كل مهارة جديدة يمكن أن تفتح لك فرصة جديدة.
-                    تعلم باستمرار في المجال الذي تعمل فيه،
-                    ولا تجعل خبرتك تتوقف
-                    عند ما تعلمته قبل سنوات.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                🎯
-            </div>
-
-            <div>
-
-                <h4>
-                    اجعل أهدافك محددة
-                </h4>
-
-                <p>
-
-                    بدلاً من قول «أريد أن أصبح غنياً»،
-                    حدد هدفاً قابلاً للقياس:
-                    ادخار مبلغ معين،
-                    زيادة الدخل بنسبة معينة،
-                    أو اكتساب مهارة خلال مدة محددة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="3">
-
-            <div class="scene-icon">
-                🌟
-            </div>
-
-            <div>
-
-                <h4>
-                    ابنِ شخصيتك المالية
-                </h4>
-
-                <p>
-
-                    الالتزام بالوعود، سداد الديون،
-                    تحمل المسؤولية، التخطيط للمستقبل،
-                    ومساعدة الآخرين ضمن قدرتك،
-                    كلها عادات تدعم الاستقرار والثقة بالنفس.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «كلما أصبحت أكثر قيمة في عملك،
-                زادت قدرتك على خلق دخل أكبر.»
-
-            </p>
-
-            <small>
-                تطوير الذات والمهارات
-            </small>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🎯 التطبيق العملي
-            </div>
-
-            <p>
-
-                اختر مهارة واحدة يمكن أن تزيد دخلك
-                خلال السنة القادمة،
-                ثم خصص لها وقتاً أسبوعياً ثابتاً.
-                المعرفة التي لا تتحول إلى ممارسة
-                تبقى مجرد ملف PDF آخر
-                ينتظر مصيره المأساوي في مجلد التنزيلات.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>✦</span>
-    </div>
-
-
-    <!-- الخلاصة -->
-    <section class="conclusion" data-reveal data-delay="1">
-
-        <h2>
-            🏺 الطرق السبع في صفحة واحدة
-        </h2>
-
-        <p>
-
-            سبع خطوات لا تعمل منفردة،
-            بل تكتمل ببعضها:
-            ادخار يبني الأساس،
-            وإنفاق منضبط يحمي الأساس،
-            واستثمار ينمّي الأساس،
-            وحماية تحفظ ما بُني.
-
-        </p>
-
-        <div class="points">
-
-            <div class="point">
-                ١ — احتفظ بجزء من كل دخل تكسبه.
-            </div>
-
-            <div class="point">
-                ٢ — سيطر على نفقاتك ولا تجعل الرغبات ضروريات.
-            </div>
-
-            <div class="point">
-                ٣ — استثمر مدخراتك بطريقة تفهمها وتناسب مخاطرك.
-            </div>
-
-            <div class="point">
-                ٤ — احمِ رأس مالك وتجنب المخاطر التي لا تفهمها.
-            </div>
-
-            <div class="point">
-                ٥ — خطط للسكن بطريقة تحقق الاستقرار دون إرهاق الميزانية.
-            </div>
-
-            <div class="point">
-                ٦ — خطط لدخلك ومستقبلك قبل أن تحتاج إليه.
-            </div>
-
-            <div class="point">
-                ٧ — طوّر مهاراتك وقدرتك على الكسب باستمرار.
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- الخاتمة -->
-    <section class="ending">
-
-        <div class="ending-symbol" data-reveal>
-            🌿
-        </div>
-
-        <h2 data-reveal>
-            الثروة عادة قبل أن تكون رقماً
-        </h2>
-
-        <p data-reveal>
-
-            قد تختلف الأسواق، وتتغير الأسعار،
-            وتتطور طرق الاستثمار،
-            لكن المبادئ الأساسية لإدارة المال
-            تبقى قريبة من الإنسان:
-            أن تنفق أقل مما تكسب،
-            وتدخر بانتظام،
-            وتحمي ما تملك،
-            وتستثمر بعقل،
-            وتطور قدرتك على الكسب.
-
-        </p>
-
-        <p data-reveal>
-
-            لا تبحث عن طريق سحري إلى الثراء.
-
-            <strong>
-                ابنِ طريقاً تستطيع السير فيه لسنوات.
-            </strong>
-
-        </p>
-
-    </section>
-
 </div>
 
-
-<!-- =========================================================
-     اللوحة الثانية : قصص الحظ والفرص
-========================================================= -->
-
-<div class="panel" id="panel2" role="tabpanel" aria-labelledby="tabBtn2">
-
-    <!-- رأس الفصل -->
+<!-- ============ لوحة 8 ============ -->
+<div class="panel" id="panel8" role="tabpanel">
     <section class="chapter-head" data-reveal>
-
-        <div class="symbol">
-            🏺
-        </div>
-
-        <small>
-            القسم الثاني — من قصص بابل القديمة
-        </small>
-
-        <h2>
-            الحظ السعيد والفرص الضائعة
-        </h2>
-
-        <p>
-            قصتان، ودرس واحد لا يشيخ
-        </p>
-
+        <div class="symbol">🐪</div>
+        <small>القسم الثامن</small>
+        <h2>تاجر الإبل في بابل</h2>
+        <p>قصة داباسير: من الديون والعبودية إلى الكرامة والوفاء</p>
     </section>
 
+    <p class="story-text" data-reveal>كان <strong>تاركاد</strong> جالساً في مطعم وهو جائع لا يملك ثمن الطعام، عندما ظهر أمامه <strong>داباسير</strong>، الرجل الذي كان مديناً له بمال. 🍽️😔</p>
 
-    <!-- المقدمة -->
-    <section class="intro" data-reveal>
+    <p class="story-text" data-reveal>أخبر داباسير أنه كان في شبابه ينفق أكثر مما يكسب، ويشتري الكماليات لزوجته وبيته، ثم يقترض من أصدقائه حتى تراكمت عليه الديون. 💸😢</p>
 
-        <p>
+    <div class="quote" data-reveal><p>🐪 الهروب من الدين قد يريح الإنسان لحظة، لكنه لا يحل المشكلة. مواجهة الدين هي بداية استعادة الحرية.</p></div>
 
-            في بابل القديمة، كان الناس يتحدثون عن الحظ
-            كما يتحدثون عن المطر؛
-            بعضهم يراه هبة تأتي فجأة،
-            وبعضهم يعتقد أن هناك أشخاصًا يولدون محظوظين
-            وآخرين لا يأتيهم الحظ أبدًا.
-
-            <br><br>
-
-            لكن أركاد كان ينظر إلى الأمر بطريقة مختلفة.
-
-            كان يريد أن يعرف:
-
-            <strong>
-                هل الحظ مجرد صدفة؟
-            </strong>
-
-            أم أن الإنسان يستطيع أن يزيد فرصه في العثور عليه؟
-
-            ومن هنا بدأت حكايات الرجال الذين
-
-            <strong>
-                رأوا الفرصة أمام أعينهم...
-                ثم تركوها تمر.
-            </strong>
-
-        </p>
-
-    </section>
-
-
-    <!-- =========================
-         القصة الأولى
-    ========================= -->
-
-    <section class="story">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ١
-            </div>
-
-            <small>
-                القصة الأولى
-            </small>
-
-            <h3>
-                🪙 التاجر والفرصة التي انتظرها طويلاً
-            </h3>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            كان هناك تاجر شاب بدأ حياته العملية،
-            وكان والده يتمنى أن يراه أكثر نجاحًا.
-            وفي أحد الأيام أخبره والده عن فرصة استثمارية
-            يمكن أن تفتح له بابًا نحو مستقبل أفضل.
-
-            <br><br>
-
-            كان المشروع يقوم على استصلاح أرض قاحلة
-            من خلال حفر القنوات والسواقي،
-            ثم تحويل الأرض إلى أرض صالحة للزراعة وبيعها.
-
-            🌱💧
-
-            وكانت الخطة تحتاج إلى مساهمة مجموعة من الرجال،
-            بحيث يدفع كل واحد منهم جزءًا من دخله،
-            ثم يشترك الجميع في الأرباح.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                👨‍👦
-            </div>
-
-            <div>
-
-                <h4>
-                    نصيحة الأب
-                </h4>
-
-                <p>
-
-                    نصح الأب ابنه بأن يحتفظ بجزء من دخله
-                    وأن يستثمره بدل أن ينفقه كله.
-
-                    كانت أمامه فرصة واضحة،
-                    وكان بإمكانه أن يبدأ بخطوة صغيرة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            لكن الشاب بدأ يفكر في الأشياء التي يرغب في شرائها.
-            كان يريد ثيابًا جديدة وفاخرة،
-            وشعر أن بإمكانه تأجيل الاستثمار إلى وقت آخر.
-
-            👔
-
-            قال في نفسه إنه لا يزال شابًا،
-            وأن أمامه سنوات طويلة،
-            وأن الفرص ستأتي مرة أخرى.
-
-            وهكذا بدأ يؤجل.
-
-        </p>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                «ليس كل من رأى الفرصة عرف قيمتها،
-                وليس كل من عرف قيمتها امتلك الشجاعة لاغتنامها.»
-
-            </p>
-
-            <small>
-                درس القصة
-            </small>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            مرت الأيام، ثم اكتشف الشاب
-            أن المشروع الذي تردد في الدخول فيه
-            قد حقق أرباحًا كبيرة.
-
-            💰
-
-            كانت الفرصة موجودة.
-            وكان المال موجودًا.
-            وكانت النصيحة موجودة.
-
-            لكن شيئًا واحدًا كان غائبًا:
-
-            <strong>
-                القرار.
-            </strong>
-
-            لقد لم يخسر لأنه لم يعرف الطريق،
-            بل لأنه سمح للتردد بأن يجعله يقف على جانب الطريق.
-
-        </p>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🌟 جوهر القصة
-            </div>
-
-            <p>
-
-                أحيانًا لا تحتاج الفرصة إلى ثروة كبيرة،
-                بل تحتاج إلى الاستعداد لرؤيتها
-                واتخاذ القرار المناسب في الوقت المناسب.
-
-                وما يبدو اليوم قرارًا صغيرًا،
-                قد يصبح بعد سنوات فرقًا كبيرًا.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>◆</span>
+    <div class="timeline" data-reveal>
+        <div class="timeline-item"><h3>1️⃣ الاعتراف</h3><p>توقف عن الهروب واعترف بأن الديون نتيجة قرارات سابقة يجب مواجهتها.</p></div>
+        <div class="timeline-item"><h3>2️⃣ العمل</h3><p>عاد إلى العمل واستخدم قدرته على الكسب باعتبارها رأس ماله الحقيقي.</p></div>
+        <div class="timeline-item"><h3>3️⃣ التقسيم</h3><p>خصص جزءاً من دخله للديون، وجزءاً لمعيشته، وجزءاً لمستقبله.</p></div>
+        <div class="timeline-item"><h3>4️⃣ الوفاء</h3><p>مع مرور الوقت تقلصت الديون حتى أصبح حراً منها.</p></div>
     </div>
 
-
-    <!-- =========================
-         القصة الثانية
-    ========================= -->
-
-    <section class="story">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                ٢
-            </div>
-
-            <small>
-                القصة الثانية
-            </small>
-
-            <h3>
-                🐑 تاجر الحيوانات والقطيع الذي أفلت منه
-            </h3>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            كان أحد الرجال يعمل في تجارة الحيوانات.
-            وبعد رحلة شاقة استمرت عشرة أيام بحثًا عن الإبل،
-            عاد إلى بابل متأخرًا.
-
-            🌙
-
-            لكنه وصل بعد أن أُغلقت أبواب المدينة.
-
-            وبينما كان ينتظر، اقترب منه مزارع عجوز
-            وعرض عليه شراء قطيع كبير من الأغنام.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🐑
-            </div>
-
-            <div>
-
-                <h4>
-                    صفقة مغرية
-                </h4>
-
-                <p>
-
-                    كان المزارع يريد العودة سريعًا إلى منزله
-                    بسبب مرض زوجته،
-                    ولذلك كان مستعدًا للبيع.
-
-                    أما التاجر فكان يعرف سوق الحيوانات،
-                    وكان يرى أن بإمكانه بيع الأغنام
-                    داخل بابل بسعر أعلى.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            بدت الصفقة ممتازة.
-
-            كان هناك طلب على الحيوانات،
-            وكان السعر مناسبًا،
-            وكان التاجر يعرف كيف يحقق الربح منها.
-
-            لكنه واجه مشكلة واحدة:
-
-            <strong>
-                لم يستطع عد الأغنام في الظلام.
-            </strong>
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                🌙
-            </div>
-
-            <div>
-
-                <h4>
-                    لحظة التردد
-                </h4>
-
-                <p>
-
-                    عرض المزارع أن يدفع التاجر جزءًا من المال،
-                    وأن يترك معه أحد رجاله،
-                    ثم يقوم بعد الأغنام في الصباح ويدفع الباقي.
-
-                    لكن التاجر رفض أن يدفع
-                    قبل أن يتأكد بنفسه.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            كان ينتظر الصباح.
-
-            لكنه لم يكن يعلم أن الفرص لا تنتظر دائمًا.
-
-            🌅
-
-            عندما أشرقت الشمس وفُتحت أبواب بابل،
-            اندفع التجار إلى المدينة،
-            وكان الطلب على الحيوانات مرتفعًا.
-
-            وجد المزارع مشترين آخرين،
-            واستطاع أن يبيع الأغنام بسعر أعلى.
-
-            وهكذا اختفت الصفقة من يد التاجر.
-
-        </p>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                أحيانًا يكون الفرق بين الربح والفرصة الضائعة
-                هو لحظة واحدة من التردد.
-
-            </p>
-
-            <small>
-                من دروس الحكاية
-            </small>
-
-        </div>
-
-
-        <div class="lesson" data-reveal data-delay="1">
-
-            <div class="lesson-title">
-                🧠 جوهر القصة
-            </div>
-
-            <p>
-
-                الحذر مطلوب، لكن الحذر لا يعني
-                أن نرفض كل فرصة
-                لأننا نريد ضمان كل شيء بنسبة مئة بالمئة.
-
-                المهم أن ندرس القرار،
-                نفهم مخاطره،
-                ثم نتصرف عندما تكون الفرصة مناسبة.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <div class="divider" data-reveal>
-        <span>✦</span>
+    <div class="insight-box insight-deep" data-reveal>
+        <div class="insight-title">🧠 فكرة أعمق</div>
+        <div class="insight-body">الديون ليست مجرد أرقام بنكية، بل سلب للحرية والكرامة النفسية. الدائن يملك قرارك حتى تسدد ما عليك، والمواجهة الصريحة هي خطوة استعادة ملكية حياتك. 🔓</div>
     </div>
 
+    <div class="insight-box insight-wisdom" data-reveal>
+        <div class="insight-title">⚖️ حكمة مستخلصة</div>
+        <div class="insight-body">«روح الرجل الحر ترى الحياة كأزمة يجب حلها فتتغلب عليها، بينما روح العبد تتعلل بالأعذار وتستسلم لواقعها.» 🕊️</div>
+    </div>
+</div>
 
-    <!-- =========================
-         الدرس العام
-    ========================= -->
-
-    <section class="story">
-
-        <div class="story-title" data-reveal>
-
-            <div class="story-number">
-                🍀
-            </div>
-
-            <small>
-                الدرس الأكبر
-            </small>
-
-            <h3>
-                حين يأتي الحظ على هيئة فرصة
-            </h3>
-
-        </div>
-
-
-        <p class="story-text" data-reveal>
-
-            عندما انتهى الرجال من سرد قصصهم،
-            اتضح أن القصتين مختلفتان في التفاصيل،
-            لكنهما تحملان المشكلة نفسها.
-
-            رجل رأى فرصة استثمارية لكنه أجل قراره.
-
-            ورجل وجد صفقة مربحة لكنه انتظر حتى ضاعت.
-
-            كلاهما كان قريبًا من النجاح،
-            لكن المماطلة والتردد وقفا بينه وبين الفرصة.
-
-        </p>
-
-
-        <div class="scene" data-reveal data-delay="1">
-
-            <div class="scene-icon">
-                👁️
-            </div>
-
-            <div>
-
-                <h4>
-                    الفرصة تحتاج إلى عين تلاحظها
-                </h4>
-
-                <p>
-
-                    قد تمر فرص كثيرة أمام الإنسان
-                    دون أن ينتبه إليها،
-                    لأن عينيه مشغولتان بما يملكه الآن
-                    بدل ما يمكن أن يبنيه غدًا.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="2">
-
-            <div class="scene-icon">
-                🧠
-            </div>
-
-            <div>
-
-                <h4>
-                    الفرصة تحتاج إلى عقل يدرسها
-                </h4>
-
-                <p>
-
-                    اغتنام الفرص لا يعني الاندفاع الأعمى.
-                    بل يعني فهم الفرصة،
-                    معرفة مخاطرها،
-                    ثم اتخاذ القرار بعد دراسة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="scene" data-reveal data-delay="3">
-
-            <div class="scene-icon">
-                🚪
-            </div>
-
-            <div>
-
-                <h4>
-                    والفرصة تحتاج إلى يد تفتح الباب
-                </h4>
-
-                <p>
-
-                    قد تعرف الفرصة،
-                    وقد تفهمها،
-                    لكن إذا لم تتخذ خطوة عملية،
-                    فستبقى مجرد فكرة جميلة.
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="quote" data-reveal data-delay="1">
-
-            <p>
-
-                🍀 الحظ قد يطرق الباب،
-                لكن الإنسان هو الذي يقرر
-                هل سيفتحه أم سيتركه حتى يرحل.
-
-            </p>
-
-        </div>
-
+<!-- ============ لوحة 9 ============ -->
+<div class="panel" id="panel9" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">📜</div>
+        <small>القسم التاسع</small>
+        <h2>ألواح بابل الصلصالية</h2>
+        <p>خطة رجل قديم للخروج من الديون</p>
     </section>
 
+    <p class="story-text" data-reveal>بين آثار بابل عُثر على ألواح طينية تسجل قصة داباسير بعد عودته من الأسر. لم تكن الألواح تسجل مغامرة أسطورية، بل شيئاً أكثر واقعية: خطة مالية لرجل يريد أن يستعيد حياته. 🏛️📜</p>
 
-    <!-- =========================
-         الخلاصة
-    ========================= -->
+    <div class="principles" data-reveal>
+        <div class="principle"><span class="principle-icon">💰</span><h3>جزء للمستقبل</h3><p>يحتفظ بجزء من دخله لنفسه ومستقبله.</p></div>
+        <div class="principle"><span class="principle-icon">🏠</span><h3>العيش ضمن الحدود</h3><p>ينظم نفقاته بحيث لا يتجاوز الجزء المخصص للمعيشة.</p></div>
+        <div class="principle"><span class="principle-icon">🤝</span><h3>الوفاء بالديون</h3><p>يخصص جزءاً ثابتاً من دخله لسداد من وثقوا به.</p></div>
+        <div class="principle"><span class="principle-icon">📈</span><h3>الاستمرار</h3><p>لا يترك الخطة عندما يقل الدخل.</p></div>
+    </div>
 
-    <section class="conclusion" data-reveal data-delay="1">
+    <div class="quote" data-reveal><p>📜 المشكلة ليست دائماً في مقدار الدخل، بل في غياب الخطة التي تحكم طريقة استخدامه.</p></div>
 
-        <h2>
-            🏺 خلاصة قصص بابل
-        </h2>
+    <div class="table-wrap" data-reveal>
+        <h4>📊 خطة توزيع الدخل (مثال رقمي على 12,000 ريال)</h4>
+        <table>
+            <thead><tr><th>الفئة</th><th>النسبة</th><th>المبلغ الشهري</th><th>الهدف</th></tr></thead>
+            <tbody>
+                <tr><td>🏠 معيشة</td><td>70%</td><td>8,400 ريال</td><td>تغطية الاحتياجات</td></tr>
+                <tr><td>🤝 سداد ديون</td><td>20%</td><td>2,400 ريال</td><td>استعادة الحرية</td></tr>
+                <tr><td>💰 ادخار</td><td>10%</td><td>1,200 ريال</td><td>بناء المستقبل</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-        <p>
+    <div class="insight-box insight-action" data-reveal>
+        <div class="insight-title">🚀 تطبيق عملي (خطة ألواح بابل الخالدة)</div>
+        <div class="insight-body">قسم دخلك كالتالي:<br>
+        - <strong>70%</strong> لمعيشتك ونفقاتك الضرورية.<br>
+        - <strong>20%</strong> لسداد الديون بشكل مجدول وثابت.<br>
+        - <strong>10%</strong> للادخار والاستثمار الذاتي دون مساس بها إطلاقاً.</div>
+    </div>
 
-            ليست الحكاية أن كل فرصة ستنجح،
-            ولا أن كل قرار سريع سيكون صائبًا.
+    <div class="insight-box insight-warning" data-reveal>
+        <div class="insight-title">⚠️ تنبيه</div>
+        <div class="insight-body">لا تُوقف ادخار الـ10% الخاصة بحمايتك بحجة سداد الديون أسرع؛ اقتطاع مستقبلك يُبقيك عرضة للوقوع في ديون جديدة عند أول عارض طارئ. 🚫</div>
+    </div>
+</div>
 
-            بل إن الحكمة تكمن في أن يكون الإنسان
-            مستعدًا للفرص،
-            واعيًا بمخاطرها،
-            وقادرًا على اتخاذ القرار
-            عندما يجد ما يناسبه.
-
-        </p>
-
-
-        <div class="points">
-
-            <div class="point">
-                👁️ راقب الفرص من حولك.
-            </div>
-
-            <div class="point">
-                🧠 ادرسها قبل اتخاذ القرار.
-            </div>
-
-            <div class="point">
-                ⚖️ لا تجعل الخوف يمنعك من كل خطوة.
-            </div>
-
-            <div class="point">
-                ⏳ لا تؤجل القرارات المهمة بلا سبب.
-            </div>
-
-            <div class="point">
-                🚪 عندما تكون الفرصة مناسبة، بادر.
-            </div>
-
-            <div class="point">
-                🍀 لا تنتظر الحظ، بل كن مستعدًا عندما يأتي.
-            </div>
-
-        </div>
-
+<!-- ============ لوحة 10 ============ -->
+<div class="panel" id="panel10" role="tabpanel">
+    <section class="chapter-head" data-reveal>
+        <div class="symbol">🍀</div>
+        <small>القسم العاشر</small>
+        <h2>الرجل الأكثر حظاً في بابل</h2>
+        <p>قصة شارونادا وهادان جولا</p>
     </section>
 
+    <p class="story-text" data-reveal>كان <strong>شارونادا</strong> يسافر مع قافلة متجهة نحو بابل، وكان برفقته شاب يدعى <strong>هادان جولا</strong>، حفيد رجل كان شارونادا يعرفه جيداً. 🐪🌅</p>
 
-    <!-- =========================
-         الخاتمة
-    ========================= -->
+    <p class="story-text" data-reveal>كان الشاب يعيش حياة مترفة، لكنه كان يحمل في داخله سؤالاً: كيف يستطيع الإنسان أن يحصل على الذهب؟ 💭🪙</p>
+
+    <div class="quote" data-reveal><p>🛠️ العمل الجيد لا يمنحك المال فقط؛ قد يمنحك الخبرة والسمعة والفرص والكرامة.</p></div>
+
+    <div class="lesson" data-reveal>
+        <div class="lesson-title">🌟 لحظة التحول</div>
+        <p>في نهاية الرحلة بدأ هادان جولا ينظر إلى العمل بطريقة مختلفة. أدرك أن جده لم يبنِ مكانته بالذهب وحده، وأن العمل الذي كان يظنه عبئاً قد يكون واحداً من أهم الطرق التي يصنع بها الإنسان مستقبله.</p>
+    </div>
+
+    <div class="principles" data-reveal>
+        <div class="principle"><span class="principle-icon">🛠️</span><h3>العمل</h3><p>مصدر الخبرة والسمعة والفرص.</p></div>
+        <div class="principle"><span class="principle-icon">🌱</span><h3>الصبر</h3><p>النتائج الكبيرة تحتاج زمناً طويلاً.</p></div>
+        <div class="principle"><span class="principle-icon">🎯</span><h3>الهدف</h3><p>من يعرف أين يريد الوصول، يجد الطريق.</p></div>
+        <div class="principle"><span class="principle-icon">🤝</span><h3>الأمانة</h3><p>من يعمل بأمانة، يثق به الناس ويعطونه المزيد.</p></div>
+    </div>
+
+    <div class="insight-box insight-deep" data-reveal>
+        <div class="insight-title">🧠 فكرة أعمق</div>
+        <div class="insight-body">النظرة الدونية للعمل الميداني والاجتهاد الشخصي تُفقدك أثمن أدوات التطور. العمل المخلص ينشئ السمعة والشبكة العلاقاتية القوية التي يجلب أثرها الحظ الحقيقي. 💎</div>
+    </div>
+
+    <div class="insight-box insight-wisdom" data-reveal>
+        <div class="insight-title">⚖️ حكمة مستخلصة</div>
+        <div class="insight-body">«العمل هو أفضل صديق للرجل؛ يفتح الأبواب المغلوقة ويجلب احترام الآخرين قبل أن يجلب أموالهم.» 🌟</div>
+    </div>
+
+    <div class="divider" data-reveal><span>✦</span></div>
+
+    <section class="conclusion" data-reveal>
+        <h2>✦ ما الذي بقي من بابل؟ ✦</h2>
+        <p>بدأت الحكايات بأشخاص يبحثون عن الذهب، لكنها انتهت بشيء أعمق: الإنسان الذي يريد أن يغير حياته يحتاج إلى أكثر من المال.</p>
+        <p>يحتاج إلى عمل، وخطة، وحذر، ووفاء، واستعداد للمستقبل، وقدرة على مواجهة أخطائه بدلاً من الهروب منها.</p>
+    </section>
 
     <section class="ending">
-
-        <div class="ending-symbol" data-reveal>
-            🏺
-        </div>
-
-        <h2 data-reveal>
-            كلمة أخيرة
-        </h2>
-
-        <p data-reveal>
-
-            ربما لا نستطيع أن نعرف متى سيأتي الحظ،
-            ولا نستطيع أن نضمن نتيجة كل قرار.
-
-            لكننا نستطيع أن نكون مستعدين.
-
-            نقرأ،
-            نتعلم،
-            ندخر،
-            نفكر،
-            ثم نتحرك عندما تظهر الفرصة المناسبة.
-
-        </p>
-
-        <p data-reveal>
-
-            فكم من باب مرّ أمام الإنسان
-            ولم يفتحه،
-            ثم ظل يتساءل بعد سنوات:
-
-            <strong>
-                ماذا لو أنني دخلت؟
-            </strong>
-
-        </p>
-
+        <div class="ending-symbol" data-reveal>🏺</div>
+        <h2 data-reveal>نهاية حكايات بابل</h2>
+        <p data-reveal>قد تسقط المدن، وتغيب الحجار، وتمضي القرون، لكن الحكمة التي يتركها الإنسان وراءه تبقى حية في كل من يقرؤها. 🌟📖</p>
     </section>
-
 </div>
 
-
-<!-- =========================================================
-     اسم المعد + الفوتر (مشترك بين التبويبين)
-========================================================= -->
-
+<!-- اسم المعد + الفوتر -->
 <div class="credit" data-reveal>
-
-    <span>
-        إعداد وترتيب
-    </span>
-
-    <strong>
-        حسين العرياني
-    </strong>
-
+    <span>إعداد وترتيب</span>
+    <strong>حسين العرياني</strong>
 </div>
-
 
 <footer class="footer" data-reveal>
-
-    <p>
-        🏺 دستور بابل المالي
-    </p>
-
-    <p>
-        الطرق السبع للتغلب على المحافظ الخاوية &nbsp;·&nbsp; قصص الحظ والفرص
-    </p>
-
-    <p>
-        ملخص تعليمي مستوحى من مبادئ كتاب «أغنى رجل في بابل» —
-        جميع الأمثلة لأغراض تعليمية وليست توصية استثمارية.
-    </p>
-
+    <p>🏺 أسرار بابل المالية</p>
+    <p>نبذة تاريخية · الرجل الذي يحلم بالثراء · الطرق السبع · قصص الحظ والفرص · حكاية نومسير · تاجر الجواهر · أسوار بابل · تاجر الإبل · ألواح بابل · الرجل الأكثر حظاً</p>
+    <p>ملخص تعليمي مستوحى من مبادئ كتاب «أغنى رجل في بابل» — جميع الأمثلة لأغراض تعليمية وليست توصية استثمارية.</p>
 </footer>
 
 </main>
-
 </div>
 
-
-<a href="#top" class="top" id="toTop" aria-label="العودة إلى الأعلى">
-    ↑
-</a>
-
+<a href="#top" class="top" id="toTop" aria-label="العودة إلى الأعلى">↑</a>
 
 <script>
-
 (function(){
-
     "use strict";
 
-    var reduceMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-
-    /* =========================
-       كشف العناصر عند التمرير
-    ========================= */
-
-    var revealItems =
-        document.querySelectorAll("[data-reveal]");
-
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var revealItems = document.querySelectorAll("[data-reveal]");
     var observer = null;
 
-
     function prepareReveal(el){
-
         if(el.classList.contains("reveal")) return;
-
         el.classList.add("reveal");
-
-        if(el.classList.contains("scene")){
-            el.classList.add("reveal-right");
-        }
-
-        if(
-            el.classList.contains("conclusion") ||
-            el.classList.contains("quote")
-        ){
-            el.classList.add("reveal-scale");
-        }
-
-        var delay =
-            parseInt(el.getAttribute("data-delay") || "0",10);
-
-        if(delay > 0){
-            el.style.transitionDelay = (delay * 0.13) + "s";
-        }
-
+        if(el.classList.contains("scene")) el.classList.add("reveal-right");
+        if(el.classList.contains("conclusion") || el.classList.contains("quote")) el.classList.add("reveal-scale");
     }
-
 
     if(reduceMotion || !("IntersectionObserver" in window)){
-
-        revealItems.forEach(function(el){
-            el.classList.add("reveal","visible");
-        });
-
+        revealItems.forEach(function(el){ el.classList.add("reveal","visible"); });
     } else {
-
-        revealItems.forEach(function(el){
-            prepareReveal(el);
-        });
-
-        observer = new IntersectionObserver(
-
-            function(entries){
-
-                entries.forEach(function(entry){
-
-                    if(entry.isIntersecting){
-
-                        entry.target.classList.add("visible");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-
-            {
-                threshold:0.12,
-                rootMargin:"0px 0px -70px 0px"
-            }
-
-        );
-
-        revealItems.forEach(function(el){
-            observer.observe(el);
-        });
-
-    }
-
-
-    /* إظهار ما هو ظاهر داخل لوحة معيّنة */
-
-    function revealInView(container){
-
-        if(reduceMotion || !observer) return;
-
-        container.querySelectorAll(".reveal:not(.visible)")
-        .forEach(function(el){
-
-            var r = el.getBoundingClientRect();
-
-            if(
-                r.top < window.innerHeight * 0.92 &&
-                r.bottom > -60
-            ){
-
-                el.classList.add("visible");
-
-                observer.unobserve(el);
-
-            }
-
-        });
-
-    }
-
-
-    /* =========================
-       التبويبات
-    ========================= */
-
-    var tabBtns =
-        document.querySelectorAll(".tab-btn");
-
-    var panels =
-        document.querySelectorAll(".panel");
-
-    var tabsBar =
-        document.getElementById("tabs");
-
-
-    function activateTab(btn){
-
-        var targetId =
-            btn.getAttribute("data-panel");
-
-        tabBtns.forEach(function(b){
-
-            var on = (b === btn);
-
-            b.classList.toggle("active", on);
-
-            b.setAttribute(
-                "aria-selected",
-                on ? "true" : "false"
-            );
-
-        });
-
-        panels.forEach(function(p){
-
-            p.classList.toggle(
-                "active",
-                p.id === targetId
-            );
-
-        });
-
-        var activePanel =
-            document.getElementById(targetId);
-
-        if(activePanel){
-            revealInView(activePanel);
-        }
-
-    }
-
-
-    tabBtns.forEach(function(btn){
-
-        btn.addEventListener("click", function(){
-
-            if(btn.classList.contains("active")) return;
-
-            var y = tabsBar
-                ? tabsBar.getBoundingClientRect().top +
-                  (window.pageYOffset ||
-                   document.documentElement.scrollTop)
-                : 0;
-
-            activateTab(btn);
-
-            window.requestAnimationFrame(function(){
-
-                window.scrollTo({
-                    top: y,
-                    behavior: reduceMotion ? "auto" : "smooth"
-                });
-
+        revealItems.forEach(prepareReveal);
+        observer = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
             });
-
-        });
-
-    });
-
-
-    /* =========================
-       شريط التقدم + زر العودة
-    ========================= */
-
-    var bar = document.getElementById("progressBar");
-    var top = document.getElementById("toTop");
-
-    var ticking = false;
-
-    function onScroll(){
-
-        var doc = document.documentElement;
-
-        var scrolled =
-            doc.scrollTop || document.body.scrollTop;
-
-        var height =
-            doc.scrollHeight - doc.clientHeight;
-
-        var percent =
-            height > 0 ? (scrolled / height) * 100 : 0;
-
-        if(bar){
-            bar.style.width = percent + "%";
-        }
-
-        if(top){
-
-            if(scrolled > 320){
-                top.classList.add("show");
-            } else {
-                top.classList.remove("show");
-            }
-
-        }
-
-        ticking = false;
-
+        }, { threshold:0.1, rootMargin:"0px 0px -60px 0px" });
+        revealItems.forEach(function(el){ observer.observe(el); });
     }
 
+    var tabBtns = document.querySelectorAll(".tab-btn");
+    var panels  = document.querySelectorAll(".panel");
+    var tabsBar = document.getElementById("tabs");
 
-    window.addEventListener("scroll", function(){
+    function getScrollTop(){
+        return window.pageYOffset || document.documentElement.scrollTop;
+    }
 
-        if(!ticking){
+    // عند الضغط على تبويب → انزلق إلى بداية الفصل
+    tabBtns.forEach(function(btn){
+        btn.addEventListener("click", function(){
+            var targetId = btn.getAttribute("data-panel");
+            var panel = document.getElementById(targetId);
+            if(!panel) return;
 
-            window.requestAnimationFrame(onScroll);
-
-            ticking = true;
-
-        }
-
-    }, { passive:true });
-
-
-    window.addEventListener("resize", onScroll);
-
-    window.addEventListener("load", onScroll);
-
-    onScroll();
-
-
-    /* =========================
-       تمرير ناعم لزر العودة
-    ========================= */
-
-    if(top){
-
-        top.addEventListener("click", function(e){
-
-            e.preventDefault();
+            var tabsHeight = tabsBar ? tabsBar.offsetHeight : 0;
+            var targetY = panel.getBoundingClientRect().top + getScrollTop() - tabsHeight - 8;
+            if(targetY < 0) targetY = 0;
 
             window.scrollTo({
-                top:0,
+                top: targetY,
                 behavior: reduceMotion ? "auto" : "smooth"
             });
 
+            // تمرير أفقي للزر النشط فقط داخل الشريط
+            if(btn.scrollIntoView){
+                try{ btn.scrollIntoView({behavior:"auto", block:"nearest", inline:"center"}); }catch(e){}
+            }
         });
-
-    }
-
-
-    /* =========================
-       تأثير لمس بسيط على النقاط
-    ========================= */
-
-    document.querySelectorAll(".point").forEach(function(p){
-
-        p.addEventListener("click", function(){
-
-            p.animate(
-
-                [
-                    { transform:"translateX(-8px)" },
-                    { transform:"translateX(0)" }
-                ],
-
-                {
-                    duration:420,
-                    easing:"cubic-bezier(.2,.8,.3,1)"
-                }
-
-            );
-
-        });
-
     });
 
+    // Scroll Spy: تمييز التبويب الحالي بحسب موضع القراءة
+    function updateActiveTab(){
+        if(!tabsBar) return;
+        var tabsHeight = tabsBar.offsetHeight;
+        var probe = getScrollTop() + tabsHeight + 60;
+        var currentBtn = tabBtns[0];
 
-    /* =========================
-       تأثير دوران على أرقام الطرق
-    ========================= */
-
-    document.querySelectorAll(".story-number").forEach(function(n){
-
-        n.style.cursor = "pointer";
-
-        n.addEventListener("click", function(){
-
-            n.animate(
-
-                [
-                    { transform:"rotate(0deg) scale(1)" },
-                    { transform:"rotate(180deg) scale(1.12)" },
-                    { transform:"rotate(360deg) scale(1)" }
-                ],
-
-                {
-                    duration:800,
-                    easing:"cubic-bezier(.2,.8,.3,1)"
-                }
-
-            );
-
+        panels.forEach(function(p){
+            if(p.offsetTop <= probe){
+                var btn = document.querySelector('.tab-btn[data-panel="' + p.id + '"]');
+                if(btn) currentBtn = btn;
+            }
         });
 
+        tabBtns.forEach(function(b){
+            var isActive = (b === currentBtn);
+            if(b.classList.contains("active") !== isActive){
+                b.classList.toggle("active", isActive);
+                b.setAttribute("aria-selected", isActive ? "true" : "false");
+            }
+        });
+    }
+
+    var bar = document.getElementById("progressBar");
+    var top = document.getElementById("toTop");
+    var ticking = false;
+
+    function onScroll(){
+        var doc = document.documentElement;
+        var scrolled = getScrollTop();
+        var height = doc.scrollHeight - doc.clientHeight;
+        var percent = height > 0 ? (scrolled / height) * 100 : 0;
+        if(bar) bar.style.width = percent + "%";
+        if(top){
+            if(scrolled > 320) top.classList.add("show");
+            else top.classList.remove("show");
+        }
+        updateActiveTab();
+        ticking = false;
+    }
+
+    window.addEventListener("scroll", function(){
+        if(!ticking){
+            window.requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive:true });
+
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", onScroll);
+    onScroll();
+
+    if(top){
+        top.addEventListener("click", function(e){
+            e.preventDefault();
+            window.scrollTo({ top:0, behavior: reduceMotion ? "auto" : "smooth" });
+        });
+    }
+
+    document.querySelectorAll(".point").forEach(function(p){
+        p.addEventListener("click", function(){
+            p.animate(
+                [{transform:"translateX(-8px)"},{transform:"translateX(0)"}],
+                {duration:420,easing:"cubic-bezier(.2,.8,.3,1)"}
+            );
+        });
+    });
+
+    document.querySelectorAll(".story-number").forEach(function(n){
+        n.style.cursor = "pointer";
+        n.addEventListener("click", function(){
+            n.animate(
+                [
+                    {transform:"rotate(0deg) scale(1)"},
+                    {transform:"rotate(180deg) scale(1.12)"},
+                    {transform:"rotate(360deg) scale(1)"}
+                ],
+                {duration:800,easing:"cubic-bezier(.2,.8,.3,1)"}
+            );
+        });
     });
 
 })();
-
 </script>
 
 </body>
-   </html>
+</html>
